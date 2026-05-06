@@ -67,32 +67,38 @@ export default function NavBar() {
           ))}
           <path d={SLASH_PATH} fill="white" />
           <path d={TAGLINE_PATH} fill="white" />
-          {NAV_LINK_PATHS.map((d, i) => (
-            <g
-              key={i}
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setHoveredLink(i)}
-              onMouseLeave={() => setHoveredLink(null)}
-              onClick={() => {
-                const el = document.querySelector(NAV_LINKS[i].href)
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              <path
-                d={d}
-                fill={hoveredLink === i ? '#C9A84C' : '#F5F2EC'}
-                style={{ transition: 'fill 0.2s ease' }}
-              />
-              <rect
-                x={NAV_LINKS[i].x}
-                y={25}
-                width={NAV_LINKS[i].width}
-                height={30}
-                fill="transparent"
-              />
-            </g>
-          ))}
         </svg>
+      </div>
+
+      {/* HTML nav links — true 15px, percentage-positioned to match canvas x coords */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+        {NAV_LINKS.map((link, i) => (
+          <a
+            key={i}
+            href={link.href}
+            onClick={e => { e.preventDefault(); document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' }) }}
+            onMouseEnter={() => setHoveredLink(i)}
+            onMouseLeave={() => setHoveredLink(null)}
+            style={{
+              position: 'absolute',
+              left: `${(link.x + link.width / 2) / 1905 * 100}%`,
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              color: hoveredLink === i ? '#C9A84C' : '#F5F2EC',
+              transition: 'color 0.2s ease',
+              fontFamily: '"SF Pro Display", system-ui, sans-serif',
+              fontSize: 15,
+              fontWeight: 400,
+              letterSpacing: '0.5px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              pointerEvents: 'auto',
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
     </nav>
   )

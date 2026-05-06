@@ -14,6 +14,8 @@ function App() {
     <main style={{ backgroundColor: '#0A0A08', minHeight: '100vh' }}>
       <NavBar />
       <HeroSection />
+      {/* Pull all sections up by one hero height so Gap overlaps the second half of Hero's sticky scroll space */}
+      <div style={{ position: 'relative', zIndex: 1, marginTop: 'calc((1167 / 1905) * -100vw)' }}>
       <GapSection />
       <BPAPSection />
       <RegulationSection />
@@ -22,6 +24,7 @@ function App() {
       <BQEGVIRSection />
       <HonestPictureSection />
       <BPAP1Section />
+      </div>
     </main>
   )
 }

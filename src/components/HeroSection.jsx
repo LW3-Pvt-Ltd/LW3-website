@@ -39,6 +39,9 @@ export default function HeroSection() {
   const [slideIndex, setSlideIndex] = useState(0)
   const containerRef = useRef(null)
   const [scale, setScale] = useState(1)
+  const [isDemoHovered, setIsDemoHovered] = useState(false)
+  const [isExploreHovered, setIsExploreHovered] = useState(false)
+  const [isPilotsHovered, setIsPilotsHovered] = useState(false)
 
   // Responsive scale tied to container width
   useEffect(() => {
@@ -64,12 +67,14 @@ export default function HeroSection() {
   return (
     <>
       {/* ── Desktop / Tablet: scale-based pixel-perfect layout ── */}
+      {/* Outer section is 2× tall: first FH*scale = normal hero scroll, second = gap slides over */}
       <section
         ref={containerRef}
-        className="relative w-full overflow-hidden hidden sm:block"
-        style={{ height: FH * scale }}
+        className="relative w-full hidden sm:block"
+        style={{ height: FH * scale * 2 }}
         aria-label="Hero section"
       >
+        <div style={{ position: 'sticky', top: 0, height: FH * scale, overflow: 'hidden' }}>
         <div
           className="absolute top-0 left-0 origin-top-left"
           style={{ width: FW, height: FH, transform: `scale(${scale})` }}
@@ -145,12 +150,16 @@ export default function HeroSection() {
             <rect
               x="187.809" y="908.461"
               width="267.815" height="43.3759"
-              fill="#F5F2EC"
+              fill={isExploreHovered ? '#003399' : '#F5F2EC'}
+              style={{ transition: 'fill 0.2s' }}
             />
             <rect
               x="188.272" y="908.924"
               width="266.888" height="42.449"
-              fill="none" stroke="#0A0A08" strokeWidth="0.926897"
+              fill="none"
+              stroke={isExploreHovered ? '#003399' : '#0A0A08'}
+              strokeWidth="0.926897"
+              style={{ transition: 'stroke 0.2s' }}
             />
 
             {/* BOOK A DEMO pill (sits in dark notch area, top-right) */}
@@ -158,8 +167,9 @@ export default function HeroSection() {
               x="1602.71" y="188.916"
               width="174.268" height="63.9676"
               rx="31.9838"
-              fill="white"
+              fill={isDemoHovered ? '#003399' : 'white'}
               stroke="#F5F2EC" strokeWidth="0.915228"
+              style={{ transition: 'fill 0.2s' }}
             />
           </svg>
 
@@ -237,6 +247,8 @@ export default function HeroSection() {
 
           {/* Primary CTA — transparent overlay on the SVG-drawn rect */}
           <button
+            onMouseEnter={() => setIsExploreHovered(true)}
+            onMouseLeave={() => setIsExploreHovered(false)}
             style={abs(187.809, 908.461, {
               width: 267.815,
               height: 43.376,
@@ -246,11 +258,12 @@ export default function HeroSection() {
               fontFamily: '"SF Pro Display", system-ui, sans-serif',
               fontSize: 11.864,
               fontWeight: 700,
-              color: '#0A0A08',
+              color: isExploreHovered ? 'white' : '#0A0A08',
               letterSpacing: '1.1864px',
               lineHeight: 1.2,
               paddingLeft: 31.7,
               textAlign: 'left',
+              transition: 'color 0.2s',
             })}
           >
             Explore the Platform ↗
@@ -258,23 +271,30 @@ export default function HeroSection() {
 
           {/* Secondary CTA */}
           <button
+            onMouseEnter={() => setIsPilotsHovered(true)}
+            onMouseLeave={() => setIsPilotsHovered(false)}
             style={abs(470.457, 919.294, {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
               fontFamily: '"SF Pro Display", system-ui, sans-serif',
-              fontSize: 11.061,
+              fontSize: 18,
               fontWeight: 510,
-              color: '#888780',
+              color: isPilotsHovered ? '#E24B4A' : '#888780',
               letterSpacing: '1.1123px',
               lineHeight: 1.2,
               display: 'flex',
               alignItems: 'center',
               gap: 27.418,
               padding: 0,
+              transition: 'color 0.2s',
             })}
           >
-            <span>See our pilots</span>
+            <span style={{
+              textDecoration: isPilotsHovered ? 'underline' : 'none',
+              textUnderlineOffset: '3px',
+              transition: 'text-decoration 0.2s',
+            }}>See our pilots</span>
             <span
               style={{
                 fontFamily: '"DM Mono", monospace',
@@ -288,6 +308,8 @@ export default function HeroSection() {
 
           {/* BOOK A DEMO — text overlay on SVG-drawn pill */}
           <button
+            onMouseEnter={() => setIsDemoHovered(true)}
+            onMouseLeave={() => setIsDemoHovered(false)}
             style={abs(1602.71, 188.916, {
               width: 174.268,
               height: 63.9676,
@@ -300,6 +322,8 @@ export default function HeroSection() {
               justifyContent: 'center',
               gap: 0,
               padding: 0,
+              transition: 'color 0.2s',
+              borderRadius: 31.9838,
             })}
           >
             <span
@@ -308,9 +332,10 @@ export default function HeroSection() {
                 fontSize: 11.024,
                 fontWeight: 510,
                 letterSpacing: '1.1024px',
-                color: '#4A4A45',
+                color: isDemoHovered ? 'white' : '#4A4A45',
                 lineHeight: 1.2,
                 display: 'block',
+                transition: 'color 0.2s',
               }}
             >
               BOOK A
@@ -321,10 +346,11 @@ export default function HeroSection() {
                 fontSize: 29.398,
                 fontWeight: 400,
                 letterSpacing: '1.3826px',
-                color: '#4A4A45',
+                color: isDemoHovered ? 'white' : '#4A4A45',
                 lineHeight: 1.0,
                 display: 'block',
                 marginTop: 3,
+                transition: 'color 0.2s',
               }}
             >
               DEMO
@@ -360,6 +386,7 @@ export default function HeroSection() {
               />
             ))}
           </div>
+        </div>
         </div>
       </section>
 

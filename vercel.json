@@ -1,0 +1,6 @@
+{
+  "name": "lw3-website",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 import heroBg from '@/assets/gap/gap-image0_19_89.png'
 import heroGrid from '@/assets/gap/gap-image1_19_89.png'
@@ -38,10 +39,21 @@ export default function GapSection() {
     return () => observer.disconnect()
   }, [])
 
+  // Scroll progress: 0 = section top hits viewport bottom, 1 = section top hits viewport top
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'start start'],
+  })
+
+  // Left group slides in from left (-900 canvas units → 0)
+  const leftX = useTransform(scrollYProgress, [0, 1], [-900, 0])
+  // Right group slides in from right (+900 canvas units → 0)
+  const rightX = useTransform(scrollYProgress, [0, 1], [900, 0])
+
   return (
     <section
       ref={containerRef}
-      style={{ width: '100%', height: FH * scale, overflow: 'hidden', position: 'relative' }}
+      style={{ width: '100%', height: FH * scale, overflow: 'hidden', position: 'relative', zIndex: 1 }}
       aria-label="The $2B gap in battery accountability"
     >
       <div
@@ -148,8 +160,8 @@ export default function GapSection() {
           />
         </div>
 
-        {/* White card (partially off-screen left) */}
-        <div
+        {/* LEFT GROUP: White card + "The" — slides in from left */}
+        <motion.div
           aria-hidden="true"
           style={{
             position: 'absolute',
@@ -158,11 +170,11 @@ export default function GapSection() {
             width: 609,
             height: 414,
             backgroundColor: 'white',
+            x: leftX,
           }}
         />
 
-        {/* "The" */}
-        <div
+        <motion.div
           style={{
             position: 'absolute',
             left: 260,
@@ -173,12 +185,13 @@ export default function GapSection() {
             color: '#4A4A45',
             letterSpacing: '5.6px',
             lineHeight: 1.15,
+            x: leftX,
           }}
         >
           The
-        </div>
+        </motion.div>
 
-        {/* "$2B" */}
+        {/* "$2B" — static */}
         <p
           style={{
             position: 'absolute',
@@ -197,8 +210,8 @@ export default function GapSection() {
           <span style={{ color: '#FFCC00' }}>B</span>
         </p>
 
-        {/* "gap in battery accountability" */}
-        <div
+        {/* RIGHT GROUP: "gap in battery accountability" — slides in from right */}
+        <motion.div
           style={{
             position: 'absolute',
             left: 1129,
@@ -211,14 +224,15 @@ export default function GapSection() {
             letterSpacing: '5.6px',
             lineHeight: 1.15,
             zIndex: 2,
+            x: rightX,
           }}
         >
           <p style={{ margin: 0 }}>gap in</p>
           <p style={{ margin: 0 }}>battery accountability</p>
-        </div>
+        </motion.div>
 
-        {/* Left body text */}
-        <p
+        {/* LEFT GROUP: Left body text — slides in from left */}
+        <motion.p
           style={{
             position: 'absolute',
             left: 58,
@@ -231,13 +245,14 @@ export default function GapSection() {
             fontStyle: 'italic',
             color: '#888780',
             lineHeight: 1.1,
+            x: leftX,
           }}
         >
           The global EV transition is accelerating, but the infrastructure to track, verify, and manage battery lifecycles is critically absent — creating compliance risk, recycling inefficiency, and billions in stranded value.
-        </p>
+        </motion.p>
 
-        {/* Bar chart */}
-        <div
+        {/* RIGHT GROUP: Bar chart — slides in from right */}
+        <motion.div
           aria-hidden="true"
           style={{
             position: 'absolute',
@@ -245,6 +260,7 @@ export default function GapSection() {
             top: 143,
             width: 768,
             height: 714.507,
+            x: rightX,
           }}
         >
           {BARS.map(([leftPct, rightPct, color], i) => (
@@ -261,10 +277,10 @@ export default function GapSection() {
               }}
             />
           ))}
-        </div>
+        </motion.div>
 
-        {/* Bottom-right stat text */}
-        <p
+        {/* RIGHT GROUP: Bottom-right stat text — slides in from right */}
+        <motion.p
           style={{
             position: 'absolute',
             left: 1361,
@@ -278,24 +294,26 @@ export default function GapSection() {
             color: '#888780',
             lineHeight: 1.1,
             textAlign: 'right',
+            x: rightX,
           }}
         >
           70,000+ data points are generated per battery site per year. Today&apos;s compliance processes are manual, tedious, and unable to scale with the speed of regulation.
-        </p>
+        </motion.p>
 
-        {/* Footer text */}
+        {/* Footer text — static */}
         <p
           style={{
             position: 'absolute',
-            left: 557,
+            left: 1361,
             top: 1061,
-            width: 1290,
+            width: 486,
             margin: 0,
             fontFamily: '"SF Pro Display", system-ui, sans-serif',
             fontSize: 24,
             fontWeight: 400,
             fontStyle: 'italic',
             lineHeight: 1.1,
+            textAlign: 'right',
           }}
         >
           <span style={{ color: '#F5F2EC' }}>The EU Battery Regulation enters into force in </span>
