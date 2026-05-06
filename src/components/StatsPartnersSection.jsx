@@ -20,6 +20,9 @@ export default function StatsPartnersSection() {
     return () => observer.disconnect()
   }, [])
 
+  // Canvas coords → scaled screen pixels
+  const px = v => v * scale
+
   return (
     <section
       ref={containerRef}
@@ -41,79 +44,63 @@ export default function StatsPartnersSection() {
         }}
       />
 
-      {/* Scaled overlay for interactive buttons */}
-      <div
+      {/* See Patents Here — fills blue on hover */}
+      <button
+        onMouseEnter={() => setPatentHovered(true)}
+        onMouseLeave={() => setPatentHovered(false)}
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: FW,
-          height: FH,
-          transformOrigin: 'top left',
-          transform: `scale(${scale})`,
-          pointerEvents: 'none',
+          left: px(200),
+          top: px(1350),
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: px(10),
+          padding: `${px(12)}px ${px(28)}px`,
+          border: `${px(1.5)}px solid #3B82F6`,
+          borderRadius: px(4),
+          backgroundColor: patentHovered ? '#3B82F6' : 'transparent',
+          color: patentHovered ? '#ffffff' : '#3B82F6',
+          fontFamily: '"SF Pro Display", system-ui, sans-serif',
+          fontSize: px(18),
+          fontWeight: 500,
+          letterSpacing: '0.5px',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s ease, color 0.2s ease',
+          whiteSpace: 'nowrap',
+          lineHeight: 1,
         }}
       >
-        {/* See Patents Here — fills blue on hover, text turns white */}
-        <button
-          onMouseEnter={() => setPatentHovered(true)}
-          onMouseLeave={() => setPatentHovered(false)}
-          onClick={e => e.preventDefault()}
-          style={{
-            position: 'absolute',
-            left: 200,
-            top: 1370,
-            pointerEvents: 'auto',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 10,
-            padding: '14px 32px',
-            border: '1.5px solid #3B82F6',
-            borderRadius: 4,
-            backgroundColor: patentHovered ? '#3B82F6' : 'transparent',
-            color: patentHovered ? '#ffffff' : '#3B82F6',
-            fontFamily: '"SF Pro Display", system-ui, sans-serif',
-            fontSize: 20,
-            fontWeight: 500,
-            letterSpacing: '0.5px',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s ease, color 0.2s ease',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          See Patents Here →
-        </button>
+        See Patents Here →
+      </button>
 
-        {/* CIRPASS — shakes on hover */}
-        <motion.button
-          whileHover={{
-            x: [0, -8, 8, -6, 6, -4, 4, 0],
-            transition: { duration: 0.5, ease: 'easeInOut' },
-          }}
-          onClick={e => e.preventDefault()}
-          style={{
-            position: 'absolute',
-            left: 1220,
-            top: 1370,
-            pointerEvents: 'auto',
-            display: 'inline-flex',
-            alignItems: 'center',
-            padding: '14px 32px',
-            border: '1.5px solid #ffffff',
-            borderRadius: 4,
-            backgroundColor: 'transparent',
-            color: '#ffffff',
-            fontFamily: '"Monument Extended", sans-serif',
-            fontSize: 20,
-            fontWeight: 400,
-            letterSpacing: '2px',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          CIRPASS
-        </motion.button>
-      </div>
+      {/* CIRPASS — shakes on hover */}
+      <motion.button
+        whileHover={{
+          x: [0, -px(8), px(8), -px(6), px(6), -px(4), px(4), 0],
+          transition: { duration: 0.5, ease: 'easeInOut' },
+        }}
+        style={{
+          position: 'absolute',
+          left: px(1220),
+          top: px(1350),
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: `${px(12)}px ${px(28)}px`,
+          border: `${px(1.5)}px solid #ffffff`,
+          borderRadius: px(4),
+          backgroundColor: 'transparent',
+          color: '#ffffff',
+          fontFamily: '"Monument Extended", sans-serif',
+          fontSize: px(18),
+          fontWeight: 400,
+          letterSpacing: px(2) + 'px',
+          cursor: 'pointer',
+          whiteSpace: 'nowrap',
+          lineHeight: 1,
+        }}
+      >
+        CIRPASS
+      </motion.button>
     </section>
   )
 }
