@@ -169,9 +169,8 @@ export default function BPAPSection() {
             {/* Background */}
             <rect width="1905" height="1474" fill="#0A0A08" />
 
-            {/* Gold accent bar + label */}
+            {/* Gold accent bar */}
             <rect width="24" height="1" transform="translate(199 147)" fill="#C9A84C" />
-            <path d={p0d} fill="#C9A84C" />
 
             {/* Grid overlay */}
             <image href={bpapGrid} x="0" y="0" width="1905" height="1545" opacity="0.07" preserveAspectRatio="xMidYMid slice" />

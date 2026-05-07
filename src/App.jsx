@@ -7,6 +7,7 @@ import IITPedigreeSection from '@/components/IITPedigreeSection'
 import BQEGVIRSection from '@/components/BQEGVIRSection'
 import HonestPictureSection from '@/components/HonestPictureSection'
 import BPAP1Section from '@/components/BPAP1Section'
+import FooterSection from '@/components/FooterSection'
 import NavBar from '@/components/NavBar'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <BQEGVIRSection />
       <HonestPictureSection />
       <BPAP1Section />
+      <FooterSection />
       </div>
     </main>
   )

@@ -17,6 +17,7 @@ const BTN_Y = 908.461
 const BTN_W = 267.815
 const BTN_H = 43.376
 
+
 export default function HeroSection() {
   const containerRef = useRef(null)
   const [scale, setScale] = useState(1)
@@ -96,7 +97,7 @@ export default function HeroSection() {
           ))}
         </svg>
 
-        {/* Primary CTA button overlay */}
+        {/* Primary CTA button overlay — "Book a Demo" */}
         <div
           role="button"
           tabIndex={0}
@@ -114,7 +115,6 @@ export default function HeroSection() {
             justifyContent: 'center',
             backgroundColor: btnHovered ? '#3B82F6' : 'transparent',
             transition: 'background-color 0.2s ease',
-            borderRadius: px(2),
           }}
         >
           {btnHovered && (
@@ -129,10 +129,11 @@ export default function HeroSection() {
                 pointerEvents: 'none',
               }}
             >
-              Explore the Platform ↗
+              Book a Demo
             </span>
           )}
         </div>
+
       </div>
     </section>
   )
