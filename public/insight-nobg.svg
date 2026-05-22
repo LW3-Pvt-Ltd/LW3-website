@@ -1,0 +1,64 @@
+<svg width="1905" height="891" viewBox="0 0 1905 891" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_46_1837)">
+<rect width="1905" height="891" fill="black"/>
+
+<rect y="209" width="209" height="1905" transform="rotate(-90 0 209)" fill="black"/>
+<line x1="-4.37114e-08" y1="0.5" x2="1905" y2="0.499833" stroke="white"/>
+
+<mask id="path-4-inside-1_46_1837" fill="white">
+<path d="M635 209H1270V891H635V209Z"/>
+</mask>
+
+<path d="M1270 891V890H635V891V892H1270V891Z" fill="white" mask="url(#path-4-inside-1_46_1837)"/>
+
+
+
+
+
+
+
+
+
+<mask id="path-13-inside-2_46_1837" fill="white">
+<path d="M1270 209H1905V891H1270V209Z"/>
+</mask>
+
+<path d="M1905 891V890H1270V891V892H1905V891Z" fill="white" mask="url(#path-13-inside-2_46_1837)"/>
+
+
+
+
+
+
+
+
+
+<mask id="path-22-inside-3_46_1837" fill="white">
+<path d="M0 209H635V891H0V209Z"/>
+</mask>
+
+<path d="M635 891V890H0V891V892H635V891Z" fill="white" mask="url(#path-22-inside-3_46_1837)"/>
+
+
+
+
+
+
+
+
+
+</g>
+<defs>
+
+
+
+
+<clipPath id="clip0_46_1837">
+<rect width="1905" height="891" fill="white"/>
+</clipPath>
+
+
+
+
+</defs>
+</svg>

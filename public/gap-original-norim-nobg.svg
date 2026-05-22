@@ -1,0 +1,25 @@
+<svg width="1905" height="1079" viewBox="0 0 1905 1079" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_27_160)">
+<mask id="path-1-inside-1_27_160" fill="white">
+<path d="M0 0H1905V1079H0V0Z"/>
+</mask>
+
+<mask id="path-3-inside-2_27_160" fill="white">
+<path d="M0 0H798V1079H0V0Z"/>
+</mask>
+<path d="M0 0H798V1079H0V0Z" fill="black"/>
+
+
+<circle cx="104.625" cy="104.625" r="104.351" transform="matrix(1 0 0 -1 -11.0938 639.94)" stroke="white" stroke-width="0.54719"/>
+<circle cx="38.6443" cy="38.6443" r="38.6443" transform="matrix(1 0 0 -1 56.2891 577.739)" fill="white"/>
+<path d="M119.18 538.46C119.766 539.046 119.766 539.995 119.18 540.581L109.634 550.127C109.048 550.713 108.099 550.713 107.513 550.127C106.927 549.541 106.927 548.592 107.513 548.006L115.998 539.521L107.513 531.035C106.927 530.449 106.927 529.5 107.513 528.914C108.099 528.328 109.048 528.328 109.634 528.914L119.18 538.46ZM66.5938 539.521V538.021H118.12V539.521V541.021H66.5938V539.521Z" fill="black"/>
+</g>
+<path d="M0 0V1H1905V0V-1H0V0ZM1905 1079V1078H0V1079V1080H1905V1079Z" fill="white" mask="url(#path-1-inside-1_27_160)"/>
+<defs>
+
+<clipPath id="clip0_27_160">
+<path d="M0 0H1905V1079H0V0Z" fill="white"/>
+</clipPath>
+
+</defs>
+</svg>

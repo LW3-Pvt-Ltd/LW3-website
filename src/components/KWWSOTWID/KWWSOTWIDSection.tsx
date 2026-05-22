@@ -9,12 +9,19 @@
 
 export default function KWWSOTWIDSection() {
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1140', borderTop: '1px solid #ffffff' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 1140', borderTop: '1px solid #ffffff', background: '#000000' }}>
       <img
-        src="/kwwsotwid-notxt.svg"
+        src="/kwwsotwid-nobg.svg"
         alt=""
         className="w-full h-auto block"
         draggable={false}
+      />
+      {/* Top band background — y=0 to y=326 on 1140 canvas = 28.60% */}
+      <img
+        src="/KWWSOTWID background.webp"
+        alt=""
+        draggable={false}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '28.60%', objectFit: 'cover' }}
       />
 
       {/* Heading — D-DIN Bold 70px */}

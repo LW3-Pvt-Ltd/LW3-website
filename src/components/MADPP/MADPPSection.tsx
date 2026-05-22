@@ -169,6 +169,7 @@ export default function MADPPSection() {
           aspectRatio: '1905 / 1064',
           overflow: 'hidden',
           borderBottom: '1px solid #ffffff',
+          background: '#000000',
         }}
       >
 
@@ -263,14 +264,14 @@ export default function MADPPSection() {
         {/* ── RTWF LAYER ── */}
         <div style={rtwfStyle}>
           {/* Left panel grainy background */}
-          <div className="absolute" style={{
-            left: 0, top: 0, width: '34.86%', height: '100%',
-            backgroundImage: 'url(/left-panel-bg.jpg)',
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            zIndex: 0,
-          }} />
           <img
-            src="/rtwf-vectors.svg"
+            src="/MADPP background.webp"
+            alt=""
+            draggable={false}
+            style={{ position: 'absolute', left: 0, top: 0, width: '34.86%', height: '100%', objectFit: 'cover' }}
+          />
+          <img
+            src="/rtwf-nobg.svg"
             alt=""
             className="w-full h-full block"
             style={{ objectFit: 'fill' }}
@@ -377,14 +378,14 @@ export default function MADPPSection() {
         {/* ── DDAt LAYER ── */}
         <div style={ddatStyle}>
           {/* Left panel grainy background */}
-          <div className="absolute" style={{
-            left: 0, top: 0, width: '34.86%', height: '100%',
-            backgroundImage: 'url(/left-panel-bg.jpg)',
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            zIndex: 0,
-          }} />
           <img
-            src="/ddat-notxt.svg"
+            src="/MADPP background.webp"
+            alt=""
+            draggable={false}
+            style={{ position: 'absolute', left: 0, top: 0, width: '34.86%', height: '100%', objectFit: 'cover' }}
+          />
+          <img
+            src="/ddat-nobg.svg"
             alt=""
             className="w-full h-full block"
             style={{ objectFit: 'fill' }}

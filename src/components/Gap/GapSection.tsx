@@ -51,16 +51,25 @@ export default function GapSection() {
 
   // Base SVG: norim/noarc stripped versions during animation so baked-in circles don't ghost
   const baseImg =
-    phase === 'idle-1'  ? '/gap-original.svg'
-  : phase === 'idle-2'  ? '/gap-animation.svg'
-  :                       '/gap-original-norim.svg'   // both growing & shrinking
+    phase === 'idle-1'  ? '/gap-original-nobg.svg'
+  : phase === 'idle-2'  ? '/gap-animation-nobg.svg'
+  :                       '/gap-original-norim-nobg.svg'   // both growing & shrinking
 
   return (
     <section
       className="relative w-full overflow-hidden"
       style={{ aspectRatio: '1905 / 1079' }}
     >
-      {/* ── Layer 1: base SVG ── */}
+      {/* ── Layer 0: grainy background WebP ── */}
+      <img
+        src="/gap-bg.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full block"
+        style={{ objectFit: 'cover' }}
+        draggable={false}
+      />
+
+      {/* ── Layer 1: base SVG (no embedded background) ── */}
       <img
         src={baseImg}
         alt=""

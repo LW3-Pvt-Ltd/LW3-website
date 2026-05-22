@@ -1,0 +1,41 @@
+<svg width="1905" height="2969" viewBox="0 0 1905 2969" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_27_1625)">
+<mask id="path-1-inside-1_27_1625" fill="white">
+<path d="M0 0H1905V2969H0V0Z"/>
+</mask>
+
+
+
+
+<circle cx="952.001" cy="964.856" r="694.164" stroke="white" stroke-width="1.38972"/>
+<circle cx="952.003" cy="1138.57" r="520.449" stroke="white" stroke-width="1.38972"/>
+<circle cx="952.003" cy="2180.86" r="520.449" stroke="white" stroke-width="1.38972"/>
+
+<circle cx="952.003" cy="1833.43" r="173.02" stroke="white" stroke-width="1.38972"/>
+<circle cx="952.004" cy="2354.57" r="346.735" stroke="white" stroke-width="1.38972"/>
+<circle cx="952.003" cy="1486" r="1215.31" stroke="white" stroke-width="1.38972"/>
+<line x1="952.699" y1="269.997" x2="952.699" y2="2702" stroke="white" stroke-width="1.38972"/>
+
+
+
+
+
+
+
+
+
+
+
+
+</g>
+<path d="M0 0V1H1905V0V-1H0V0ZM1905 2969V2968H0V2969V2970H1905V2969Z" fill="white" mask="url(#path-1-inside-1_27_1625)"/>
+<defs>
+
+
+<clipPath id="clip0_27_1625">
+<path d="M0 0H1905V2969H0V0Z" fill="white"/>
+</clipPath>
+
+
+</defs>
+</svg>

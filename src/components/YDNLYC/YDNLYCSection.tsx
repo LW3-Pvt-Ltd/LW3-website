@@ -14,13 +14,25 @@ export default function YDNLYCSection() {
   const [btnHovered, setBtnHovered] = useState(false)
 
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064', borderTop: '1px solid #ffffff' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064', borderTop: '1px solid #ffffff', background: '#000000' }}>
+      {/* Right panel background — x=789 to x=1905 = left 41.42%, width 58.58% */}
       <img
-        src="/ydnlyc-v2.svg"
+        src="/YDNLYC background.webp"
         alt=""
-        className="w-full h-auto block"
         draggable={false}
+        style={{ position: 'absolute', top: 0, left: '41.42%', width: '58.58%', height: '100%', objectFit: 'cover' }}
       />
+
+      {/* 4 white rects inline SVG — on top of WebP */}
+      <svg
+        viewBox="0 0 1905 1064"
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+      >
+        <rect x="946" y="146" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
+        <rect x="946" y="537" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
+        <rect x="1364" y="536" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
+        <rect x="1364" y="146" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
+      </svg>
 
       {/* Left edge stroke of background image panel */}
       <div

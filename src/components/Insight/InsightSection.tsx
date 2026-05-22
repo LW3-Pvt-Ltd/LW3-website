@@ -96,13 +96,20 @@ function ReadMoreBtn({ left }: { left: string }) {
 
 export default function InsightSection() {
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 891' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 891', background: '#000000' }}>
       <img
-        src="/insight-v3.svg"
+        src="/insight-nobg.svg"
         alt=""
         className="w-full h-auto block"
         draggable={false}
       />
+      {/* Blog card images — y=209 to y=891 on 891 canvas = top 23.46%, height 76.54% */}
+      <img src="/1 Insight you can act on Data you can trust.webp" alt="" draggable={false}
+        style={{ position: 'absolute', top: '23.46%', left: 0, width: '33.33%', height: '76.54%', objectFit: 'cover' }} />
+      <img src="/2 Insight you can act on Data you can trust.webp" alt="" draggable={false}
+        style={{ position: 'absolute', top: '23.46%', left: '33.33%', width: '33.33%', height: '76.54%', objectFit: 'cover' }} />
+      <img src="/3 Insight you can act on Data you can trust.webp" alt="" draggable={false}
+        style={{ position: 'absolute', top: '23.46%', left: '66.67%', width: '33.33%', height: '76.54%', objectFit: 'cover' }} />
 
       {/* Heading — D-DIN Bold 70px */}
       <div

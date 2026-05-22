@@ -23,12 +23,27 @@ export default function BQEGVIRSection() {
   const [techBbqHovered, setTechBbqHovered] = useState(false)
   const [forbesHovered, setForbesHovered] = useState(false)
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 2969', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 2969', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff', background: '#000000' }}>
       <img
-        src="/bqegvir-v13.svg"
+        src="/bqegvir-v14.svg"
         alt=""
         className="w-full h-auto block"
         draggable={false}
+      />
+      {/* Top grainy band — y=0 to y=209 on 2969 canvas = 7.04% */}
+      <img
+        src="/bqegvir-top-bg.webp"
+        alt=""
+        draggable={false}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '7.04%', objectFit: 'cover', zIndex: 1 }}
+      />
+      {/* Bottom grainy band — y=2760 to y=2969 on 2969 canvas = 7.04% */}
+      <img
+        src="/bottom BQE GVIR.webp"
+        alt=""
+        draggable={false}
+        style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '7.04%', objectFit: 'cover', zIndex: 1 }}
+
       />
 
       {/* "Built for The Quantum Era" — D-DIN Bold 70px */}
@@ -43,6 +58,7 @@ export default function BQEGVIRSection() {
           lineHeight: 1.05,
           color: '#ffffff',
           letterSpacing: '0.01em',
+          zIndex: 3,
         }}
       >
         Built for The Quantum Era
@@ -60,6 +76,7 @@ export default function BQEGVIRSection() {
           lineHeight: 1.05,
           color: '#ffffff',
           letterSpacing: '0.01em',
+          zIndex: 3,
         }}
       >
         Globally validated, India-Rooted

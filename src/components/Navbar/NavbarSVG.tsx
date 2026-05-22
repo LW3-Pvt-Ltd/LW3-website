@@ -81,7 +81,7 @@ const SVG_INNER = `<foreignObject x="-21.4" y="-21.4" width="1947.8" height="206
 </clipPath><pattern id="pattern0_15_91" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_15_91" transform="matrix(0.000244141 0 0 0.00300057 0 -3.16369)"/>
 </pattern>
-<image id="image0_15_91" width="4096" height="2442" preserveAspectRatio="none" xlink:href="/navbar-bg.jpg"/>
+<image id="image0_15_91" width="4096" height="2442" preserveAspectRatio="none" xlink:href="/top nav image.webp"/>
 </defs>`
 
 export default function NavbarSVG() {

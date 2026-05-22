@@ -32,12 +32,19 @@ const SANKEY_LABEL: React.CSSProperties = {
 
 export default function UYBPCERSection() {
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064', background: '#000000' }}>
       <img
-        src="/uybpcer-notxt.svg"
+        src="/uybpcer-nobg.svg"
         alt=""
         className="w-full h-auto block"
         draggable={false}
+      />
+      {/* Top band background — y=0 to y=398 on 1064 canvas = 37.41% */}
+      <img
+        src="/UYBPCER background.webp"
+        alt=""
+        draggable={false}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '37.41%', objectFit: 'cover' }}
       />
 
       {/* ── Sankey shimmer — grey stripe sweeps left→right on each white band ── */}
