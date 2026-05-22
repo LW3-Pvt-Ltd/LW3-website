@@ -5,3 +5,4 @@ dist
 vite.config.ts.timestamp-*
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
+.vercel
