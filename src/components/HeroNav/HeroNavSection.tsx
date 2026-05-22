@@ -64,13 +64,6 @@ const NAV_LINK: React.CSSProperties = {
   zIndex: 3,
 }
 
-const SUB_LINK: React.CSSProperties = {
-  ...NAV_LINK,
-  fontSize: '0.735vw',      // 14px / 1905
-  letterSpacing: '0.1em',
-  display: 'block',
-}
-
 // For date/number sub-items — no small-caps, no case transform
 const DATE_LINK: React.CSSProperties = {
   position: 'absolute',
