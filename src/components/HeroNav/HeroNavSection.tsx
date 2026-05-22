@@ -148,7 +148,7 @@ export default function HeroNavSection() {
       {/* ── Hero background video ── */}
       <div className="absolute left-0 right-0 overflow-hidden bg-black" style={{ top: '14.6%', bottom: 0 }}>
         <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/hero background.webm" type="video/webm" />
+          <source src="/hero background-compressed.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.63)' }} />
       </div>
