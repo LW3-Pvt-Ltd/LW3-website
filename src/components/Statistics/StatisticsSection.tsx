@@ -37,13 +37,7 @@ const LABEL_STYLE: React.CSSProperties = {
 
 export default function StatisticsSection() {
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1080' }}>
-      <img
-        src="/statistics-v2.svg"
-        alt=""
-        className="w-full h-auto block"
-        draggable={false}
-      />
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 1080', background: '#000000', borderBottom: '1px solid #ffffff' }}>
 
       {/* Heading — D-DIN Bold 70px, two lines */}
       <div

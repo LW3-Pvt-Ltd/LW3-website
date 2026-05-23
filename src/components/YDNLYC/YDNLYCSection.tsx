@@ -23,16 +23,27 @@ export default function YDNLYCSection() {
         style={{ position: 'absolute', top: 0, left: '41.42%', width: '58.58%', height: '100%', objectFit: 'cover' }}
       />
 
-      {/* 4 white rects inline SVG — on top of WebP */}
-      <svg
-        viewBox="0 0 1905 1064"
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-      >
-        <rect x="946" y="146" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
-        <rect x="946" y="537" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
-        <rect x="1364" y="536" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
-        <rect x="1364" y="146" width="385" height="359" stroke="white" strokeWidth="2" fill="none"/>
-      </svg>
+      {/* 4 white squares — CSS divs, canvas 1905×1064 coords → % */}
+      {/* top-left:     x=946,  y=146, w=385, h=359 */}
+      {/* bottom-left:  x=946,  y=537, w=385, h=359 */}
+      {/* top-right:    x=1364, y=146, w=385, h=359 */}
+      {/* bottom-right: x=1364, y=536, w=385, h=359 */}
+      {[
+        { left: '49.66%', top: '13.72%' },
+        { left: '49.66%', top: '50.47%' },
+        { left: '71.60%', top: '13.72%' },
+        { left: '71.60%', top: '50.38%' },
+      ].map((pos, i) => (
+        <div key={i} style={{
+          position: 'absolute',
+          left: pos.left,
+          top: pos.top,
+          width: '20.21%',
+          height: '33.74%',
+          border: '0.105vw solid #ffffff',
+          pointerEvents: 'none',
+        }} />
+      ))}
 
       {/* Left edge stroke of background image panel */}
       <div

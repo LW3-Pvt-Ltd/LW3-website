@@ -182,8 +182,15 @@ export default function MADPPSection() {
 
         {/* ── MADPP LAYER ── */}
         <div style={madppStyle}>
+          {/* Left panel grainy background */}
           <img
-            src="/madpp-section-v2.svg"
+            src="/MADPP background.webp"
+            alt=""
+            draggable={false}
+            style={{ position: 'absolute', left: 0, top: 0, width: '34.86%', height: '100%', objectFit: 'cover' }}
+          />
+          <img
+            src="/madpp-section-v2-nobg.svg"
             alt=""
             className="w-full h-auto block"
             draggable={false}

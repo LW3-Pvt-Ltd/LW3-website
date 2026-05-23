@@ -1,7 +1,7 @@
 // Our Partners section — black bg + CSS heading + infinite scroll carousel
 // Canvas: 1905 × 541
 // Card band: y=200.5 to y=397.5 → top=36.97% height=36.41%
-// Strip SVG: 5 partner logo cards, viewBox="0 200 2105 198" (no bg, no heading)
+// Strip SVG: full partner logo strip, viewBox="0 0 3789 198"
 
 export default function PartnersSection() {
   return (
@@ -56,7 +56,7 @@ export default function PartnersSection() {
           {[0, 1, 2].map(i => (
             <img
               key={i}
-              src="/partners-strip.svg"
+              src="/Carousel frame.svg"
               alt=""
               draggable={false}
               style={{ height: '100%', width: 'auto', flexShrink: 0 }}

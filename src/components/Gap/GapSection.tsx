@@ -1,17 +1,13 @@
 // Gap Section — circle-reveal transition between two states
 // Canvas: 1905 × 1079
-//
-// Growing (1→2): gap-original-norim base + gap-animation-noarc clipped to expanding circle
-//                + white stroke circle on boundary, all three in sync
-// Shrinking (2→1): same base + same clip, reversed
-// Idle-1: full gap-original.svg | Idle-2: full gap-animation.svg
+// All circle geometry in CSS (vw units keep circles perfectly round at any viewport width)
 
 import { useState, useEffect } from 'react'
 
 const DUR = 750
 const EASING = 'cubic-bezier(0.65, 0, 0.35, 1)'
 
-// SVG canvas circle coords — used for the stroke overlay
+// SVG canvas circle coords — used for the animated stroke overlay
 const C_SMALL = { cx: -220.182, cy: 539.5,  r: 418.082, sw: 0.837   }
 const C_LARGE = { cx:  310.078, cy: 541.5,  r: 847.074, sw: 1.69584 }
 
@@ -19,12 +15,30 @@ const CIRCLE_TRANS = `cx ${DUR}ms ${EASING}, cy ${DUR}ms ${EASING}, r ${DUR}ms $
 
 type Phase = 'idle-1' | 'growing' | 'idle-2' | 'shrinking'
 
+// All sizes in vw — canvas is 1905px wide, so 1px = (1/1905*100)vw
+// This keeps circles perfectly round regardless of section height
+function cssCircle(cx: number, cy: number, r: number, sw: number, fill: string): React.CSSProperties {
+  return {
+    position: 'absolute',
+    left:   `${(cx - r) / 1905 * 100}vw`,
+    top:    `${(cy - r) / 1905 * 100}vw`,
+    width:  `${2 * r   / 1905 * 100}vw`,
+    height: `${2 * r   / 1905 * 100}vw`,
+    borderRadius: '50%',
+    background: fill,
+    border: `${sw / 1905 * 100}vw solid #ffffff`,
+    boxSizing: 'border-box' as const,
+    pointerEvents: 'none' as const,
+  }
+}
+
+// Small decorative ring — cx=93.53, cy=535.32, r=104.35, sw=0.547 — visible in all states
+const SMALL_RING = cssCircle(93.5312, 535.315, 104.351, 0.54719, 'transparent')
+
 export default function GapSection() {
   const [phase, setPhase] = useState<Phase>('idle-1')
-  // 'small' = gap-original ring position | 'large' = gap-animation arc position
   const [target, setTarget] = useState<'small' | 'large'>('small')
 
-  // One rAF delay so the element mounts at start position before transitioning
   useEffect(() => {
     let raf: number
     if (phase === 'growing')  raf = requestAnimationFrame(() => setTarget('large'))
@@ -44,16 +58,10 @@ export default function GapSection() {
     }
   }
 
-  const isAnimating     = phase === 'growing' || phase === 'shrinking'
-  const showState2Content = phase === 'idle-2' || phase === 'shrinking'
+  const isAnimating       = phase === 'growing' || phase === 'shrinking'
+  const showState2Content = phase === 'idle-2'  || phase === 'shrinking'
 
   const c = target === 'large' ? C_LARGE : C_SMALL
-
-  // Base SVG: norim/noarc stripped versions during animation so baked-in circles don't ghost
-  const baseImg =
-    phase === 'idle-1'  ? '/gap-original-nobg.svg'
-  : phase === 'idle-2'  ? '/gap-animation-nobg.svg'
-  :                       '/gap-original-norim-nobg.svg'   // both growing & shrinking
 
   return (
     <section
@@ -69,15 +77,25 @@ export default function GapSection() {
         draggable={false}
       />
 
-      {/* ── Layer 1: base SVG (no embedded background) ── */}
-      <img
-        src={baseImg}
-        alt=""
-        className="absolute inset-0 w-full h-full block"
-        draggable={false}
-      />
+      {/* ── Black left panel — idle-1 + animating (x=0..798 = 41.89%) ── */}
+      {(phase === 'idle-1' || isAnimating) && (
+        <div style={{ position: 'absolute', left: 0, top: 0, width: '41.89%', height: '100%', background: '#000000', pointerEvents: 'none' }} />
+      )}
 
-      {/* ── Layer 2: single circle — black fill + white stroke in one element, zero jitter ── */}
+      {/* ── Large circle idle-1: stroke only at C_SMALL position ── */}
+      {phase === 'idle-1' && (
+        <div style={cssCircle(C_SMALL.cx, C_SMALL.cy, C_SMALL.r, C_SMALL.sw, 'transparent')} />
+      )}
+
+      {/* ── Large circle idle-2: black fill + white stroke at C_LARGE position ── */}
+      {phase === 'idle-2' && (
+        <div style={cssCircle(C_LARGE.cx, C_LARGE.cy, C_LARGE.r, C_LARGE.sw, '#000000')} />
+      )}
+
+      {/* ── Small decorative ring — always visible ── */}
+      <div style={SMALL_RING} />
+
+      {/* ── Animated circle — only during transitions; black fill + white stroke ── */}
       {isAnimating && (
         <svg
           viewBox="0 0 1905 1079"
@@ -98,22 +116,12 @@ export default function GapSection() {
         </svg>
       )}
 
-      {/* ── Vertical divider — CSS so it vanishes instantly on click ── */}
+      {/* ── Vertical divider — CSS, only idle-1 ── */}
       {phase === 'idle-1' && (
-        <div
-          style={{
-            position: 'absolute',
-            left: 'calc(798 / 1905 * 100%)',
-            top: 0,
-            width: '1px',
-            height: '100%',
-            background: 'white',
-            pointerEvents: 'none',
-          }}
-        />
+        <div style={{ position: 'absolute', left: '41.89%', top: 0, width: '1px', height: '100%', background: 'white', pointerEvents: 'none' }} />
       )}
 
-      {/* ── Top & bottom edge strokes — always on top, never clipped ── */}
+      {/* ── Top & bottom edge strokes ── */}
       <div style={{ position: 'absolute', top: 0,    left: 0, right: 0, height: '1px', background: 'white', zIndex: 20, pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'white', zIndex: 20, pointerEvents: 'none' }} />
 

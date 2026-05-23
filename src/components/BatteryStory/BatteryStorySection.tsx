@@ -95,12 +95,13 @@ function BookPilotBtn() {
 
 export default function BatteryStorySection() {
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1059', borderBottom: '1px solid #ffffff' }}>
+    <section className="relative w-full" style={{ aspectRatio: '1905 / 1059', background: '#000000', borderBottom: '1px solid #ffffff' }}>
+      {/* Battery illustration — SVG rect: x=1374 y=522 w=531 h=535 on 1905×1059 canvas */}
       <img
-        src="/battery-story-v5.svg"
+        src="/Battery Story background.webp"
         alt=""
-        className="w-full h-auto block"
         draggable={false}
+        style={{ position: 'absolute', left: '72.13%', top: '49.29%', width: '27.87%', height: '50.52%', objectFit: 'cover' }}
       />
 
       {/* Heading — D-DIN Bold 70px */}

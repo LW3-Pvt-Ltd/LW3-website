@@ -93,7 +93,7 @@ export default function RegulationSection() {
   const [hoveredTab, setHoveredTab] = useState<HoveredTab>('eubr')
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1080' }}>
+    <section className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1080', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff' }}>
       {/* Background video */}
       <video
         className="absolute inset-0 w-full h-full block"
@@ -103,13 +103,39 @@ export default function RegulationSection() {
         <source src="/Regulation background.webm" type="video/webm" />
       </video>
 
-      {/* Circular arc + timeline dots (background stripped) */}
-      <img
-        src="/regulation-circles.svg"
-        alt=""
-        className="absolute inset-0 w-full h-full block"
-        draggable={false}
-      />
+      {/* Large circular arc — SVG: cx=1852 cy=516.5 r=703.808 on 1905×1080 canvas */}
+      <div style={{
+        position: 'absolute',
+        left: '60.27%',
+        top: '-9.83vw',
+        width: '73.89vw',
+        height: '73.89vw',
+        borderRadius: '50%',
+        border: '0.0727vw solid #ffffff',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Timeline dots — SVG r=7.5 → 0.787vw diameter, transform: translate(-50%,-50%) centres on coord */}
+      {([
+        { left: '64.59%', top: '17.27%', fill: '#8A8989' },
+        { left: '62.81%', top: '24.12%', fill: '#8A8989' },
+        { left: '61.50%', top: '30.97%', fill: '#00FF15' },
+        { left: '60.71%', top: '37.82%', fill: '#ffffff' },
+        { left: '60.29%', top: '44.68%', fill: '#ffffff' },
+        { left: '60.34%', top: '52.27%', fill: '#ffffff' },
+      ] as const).map((dot, i) => (
+        <div key={i} style={{
+          position: 'absolute',
+          left: dot.left,
+          top: dot.top,
+          width: '0.787vw',
+          height: '0.787vw',
+          borderRadius: '50%',
+          background: dot.fill,
+          transform: 'translate(-50%, -50%)',
+          pointerEvents: 'none',
+        }} />
+      ))}
 
       {/* ── Heading ── */}
       <div className="absolute" style={{
