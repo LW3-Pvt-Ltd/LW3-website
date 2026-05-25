@@ -107,8 +107,8 @@ const PROD_SUBS = [
 
 const TECH_LEFT = '52.49%'
 const TECH_SUBS = [
-  { text: 'agentic ai intelligence', top: '4.96%', target: 'snap-madpp-0' },
-  { text: 'pq secure blockchain',    top: '6.37%', target: 'snap-madpp-0' },
+  { text: 'agentic ai intelligence', top: '10.61%', target: 'snap-madpp-0' },
+  { text: 'pq secure blockchain',    top: '12.02%', target: 'snap-madpp-0' },
 ]
 
 const REG_LEFT = '69.92%'
