@@ -1,0 +1,40 @@
+<svg width="1905" height="1079" viewBox="0 0 1905 1079" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_206_57)">
+<mask id="path-1-inside-1_206_57" fill="white">
+<path d="M0 0H1905V1079H0V0Z"/>
+</mask>
+<path d="M0 0H1905V1079H0V0Z"/>
+<circle cx="432" cy="516.5" r="703.808" stroke="white" stroke-width="1.38409"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<circle cx="1053.5" cy="186.5" r="7.5" fill="#8A8989"/>
+<circle cx="1087.5" cy="260.5" r="7.5" fill="#8A8989"/>
+<circle cx="1112.5" cy="334.5" r="7.5" transform="rotate(-14.6264 1112.5 334.5)" fill="#00FF15"/>
+<circle cx="1127.5" cy="408.5" r="7.5" fill="white"/>
+<circle cx="1135.5" cy="482.5" r="7.5" fill="white"/>
+<circle cx="1134.5" cy="564.5" r="7.5" fill="white"/>
+
+
+<circle cx="104.625" cy="104.625" r="104.351" transform="matrix(1 0 0 -1 -11.0938 639.94)" stroke="white" stroke-width="0.54719"/>
+<circle cx="38.6443" cy="38.6443" r="38.6443" transform="matrix(1 0 0 -1 56.2891 577.739)" fill="white"/>
+
+</g>
+<path d="M0 0V1H1905V0V-1H0V0ZM1905 1079V1078H0V1079V1080H1905V1079Z" fill="white" mask="url(#path-1-inside-1_206_57)"/>
+<defs>
+
+<clipPath id="clip0_206_57">
+<path d="M0 0H1905V1079H0V0Z" fill="white"/>
+</clipPath>
+
+</defs>
+</svg>

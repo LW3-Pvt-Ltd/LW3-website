@@ -4,19 +4,28 @@
 // All y: (figma_frame_y + 8.667) / 1089 × 100 — section top%.
 
 import React, { useState, useEffect } from 'react'
+import { openBookDemo } from '../BookDemo/BookDemoModal'
+import { openContact } from '../Contact/ContactModal'
+
+function scrollTo(id: string) {
+  const el = document.getElementById(id)
+  if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+}
 
 const REGULATION_ITEMS = [
   'Regulation (EU) 2023/1542',
-  'INDIA Battery Aadhar',
-  'EU DPP Mendatory Deadline',
+  'BPAN Draft Guidelines (upcoming)',
+  'EU DPP Mandatory Deadline',
+  'ESPR Regulation:(EU) 2024/1781',
+  'CRMA Regulation:(EU) 2024/1252',
 ]
 
 // ── BOOK A DEMO button ────────────────────────────────────────────────────
 function BookDemoBtn() {
   const [hovered, setHovered] = useState(false)
   return (
-    <a
-      href="#"
+    <button
+      onClick={openBookDemo}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -36,7 +45,6 @@ function BookDemoBtn() {
         fontWeight: 400,
         letterSpacing: '0.08em',
         textTransform: 'uppercase',
-        textDecoration: 'none',
         whiteSpace: 'nowrap',
         cursor: 'pointer',
         transition: 'background 0.2s ease, color 0.2s ease',
@@ -44,7 +52,7 @@ function BookDemoBtn() {
       }}
     >
       Book a Demo
-    </a>
+    </button>
   )
 }
 
@@ -83,56 +91,80 @@ const DATE_LINK: React.CSSProperties = {
 // x = item_start + left_inset% × item_width, all / 1905
 // y ≈ 10px on nav canvas → 10/1089 = 0.92%
 const NAV_LINKS = [
-  { label: 'Technology',  left: '36.06%' },  // x=687
-  { label: 'Regulations', left: '52.49%' },  // x=1000
-  { label: 'Statistics',  left: '69.92%' },  // x=1332
-  { label: 'Our Pilots',  left: '87.45%' },  // x=1666
+  { label: 'Product',    left: '36.06%', target: 'snap-bpap'    },
+  { label: 'Technology', left: '52.49%', target: 'snap-madpp-0' },
+  { label: 'Regulation', left: '69.92%', target: 'snap-gap'     },
+  { label: 'About',      left: '87.45%', target: 'snap-bqegvir' },
 ]
-const NAV_TOP = '1.47%'   // 16px / 1089 — aligns label top with icon box top
+const NAV_TOP = '1.47%'
 
-// ── Technology sub-items (separately positioned) ──────────────────────────
-// Figma: item starts y=16px, products inset top=76.47% of 119px=91px → canvas y=107px
-//        battery passport inset top=89.92% of 119px=107px → canvas y=123px
-const TECH_LEFT = '36.06%'
+const PROD_LEFT = '36.06%'
+const PROD_SUBS = [
+  { text: 'battery passport',      top: '9.47%',  target: 'snap-bpap'    },
+  { text: 'reverse logistics',     top: '10.88%', target: 'snap-ydnlyc'  },
+  { text: 'compliance automation', top: '12.29%', target: 'snap-uybpcer' },
+]
+
+const TECH_LEFT = '52.49%'
 const TECH_SUBS = [
-  { text: 'products',         top: '10.38%' },  // (107+6)/1089
-  { text: 'battery passport', top: '11.84%' },  // (123+6)/1089
+  { text: 'agentic ai intelligence', top: '4.96%', target: 'snap-madpp-0' },
+  { text: 'pq secure blockchain',    top: '6.37%', target: 'snap-madpp-0' },
 ]
 
-// ── Sub-item line height: 14px × 1.1 = 15.4px per line ───────────────────
-// Each sub-item individually positioned (SUB_LINK inherits position:absolute)
-// Figma: item y=16px + container top → canvas y; top% = canvas_y / 1089
-
-const REG_LEFT = '52.49%'
+const REG_LEFT = '69.92%'
 const REG_SUBS = [
-  { text: 'aug 2023',    top: '4.96%'  },  // (16+32+6)/1089
-  { text: 'feb 2025',    top: '6.37%'  },
-  { text: 'now',         top: '7.78%'  },
-  { text: 'feb 2027',    top: '9.20%'  },
-  { text: '2026 - 2030', top: '10.61%' },
-  { text: '2030',        top: '12.02%' },
+  { text: 'eubr enters force',       top: '4.96%',  target: 'snap-gap' },
+  { text: 'carbon declarations',     top: '6.37%',  target: 'snap-gap' },
+  { text: 'implementation window',   top: '7.78%',  target: 'snap-gap' },
+  { text: 'full dpp mandatory',      top: '9.20%',  target: 'snap-gap' },
+  { text: 'eu pq mandate',           top: '10.61%', target: 'snap-gap' },
+  { text: 'circular economy phase',  top: '12.02%', target: 'snap-gap' },
 ]
 
-const STAT_LEFT = '69.92%'
-const STAT_SUBS = [
-  { text: 'blockchain transaction',  top: '7.53%'  },  // (16+60+6)/1089
-  { text: 'payments',                top: '8.94%'  },
-  { text: 'avoided carbon emmision', top: '10.36%' },
-  { text: 'battery modules tracked', top: '11.77%' },
+const ABOUT_LEFT = '87.45%'
+const ABOUT_SUBS = [
+  { text: 'our pilots',  top: '7.78%',  target: 'snap-uybpcer' as string | null },
+  { text: 'book a demo', top: '9.20%',  target: null },
+  { text: 'awards',      top: '10.61%', target: 'snap-bqegvir-2' as string | null },
+  { text: 'contact us',  top: '12.02%', target: 'contact' as string | null },
 ]
 
-const PILOTS_LEFT = '87.45%'
-const PILOTS_SUBS = [
-  { text: 'book a pilot', top: '9.09%'  },  // (16+77+6)/1089
-  { text: 'contact us',   top: '10.51%' },
-  { text: 'book a demo',  top: '11.92%' },
-]
+const HERO_TYPING_TEXTS = ['Post Quantum Secured', 'Agentic AI']
 
 export default function HeroNavSection() {
   const [regIdx, setRegIdx] = useState(0)
+  const [typed, setTyped] = useState('')
+
   useEffect(() => {
     const t = setInterval(() => setRegIdx(i => (i + 1) % REGULATION_ITEMS.length), 3000)
     return () => clearInterval(t)
+  }, [])
+
+  useEffect(() => {
+    let textIdx = 0
+    let charIdx = 0
+    let timer: ReturnType<typeof setTimeout>
+
+    const typeNext = () => {
+      const current = HERO_TYPING_TEXTS[textIdx]
+      if (charIdx <= current.length) {
+        setTyped(current.slice(0, charIdx))
+        charIdx++
+        timer = setTimeout(typeNext, 80)
+      } else {
+        timer = setTimeout(() => {
+          setTyped('')
+          timer = setTimeout(() => {
+            textIdx = (textIdx + 1) % HERO_TYPING_TEXTS.length
+            charIdx = 0
+            typeNext()
+          }, 400)
+        }, 1500)
+      }
+    }
+
+    typeNext()
+    return () => clearTimeout(timer)
   }, [])
   return (
     <section className="relative w-full" style={{ aspectRatio: '1905 / 1089' }}>
@@ -171,7 +203,7 @@ export default function HeroNavSection() {
           zIndex: 2,
         }}
       >
-        Post Quantum Secured
+        {typed}
       </p>
 
       {/* ── BATTERY PASSPORT heading ── */}
@@ -259,35 +291,35 @@ export default function HeroNavSection() {
 
       {/* ── Logo ── */}
       <img
-        src="/Logo ultimate.svg"
+        src="/Latest updated logo.svg"
         alt="LW3"
         draggable={false}
-        style={{ position: 'absolute', left: '8.14vw', top: '2.29vw', width: '18.11vw', height: 'auto', zIndex: 3 }}
+        style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', width: '18.11%', height: 'auto', zIndex: 3 }}
       />
 
       {/* ── Nav links (24px, small-caps) ── */}
-      {NAV_LINKS.map(({ label, left }) => (
-        <a key={label} href="#" style={{ ...NAV_LINK, left, top: NAV_TOP }}>{label}</a>
+      {NAV_LINKS.map(({ label, left, target }) => (
+        <a key={label} href="#" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...NAV_LINK, left, top: NAV_TOP }}>{label}</a>
+      ))}
+
+      {/* ── Product sub-items ── */}
+      {PROD_SUBS.map(({ text, top, target }) => (
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...DATE_LINK, left: PROD_LEFT, top }}>{text}</a>
       ))}
 
       {/* ── Technology sub-items ── */}
-      {TECH_SUBS.map(({ text, top }) => (
-        <a key={text} href="#" className="nav-sub" style={{ ...DATE_LINK, left: TECH_LEFT, top }}>{text}</a>
+      {TECH_SUBS.map(({ text, top, target }) => (
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...DATE_LINK, left: TECH_LEFT, top }}>{text}</a>
       ))}
 
-      {/* ── Regulations sub-items ── */}
-      {REG_SUBS.map(({ text, top }) => (
-        <a key={text} href="#" className="nav-sub" style={{ ...DATE_LINK, left: REG_LEFT, top }}>{text}</a>
+      {/* ── Regulation sub-items ── */}
+      {REG_SUBS.map(({ text, top, target }) => (
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...DATE_LINK, left: REG_LEFT, top }}>{text}</a>
       ))}
 
-      {/* ── Statistics sub-items ── */}
-      {STAT_SUBS.map(({ text, top }) => (
-        <a key={text} href="#" className="nav-sub" style={{ ...DATE_LINK, left: STAT_LEFT, top }}>{text}</a>
-      ))}
-
-      {/* ── Our Pilots sub-items ── */}
-      {PILOTS_SUBS.map(({ text, top }) => (
-        <a key={text} href="#" className="nav-sub" style={{ ...DATE_LINK, left: PILOTS_LEFT, top }}>{text}</a>
+      {/* ── About sub-items ── */}
+      {ABOUT_SUBS.map(({ text, top, target }) => (
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) openBookDemo(); else if (target === 'contact') openContact(); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
       ))}
 
     </section>

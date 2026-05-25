@@ -7,21 +7,42 @@
 // Columns: left=31.70%/54.38%/77.06%, top=20.37% — headers D-DINCondensed-Bold 0.84vw
 // List items: D-DIN Regular 0.68vw, gap 30.59px → top steps of 9.58%
 
+import { openContact } from '../Contact/ContactModal'
+
+function scrollTo(id: string) {
+  const el = document.getElementById(id)
+  if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+}
+
 const cols = [
   {
     left: '31.70%',
     heading: 'Product',
-    items: ['Battery Passport', 'Reverse Logistics', 'Compliance Engine', 'Carbon Reporting'],
+    items: [
+      { label: 'Battery Passport',  target: 'snap-bpap'    },
+      { label: 'Reverse Logistics', target: 'snap-ydnlyc'  },
+      { label: 'Compliance Engine', target: 'snap-uybpcer' },
+    ],
   },
   {
     left: '54.38%',
     heading: 'Technology',
-    items: ['Post-Quantum Blockchain', 'Agentic AI', 'IoT Phygital Layer', 'Algorand Network'],
+    items: [
+      { label: 'Post-Quantum Blockchain', target: 'snap-madpp-0' },
+      { label: 'Agentic AI',              target: 'snap-madpp-0' },
+      { label: 'IoT Phygital Layer',      target: 'snap-madpp-1' },
+      { label: 'Algorand Network',        target: 'snap-madpp-0' },
+    ],
   },
   {
     left: '77.06%',
     heading: 'Company',
-    items: ['Team', 'Awards', 'Regulation', 'Contact us'],
+    items: [
+      { label: 'Team',       target: 'snap-partners'  },
+      { label: 'Awards',     target: 'snap-bqegvir-2' },
+      { label: 'Regulation', target: 'snap-gap'       },
+      { label: 'Contact us', target: 'contact'        },
+    ],
   },
 ]
 
@@ -42,9 +63,9 @@ export default function FooterSection() {
       className="relative w-full"
       style={{ aspectRatio: '1905 / 319.21', background: '#0A0A08' }}
     >
-      {/* LW3 logo — kept as SVG (mark + "/" + tagline) */}
+      {/* LW3 logo */}
       <img
-        src="/footer-logo.svg"
+        src="/Latest updated logo.svg"
         alt="LW3 — accelerating sustainable traceability"
         draggable={false}
         style={{
@@ -88,10 +109,11 @@ export default function FooterSection() {
           </span>
 
           {/* List items */}
-          {col.items.map((item, j) => (
+          {col.items.map(({ label, target }, j) => (
             <a
-              key={item}
+              key={label}
               href="#"
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else scrollTo(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,
@@ -102,7 +124,7 @@ export default function FooterSection() {
               onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.textDecoration = 'underline'; e.currentTarget.style.textUnderlineOffset = '3px' }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; e.currentTarget.style.textDecoration = 'none' }}
             >
-              {item}
+              {label}
             </a>
           ))}
         </div>

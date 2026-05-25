@@ -3,11 +3,19 @@
 // Nav links + dropdowns use absolute x positions so they align exactly
 
 import { useState, useEffect, useRef } from 'react'
+import { openBookDemo } from '../BookDemo/BookDemoModal'
+import { openContact } from '../Contact/ContactModal'
+
+function scrollTo(id: string) {
+  const el = document.getElementById(id)
+  if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+}
 
 function BookDemoBtn() {
   const [hovered, setHovered] = useState(false)
   return (
     <button
+      onClick={openBookDemo}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -36,28 +44,44 @@ function BookDemoBtn() {
 
 interface Props { visible: boolean }
 
-type Key = 'technology' | 'regulations' | 'statistics' | 'our-pilots'
+type Key = 'product' | 'technology' | 'regulation' | 'about'
 
-// Absolute x positions from Figma (in 1905px canvas) → converted to %
-// Nav link x: Technology=675, Regulations=858, Statistics=1045, Our pilots=1234
-const LINKS: { key: Key; label: string; left: string }[] = [
-  { key: 'technology',   label: 'technology',   left: '35.43%' }, // 675/1905
-  { key: 'regulations',  label: 'regulations',  left: '45.04%' }, // 858/1905
-  { key: 'statistics',   label: 'statistics',   left: '54.86%' }, // 1045/1905
-  { key: 'our-pilots',   label: 'our pilots',   left: '64.78%' }, // 1234/1905
+const LINKS: { key: Key; label: string; left: string; target: string }[] = [
+  { key: 'product',    label: 'product',    left: '35.43%', target: 'snap-bpap'    },
+  { key: 'technology', label: 'technology', left: '45.04%', target: 'snap-madpp-0' },
+  { key: 'regulation', label: 'regulation', left: '54.86%', target: 'snap-gap'     },
+  { key: 'about',      label: 'about',      left: '64.78%', target: 'snap-bqegvir' },
 ]
 
-// Dropdown links — same x as parent link, top=10px within dropdown panel (y=92)
-const DROPDOWNS: Record<Key, string[]> = {
-  technology:   ['products', 'battery passport'],
-  regulations:  ['aug 2023', 'feb 2025', 'now', 'feb 2027', '2026 – 2030', '2030'],
-  statistics:   ['blockchain . transaction', 'payments', 'avoided carbon emmison', 'battery modules tracked'],
-  'our-pilots': ['book a pilot', 'contact us', 'book a demo', 'battery modules tracked'],
+type DropdownItem = { label: string; target: string | null }
+
+const DROPDOWNS: Record<Key, DropdownItem[]> = {
+  product: [
+    { label: 'battery passport',      target: 'snap-bpap'    },
+    { label: 'reverse logistics',     target: 'snap-ydnlyc'  },
+    { label: 'compliance automation', target: 'snap-uybpcer' },
+  ],
+  technology: [
+    { label: 'agentic ai intelligence', target: 'snap-madpp-0' },
+    { label: 'pq secure blockchain',    target: 'snap-madpp-0' },
+  ],
+  regulation: [
+    { label: 'eubr enters force',      target: 'snap-gap' },
+    { label: 'carbon declarations',    target: 'snap-gap' },
+    { label: 'implementation window',  target: 'snap-gap' },
+    { label: 'full dpp mandatory',     target: 'snap-gap' },
+    { label: 'eu pq mandate',          target: 'snap-gap' },
+    { label: 'circular economy phase', target: 'snap-gap' },
+  ],
+  about: [
+    { label: 'our pilots', target: 'snap-uybpcer' },
+    { label: 'book a demo', target: null },          // opens modal
+    { label: 'awards',      target: 'snap-bqegvir-2' },
+    { label: 'contact us',  target: 'contact'      },
+  ],
 }
 
-const BAR_H  = '4.83vw'   // 92 / 1905
-const DROP_H = '7.32vw'
-const DROP_MIN = '75px'
+const BAR_H = '4.83vw'   // 92 / 1905
 
 export default function AltNavbar({ visible }: Props) {
   const [active, setActive]   = useState<Key | null>(null)
@@ -67,12 +91,16 @@ export default function AltNavbar({ visible }: Props) {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
-      setHidden(y > lastY.current && y > 80) // hide when scrolling down past 80px
+      setHidden(y > lastY.current && y > 80)
       lastY.current = y
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    if (!visible) setActive(null)
+  }, [visible])
 
   if (!visible) return null
 
@@ -92,23 +120,24 @@ export default function AltNavbar({ visible }: Props) {
           height: BAR_H,
           minHeight: '60px',
           backgroundColor: '#000',
-          borderBottom: active ? 'none' : '1px solid rgba(255,255,255,0.12)',
+          borderBottom: '1px solid rgba(255,255,255,0.12)',
         }}
       >
         {/* Logo SVG */}
         <img
-          src="/Logo ultimate.svg"
+          src="/Latest updated logo.svg"
           alt="LW3"
           draggable={false}
           style={{ position: 'absolute', left: '8.14vw', top: '50%', transform: 'translateY(-50%)', width: '18.11vw', minWidth: '180px', height: 'auto' }}
         />
 
-        {/* Nav links — each absolutely positioned at exact Figma x */}
-        {LINKS.map(({ key, label, left }) => (
+        {/* Nav links */}
+        {LINKS.map(({ key, label, left, target }) => (
           <a
             key={key}
             href="#"
             onMouseEnter={() => setActive(key)}
+            onClick={(e) => { e.preventDefault(); scrollTo(target); setActive(null) }}
             className="no-underline"
             style={{
               position: 'absolute',
@@ -120,6 +149,7 @@ export default function AltNavbar({ visible }: Props) {
               fontFamily: 'D-DINCondensed, D-DIN, sans-serif',
               fontSize: '0.84vw',
               whiteSpace: 'nowrap',
+              textTransform: 'uppercase',
             }}
           >
             {label}
@@ -130,42 +160,42 @@ export default function AltNavbar({ visible }: Props) {
         <BookDemoBtn />
       </nav>
 
-      {/* ── Dropdown panel — expands below bar, same x as parent link ── */}
+      {/* ── Dropdown island ── */}
       {active && (
         <div
-          className="relative w-full"
+          className="absolute flex flex-col"
           style={{
+            left: LINKS.find(l => l.key === active)!.left,
+            top: BAR_H,
             backgroundColor: '#000',
-            borderBottom: '1px solid rgba(255,255,255,0.12)',
-            height: DROP_H,
-            minHeight: DROP_MIN,
+            border: '1px solid rgba(255,255,255,0.18)',
+            padding: '0.7vw 1vw',
+            gap: '0.4vw',
+            minWidth: '160px',
           }}
         >
-          {/* Links left-aligned directly under their column heading */}
-          <div
-            className="absolute flex flex-col"
-            style={{
-              left: LINKS.find(l => l.key === active)!.left,
-              top: '0.05vw',
-              gap: '0.13vw',
-            }}
-          >
-            {DROPDOWNS[active].map(link => (
-              <a
-                key={link}
-                href="#"
-                className="text-white no-underline hover:opacity-60 transition-opacity"
-                style={{
-                  fontFamily: 'D-DINCondensed, D-DIN, sans-serif',
-                  fontSize: '0.74vw',   // 14px / 1905
-                  whiteSpace: 'nowrap',
-                  lineHeight: 1.2,
-                }}
-              >
-                {link}
-              </a>
-            ))}
-          </div>
+          {DROPDOWNS[active].map(({ label, target }) => (
+            <a
+              key={label}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                setActive(null)
+                if (target === null) openBookDemo()
+                else if (target === 'contact') openContact()
+                else scrollTo(target)
+              }}
+              className="text-white no-underline hover:opacity-60 transition-opacity"
+              style={{
+                fontFamily: 'D-DINCondensed, D-DIN, sans-serif',
+                fontSize: '0.74vw',
+                whiteSpace: 'nowrap',
+                lineHeight: 1.4,
+              }}
+            >
+              {label}
+            </a>
+          ))}
         </div>
       )}
     </div>

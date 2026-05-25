@@ -9,6 +9,7 @@
 //   70px → 3.67vw  |  24px → 1.26vw
 
 import { useState } from 'react'
+import { openBookDemo } from '../BookDemo/BookDemoModal'
 
 export default function YDNLYCSection() {
   const [btnHovered, setBtnHovered] = useState(false)
@@ -93,12 +94,12 @@ export default function YDNLYCSection() {
       </p>
 
       {/* Book a Demo button */}
-      <a
-        href="#"
-        className="absolute flex items-center justify-center"
+      <button
+        onClick={openBookDemo}
         onMouseEnter={() => setBtnHovered(true)}
         onMouseLeave={() => setBtnHovered(false)}
         style={{
+          position: 'absolute',
           left: '8.14%',
           top: '84.77%',
           width: '11.02%',
@@ -108,15 +109,17 @@ export default function YDNLYCSection() {
           fontFamily: "'D-DIN', sans-serif",
           fontSize: '1.26vw',
           color: btnHovered ? '#000000' : '#ffffff',
-          textDecoration: 'none',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           cursor: 'pointer',
           transition: 'background 0.2s ease, color 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         BOOK A DEMO
-      </a>
+      </button>
     </section>
   )
 }

@@ -7,7 +7,7 @@ export default function PartnersSection() {
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ aspectRatio: '1905 / 541', background: '#000000' }}
+      style={{ aspectRatio: '1905 / 541', background: '#000000', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff' }}
     >
       <style>{`
         @keyframes partnersScroll {

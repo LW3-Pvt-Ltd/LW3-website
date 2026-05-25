@@ -16,11 +16,13 @@
 //   Button:      y=688     → top=77.22%  — D-DIN 16px
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const CARD_MAX_WIDTH = '24.09%'
 
 const blogs = [
   {
+    id: '1',
     left: '8.14%',
     tag1: { left: '8.14%',  label: 'Regulatory Intelligence' },
     tag2: { left: '17.87%', label: 'Post-Quantum Security'   },
@@ -29,6 +31,7 @@ const blogs = [
     desc: "How LW3's Battery Passport Meets Europe's Twin Regulatory Frontier",
   },
   {
+    id: '2',
     left: '41.47%',
     tag1: { left: '41.47%', label: 'Embedded Finance'  },
     tag2: { left: '51.21%', label: 'Battery Passport'  },
@@ -37,6 +40,7 @@ const blogs = [
     desc: 'How eRupee and USDC Unlock Financial Traceability and an EoL Marketplace',
   },
   {
+    id: '3',
     left: '74.80%',
     tag1: { left: '74.80%', label: 'Agentic AI'         },
     tag2: { left: '84.54%', label: 'Battery Regulation' },
@@ -61,11 +65,11 @@ const TAG_STYLE: React.CSSProperties = {
   whiteSpace: 'nowrap',
 }
 
-function ReadMoreBtn({ left }: { left: string }) {
+function ReadMoreBtn({ left, blogId }: { left: string; blogId: string }) {
   const [hovered, setHovered] = useState(false)
   return (
-    <a
-      href="#"
+    <Link
+      to={`/blog/${blogId}`}
       style={{
         position: 'absolute',
         top: '77.22%',
@@ -90,7 +94,7 @@ function ReadMoreBtn({ left }: { left: string }) {
       onMouseLeave={() => setHovered(false)}
     >
       READ MORE
-    </a>
+    </Link>
   )
 }
 
@@ -187,7 +191,7 @@ export default function InsightSection() {
           </p>
 
           {/* Read More button */}
-          <ReadMoreBtn left={blog.left} />
+          <ReadMoreBtn left={blog.left} blogId={blog.id} />
         </div>
       ))}
     </section>

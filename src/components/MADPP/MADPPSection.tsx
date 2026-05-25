@@ -159,7 +159,10 @@ export default function MADPPSection() {
 
   return (
     // 3× section height → 3 × (1064/1905 × 100)vw = 167.64vw
-    <div ref={wrapperRef} style={{ height: '167.64vw', position: 'relative' }}>
+    // Sentinel divs at 0, 1/3, 2/3 of wrapper height — used as scroll snap points
+    <div ref={wrapperRef} id="snap-madpp-0" style={{ height: '167.64vw', position: 'relative' }}>
+      <div id="snap-madpp-1" style={{ position: 'absolute', top: '55.88vw'  }} />
+      <div id="snap-madpp-2" style={{ position: 'absolute', top: '111.76vw' }} />
 
       <div
         style={{

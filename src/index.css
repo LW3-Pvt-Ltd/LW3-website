@@ -175,10 +175,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
+  /* scroll-behavior handled per-action by the scroll snap hook */
 
   /* Remove default scrollbar styling on dark bg */
   ::-webkit-scrollbar {
