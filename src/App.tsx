@@ -40,7 +40,7 @@ function HomePage() {
   const [altNavVisible, setAltNavVisible] = useState(false)
   const location = useLocation()
 
-  useScrollSnap(SNAP_IDS, new Set(['snap-bqegvir']))
+  useScrollSnap(SNAP_IDS)
 
   // Instant jump to section when navigating back from blog pages
   useEffect(() => {
