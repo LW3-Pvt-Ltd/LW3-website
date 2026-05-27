@@ -198,7 +198,7 @@ export default function NeedAndRegulationSection() {
     <section className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1079' }}>
 
       {/* ── Background video (same as Regulation section) ── */}
-      <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.35 }} autoPlay loop muted playsInline>
+      <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.25 }} autoPlay loop muted playsInline>
         <source src="/section2.webm" type="video/webm" />
       </video>
 

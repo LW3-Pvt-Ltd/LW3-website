@@ -69,7 +69,7 @@ export default function BPAPSection() {
       >
         <source src="/section3.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.55)', zIndex: 0 }} />
+      <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.68)', zIndex: 0 }} />
 
 
 {/* ── Left-side text + buttons (z-index: 1 ensures they sit above SVG) ── */}

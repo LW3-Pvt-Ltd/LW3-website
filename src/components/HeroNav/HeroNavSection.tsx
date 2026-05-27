@@ -175,7 +175,7 @@ export default function HeroNavSection() {
         <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
           <source src="/section1.webm" type="video/webm" />
         </video>
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.63)' }} />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.73)' }} />
       </div>
 
       {/* ── Hero SVG (nav elements only, background stripped) ── */}

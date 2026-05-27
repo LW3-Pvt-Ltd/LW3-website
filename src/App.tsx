@@ -22,7 +22,7 @@ import MobileApp from './components/Mobile/MobileApp'
 const SNAP_IDS = [
   'snap-hero',
   'snap-gap',
-  'snap-bqegvir', 'snap-bqegvir-2',
+  'snap-bqegvir',
   'snap-madpp-0', 'snap-madpp-1', 'snap-madpp-2',
   'snap-uybpcer',
   // 'snap-kwwsotwid',
@@ -40,7 +40,7 @@ function HomePage() {
   const [altNavVisible, setAltNavVisible] = useState(false)
   const location = useLocation()
 
-  useScrollSnap(SNAP_IDS)
+  useScrollSnap(SNAP_IDS, ['snap-bqegvir'])
 
   // Instant jump to section when navigating back from blog pages
   useEffect(() => {
