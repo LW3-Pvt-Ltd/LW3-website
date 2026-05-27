@@ -20,7 +20,7 @@ export default function Blog1Content() {
       }}
     >
       {/* Kicker row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0', marginBottom: '0', paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0', marginBottom: '0', paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
         <KickerTag>Regulatory Intelligence</KickerTag>
         <KickerDot />
         <KickerTag>Post-Quantum Security</KickerTag>

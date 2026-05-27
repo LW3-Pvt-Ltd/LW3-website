@@ -3,7 +3,7 @@
 // State 2: Regulation timeline + large arc on right
 // Transition: text + decorative circles slide right; main circle grows & moves right → regulation arc
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // 'entering-start' = elements mount off-screen (no transition), 'entering' = slide back in
 type Phase = 'idle-1' | 'exiting' | 'idle-2' | 'entering-start' | 'entering'
@@ -19,21 +19,48 @@ const C2 = { cx: 432,      cy: 516.5, r: 703.808, sw: 1.384 }
 
 type HoveredTab = 'eubr' | 'ibpan' | 'implwindow' | 'eudpp' | 'pqmandate' | 'circular' | null
 
-const TAB_SRCS: Record<NonNullable<HoveredTab>, string> = {
-  eubr:       '/EUBR tab.svg',
-  ibpan:      '/IBPAN tab.svg',
-  implwindow: '/Implementation window tab.svg',
-  eudpp:      '/EU DPPmtab.svg',
-  pqmandate:  '/EU Post-quantum cryptography mandatetab.svg',
-  circular:   '/EU Post-quantum cryptography mandatetab (1).svg',
-}
-const TAB_WIDTHS: Record<NonNullable<HoveredTab>, string> = {
-  eubr:       '13.91%',
-  ibpan:      '19.06%',
-  implwindow: '19.06%',
-  eudpp:      '19.11%',
-  pqmandate:  '25.04%',
-  circular:   '18.06%',
+const TAB_DATA: Record<NonNullable<HoveredTab>, {
+  heading: string; subheading?: string; body: string; badge: string; width: string; knowMore?: boolean
+}> = {
+  eubr: {
+    heading: 'EU Battery Regulation (2023/1542)',
+    body: 'Replaces EU Battery Directive. Legal framework mandating battery passports for all EV, LMT, and industrial batteries over 2 kWh.',
+    badge: 'LW3 Compliant',
+    width: '13.91%',
+  },
+  ibpan: {
+    heading: 'India Battery Aadhaar (BPAN)',
+    body: "India's national battery identity framework aligning with international DPP standards. LW3 achieved 80% alignment in pilot deployments.",
+    badge: '80% Aligned in Pilots',
+    width: '19.06%',
+  },
+  implwindow: {
+    heading: 'Implementation window',
+    subheading: 'The Critical Preparation Phase',
+    body: 'This is the active compliance window – the period to build the data infrastructure, supply chain traceability systems, and reporting pipelines needed before DPP mandates land. Companies that act now will be positioned to meet the Feb 2027 deadline. Those that delay risk costly last-minute scrambles or market exclusion.',
+    badge: 'LW3 Targeted Completion',
+    width: '19.06%',
+    knowMore: true,
+  },
+  eudpp: {
+    heading: 'EU DPP Mandatory Deadline',
+    body: 'All EV, LMT and industrial batteries sold in or exported to the EU must carry a fully compliant digital product passport from this date.',
+    badge: 'LW3 Targeted Completion',
+    width: '19.11%',
+  },
+  pqmandate: {
+    heading: 'EU Post-quantum cryptography mandate',
+    subheading: 'Quantum-Safe Infrastructure Required',
+    body: 'Critical digital infrastructure - including DPP data platforms, battery registries, and authentication systems - must transition to post-quantum cryptographic standards. This protects sensitive supply chain and product data against the threat of quantum computing attacks, which can break classical encryption methods currently in widespread use.',
+    badge: 'LW3 Targeted Completion',
+    width: '25.04%',
+  },
+  circular: {
+    heading: 'Full Lifecycle Transparency',
+    body: 'The regulation reaches its most demanding phase: mandatory disclosure of recycled content percentages, battery collection rates, and material recovery efficiency. Producers must demonstrate closed-loop accountability from raw material sourcing through to end-of-life processing – completing the regulatory framework for a truly circular battery economy in the EU.',
+    badge: 'LW3 Targeted Completion',
+    width: '18.06%',
+  },
 }
 
 // Dot positions from animation SVG (cx/1905, cy/1079)
@@ -46,44 +73,94 @@ const TIMELINE: { date: string; label: string; sub: string; dotLeft: string; top
   { date: '2030',      label: 'Circular Economy Phase',               sub: 'Full lifecycle disclosure required.',            dotLeft: '59.6%', top: '52.3%', tab: 'circular'   },
 ]
 
-function KnowMoreBtn() {
-  const [hovered, setHovered] = useState(false)
+function RegTab({ data }: { data: typeof TAB_DATA[NonNullable<HoveredTab>] }) {
+  const [kmHovered, setKmHovered] = useState(false)
   return (
-    <a
-      href="#"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'absolute',
-        left: '52%',
-        top: '90.9%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        border: '1px solid #ffffff',
-        background: hovered ? '#ffffff' : 'transparent',
-        color: hovered ? '#000000' : '#ffffff',
-        fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
-        fontSize: '0.63vw',
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        whiteSpace: 'nowrap',
-        padding: '0.2vw 0.5vw',
-        cursor: 'pointer',
-        pointerEvents: 'auto',
-        transition: 'background 0.2s ease, color 0.2s ease',
-      }}
-    >
-      Know More
-    </a>
+    <div style={{ color: '#ffffff' }}>
+      <p style={{
+        margin: 0,
+        fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif",
+        fontSize: '1.47vw',
+        fontWeight: 700,
+        lineHeight: 1.15,
+      }}>
+        {data.heading}
+      </p>
+      <p style={{
+        margin: '0.5em 0 0',
+        fontFamily: "'D-DIN', sans-serif",
+        fontSize: '0.84vw',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      }}>
+        {data.subheading && <>{data.subheading}. </>}{data.body}
+      </p>
+      <div style={{ marginTop: '0.8em', display: 'flex', alignItems: 'center', gap: '0.5vw', flexWrap: 'wrap' }}>
+        <span style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: '0.25vw 0.55vw',
+          background: 'rgba(29,158,117,0.15)',
+          border: '1px solid rgba(29,158,117,0.30)',
+          fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+          fontSize: '0.68vw',
+          letterSpacing: '0.06em',
+          whiteSpace: 'nowrap',
+        }}>
+          {data.badge}
+        </span>
+        {data.knowMore && (
+          <a
+            href="#"
+            onMouseEnter={() => setKmHovered(true)}
+            onMouseLeave={() => setKmHovered(false)}
+            onClick={e => e.preventDefault()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '0.25vw 0.55vw',
+              border: '1px solid #ffffff',
+              background: kmHovered ? '#ffffff' : 'transparent',
+              color: kmHovered ? '#000000' : '#ffffff',
+              fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+              fontSize: '0.68vw',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              cursor: 'pointer',
+              pointerEvents: 'auto',
+              transition: 'background 0.2s ease, color 0.2s ease',
+            }}
+          >
+            Know More
+          </a>
+        )}
+      </div>
+    </div>
   )
+}
+
+export function openRegulationTab(tab: HoveredTab) {
+  window.dispatchEvent(new CustomEvent('open-regulation-tab', { detail: { tab } }))
 }
 
 export default function NeedAndRegulationSection() {
   const [phase, setPhase] = useState<Phase>('idle-1')
   const [circleTarget, setCircleTarget] = useState(C1)
   const [hoveredTab, setHoveredTab] = useState<HoveredTab>('eubr')
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const tab = (e as CustomEvent<{ tab: HoveredTab }>).detail?.tab
+      if (!tab) return
+      setHoveredTab(tab)
+      setPhase('idle-2')
+      setCircleTarget(C2)
+    }
+    window.addEventListener('open-regulation-tab', handler)
+    return () => window.removeEventListener('open-regulation-tab', handler)
+  }, [])
 
   const handleClick = () => {
     if (phase === 'idle-1') {
@@ -121,8 +198,8 @@ export default function NeedAndRegulationSection() {
     <section className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1079' }}>
 
       {/* ── Background video (same as Regulation section) ── */}
-      <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover' }} autoPlay loop muted playsInline>
-        <source src="/Regulation background.webm" type="video/webm" />
+      <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.35 }} autoPlay loop muted playsInline>
+        <source src="/section2.webm" type="video/webm" />
       </video>
 
       {/* ── Animated main circle (grows & moves right into regulation arc) ── */}
@@ -186,9 +263,8 @@ export default function NeedAndRegulationSection() {
         color: '#ffffff',
         textAlign: 'right',
         zIndex: 2,
-        pointerEvents: 'none',
       }}>
-        LW3 is a participant in the EU-funded CIRPASS standardisation initiative, featured in the Final Report D3.1 Annex V9 (March 2024) - the global DPP standards roadmap.
+        LW3 is a participant in the EU-funded CIRPASS standardisation initiative, featured in the Final Report D3.1 Annex V9 (March 2024) — the global DPP standards roadmap.
       </p>}
 
       {/* ── Top & bottom borders ── */}
@@ -213,32 +289,34 @@ export default function NeedAndRegulationSection() {
 
       {/* ── STATE 1 text — slides right on exit ── */}
       {phase !== 'idle-2' && (
-        <div style={{ position: 'absolute', inset: 0, ...slideOut, zIndex: 2, pointerEvents: 'none' }}>
-          {/* 4% */}
-          <p style={{ position: 'absolute', left: '22.36%', top: '39.85%', margin: 0, lineHeight: 1, color: '#ffffff' }}>
-            <span style={{ fontFamily: "'SF Pro Display', 'SF Pro', -apple-system, sans-serif", fontSize: '6.3vw', fontWeight: 700 }}>4%</span>
-            <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', fontSize: '2.1vw', marginLeft: '0.3em' }}>of</span>
-          </p>
-          <p style={{ position: 'absolute', left: '22.36%', top: '52.85%', margin: 0, fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '0.945vw', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#ffffff' }}>
-            Global Turnover
-          </p>
+        <div style={{ position: 'absolute', inset: 0, ...slideOut, zIndex: 2 }}>
+          {/* 4% group — centered on arrow button */}
+          <div style={{ position: 'absolute', left: '22.36%', top: '50%', transform: 'translateY(-50%)', color: '#ffffff' }}>
+            <p style={{ margin: 0, lineHeight: 1 }}>
+              <span style={{ fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '6.3vw', fontWeight: 700 }}>4%</span>
+              <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', fontWeight: 400, fontSize: '2.1vw', marginLeft: '0.3em' }}>of</span>
+            </p>
+            <p style={{ margin: '0.3em 0 0', fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '0.945vw', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+              Global Turnover
+            </p>
+          </div>
 
-          {/* Heading */}
-          <p style={{ position: 'absolute', left: '50.03%', top: '42.35%', width: '35.38%', margin: 0, fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '1.68vw', fontWeight: 500, lineHeight: 1.1, textTransform: 'uppercase', color: '#ffffff' }}>
-            GDPR Moment for Supply Chain is Here
-          </p>
-
-          {/* Description */}
-          <p style={{ position: 'absolute', left: '50.03%', top: '47.73%', width: '35.38%', margin: 0, fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.4, color: '#ffffff' }}>
-            Non-compliance with ESPR/EUDR regulations is subject to GDPR-style enforcement-carrying financial penalties of up to 4% of global annual turnover, compounded by market bans and mandatory product recalls.
-          </p>
+          {/* Heading + Description — centered on arrow button */}
+          <div style={{ position: 'absolute', left: '50.03%', top: '50%', transform: 'translateY(-50%)', width: '35.38%' }}>
+            <p style={{ margin: 0, fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '1.68vw', fontWeight: 500, lineHeight: 1.1, textTransform: 'uppercase', color: '#ffffff' }}>
+              GDPR Moment for Supply Chain is Here
+            </p>
+            <p style={{ margin: '0.6em 0 0', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.4, color: '#ffffff' }}>
+              Non-compliance with ESPR/EUDR regulations is subject to GDPR-style enforcement-carrying financial penalties of up to 4% of global annual turnover, compounded by market bans and mandatory product recalls.
+            </p>
+          </div>
         </div>
       )}
 
       {/* ── STATE 2 timeline text ── */}
       {phase === 'idle-2' && TIMELINE.map(({ date, label, sub, dotLeft, top, tab }) => (
         <div key={label} style={{ position: 'absolute', top, width: '100%', zIndex: 2 }}>
-          <span style={{ position: 'absolute', right: `calc(100% - ${dotLeft} + 0.6vw)`, top: 0, transform: 'translateY(-50%)', fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '0.84vw', fontWeight: 100, color: '#ffffff', whiteSpace: 'nowrap', textAlign: 'right' }}>
+          <span style={{ position: 'absolute', right: `calc(100% - ${dotLeft} + 0.6vw)`, top: 0, transform: 'translateY(-50%)', fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '0.84vw', fontWeight: 400, color: '#ffffff', whiteSpace: 'nowrap', textAlign: 'right' }}>
             {date}
           </span>
           <span
@@ -254,7 +332,7 @@ export default function NeedAndRegulationSection() {
             {label}
           </span>
           {sub && (
-            <span style={{ position: 'absolute', left: `calc(${dotLeft} + 0.6vw)`, top: '1.3vw', transform: 'translateY(-50%)', fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '0.68vw', fontWeight: 100, color: 'rgba(255,255,255,0.7)', whiteSpace: 'nowrap' }}>
+            <span style={{ position: 'absolute', left: `calc(${dotLeft} + 0.6vw)`, top: '1.3vw', transform: 'translateY(-50%)', fontFamily: "-apple-system, 'SF Pro', sans-serif", fontSize: '0.68vw', fontWeight: 400, color: '#ffffff', whiteSpace: 'nowrap' }}>
               {sub}
             </span>
           )}
@@ -270,14 +348,11 @@ export default function NeedAndRegulationSection() {
             left: '22%',
             top: '50%',
             transform: 'translateY(-50%)',
-            width: TAB_WIDTHS[hoveredTab],
-            pointerEvents: 'none',
+            width: TAB_DATA[hoveredTab].width,
             zIndex: 10,
           }}
         >
-          <img src={TAB_SRCS[hoveredTab]} alt="" draggable={false} style={{ width: '100%', height: 'auto', display: 'block' }} />
-          {/* Know More CTA — CSS button beside LW3 targeted completion row */}
-          {hoveredTab === 'implwindow' && <KnowMoreBtn />}
+          <RegTab data={TAB_DATA[hoveredTab]} />
         </div>
       )}
 

@@ -5,6 +5,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
+import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
@@ -53,7 +54,7 @@ const LINKS: { key: Key; label: string; left: string; target: string }[] = [
   { key: 'about',      label: 'about',      left: '64.78%', target: 'snap-bqegvir' },
 ]
 
-type DropdownItem = { label: string; target: string | null }
+type DropdownItem = { label: string; target: string | null; regTab?: string }
 
 const DROPDOWNS: Record<Key, DropdownItem[]> = {
   product: [
@@ -66,16 +67,15 @@ const DROPDOWNS: Record<Key, DropdownItem[]> = {
     { label: 'pq secure blockchain',    target: 'snap-madpp-0' },
   ],
   regulation: [
-    { label: 'eubr enters force',      target: 'snap-gap' },
-    { label: 'carbon declarations',    target: 'snap-gap' },
-    { label: 'implementation window',  target: 'snap-gap' },
-    { label: 'full dpp mandatory',     target: 'snap-gap' },
-    { label: 'eu pq mandate',          target: 'snap-gap' },
-    { label: 'circular economy phase', target: 'snap-gap' },
+    { label: 'eubr enters force',      target: 'snap-gap', regTab: 'eubr'       },
+    { label: 'carbon declarations',    target: 'snap-gap', regTab: 'ibpan'      },
+    { label: 'implementation window',  target: 'snap-gap', regTab: 'implwindow' },
+    { label: 'full dpp mandatory',     target: 'snap-gap', regTab: 'eudpp'      },
+    { label: 'eu pq mandate',          target: 'snap-gap', regTab: 'pqmandate'  },
+    { label: 'circular economy phase', target: 'snap-gap', regTab: 'circular'   },
   ],
   about: [
-    { label: 'our pilots', target: 'snap-uybpcer' },
-    { label: 'book a demo', target: null },          // opens modal
+    { label: 'book a demo', target: null },
     { label: 'awards',      target: 'snap-bqegvir-2' },
     { label: 'contact us',  target: 'contact'      },
   ],
@@ -174,7 +174,7 @@ export default function AltNavbar({ visible }: Props) {
             minWidth: '160px',
           }}
         >
-          {DROPDOWNS[active].map(({ label, target }) => (
+          {DROPDOWNS[active].map(({ label, target, regTab }) => (
             <a
               key={label}
               href="#"
@@ -183,7 +183,10 @@ export default function AltNavbar({ visible }: Props) {
                 setActive(null)
                 if (target === null) openBookDemo()
                 else if (target === 'contact') openContact()
-                else scrollTo(target)
+                else {
+                  scrollTo(target)
+                  if (regTab) openRegulationTab(regTab as Parameters<typeof openRegulationTab>[0])
+                }
               }}
               className="text-white no-underline hover:opacity-60 transition-opacity"
               style={{

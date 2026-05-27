@@ -67,8 +67,7 @@ export default function BPAPSection() {
         style={{ objectFit: 'cover', zIndex: 0 }}
         autoPlay loop muted playsInline
       >
-        <source src="/BPAP background.webm" type="video/webm" />
-        <source src="/BPAP background.mp4" type="video/mp4" />
+        <source src="/section3.webm" type="video/webm" />
       </video>
       <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.55)', zIndex: 0 }} />
 

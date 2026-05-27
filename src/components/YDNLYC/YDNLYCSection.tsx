@@ -90,7 +90,7 @@ export default function YDNLYCSection() {
           margin: 0,
         }}
       >
-        Encrypted in transit and at rest. Configurable access permissions. Full compliance with global privacy standards — so your team can move fast without cutting corners on security.
+        Encrypted in transit and at rest. Configurable access permissions. Full compliance with global privacy standards - so your team can move fast without cutting corners on security.
       </p>
 
       {/* Book a Demo button */}

@@ -19,26 +19,23 @@ const cols = [
     left: '31.70%',
     heading: 'Product',
     items: [
-      { label: 'Battery Passport',  target: 'snap-bpap'    },
-      { label: 'Reverse Logistics', target: 'snap-ydnlyc'  },
-      { label: 'Compliance Engine', target: 'snap-uybpcer' },
+      { label: 'Battery Passport',       target: 'snap-bpap'    },
+      { label: 'Reverse Logistics',      target: 'snap-ydnlyc'  },
+      { label: 'Compliance Automation',  target: 'snap-uybpcer' },
     ],
   },
   {
     left: '54.38%',
     heading: 'Technology',
     items: [
-      { label: 'Post-Quantum Blockchain', target: 'snap-madpp-0' },
-      { label: 'Agentic AI',              target: 'snap-madpp-0' },
-      { label: 'IoT Phygital Layer',      target: 'snap-madpp-1' },
-      { label: 'Algorand Network',        target: 'snap-madpp-0' },
+      { label: 'Post Quantum Secure Blockchain', target: 'snap-madpp-0' },
+      { label: 'Agentic AI',                     target: 'snap-madpp-0' },
     ],
   },
   {
     left: '77.06%',
-    heading: 'Company',
+    heading: 'About',
     items: [
-      { label: 'Team',       target: 'snap-partners'  },
       { label: 'Awards',     target: 'snap-bqegvir-2' },
       { label: 'Regulation', target: 'snap-gap'       },
       { label: 'Contact us', target: 'contact'        },

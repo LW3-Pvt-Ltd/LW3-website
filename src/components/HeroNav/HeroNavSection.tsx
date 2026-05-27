@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
+import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
@@ -113,20 +114,19 @@ const TECH_SUBS = [
 
 const REG_LEFT = '69.92%'
 const REG_SUBS = [
-  { text: 'eubr enters force',       top: '4.96%',  target: 'snap-gap' },
-  { text: 'carbon declarations',     top: '6.37%',  target: 'snap-gap' },
-  { text: 'implementation window',   top: '7.78%',  target: 'snap-gap' },
-  { text: 'full dpp mandatory',      top: '9.20%',  target: 'snap-gap' },
-  { text: 'eu pq mandate',           top: '10.61%', target: 'snap-gap' },
-  { text: 'circular economy phase',  top: '12.02%', target: 'snap-gap' },
+  { text: 'eubr enters force',       top: '4.96%',  tab: 'eubr'       },
+  { text: 'carbon declarations',     top: '6.37%',  tab: 'ibpan'      },
+  { text: 'implementation window',   top: '7.78%',  tab: 'implwindow' },
+  { text: 'full dpp mandatory',      top: '9.20%',  tab: 'eudpp'      },
+  { text: 'eu pq mandate',           top: '10.61%', tab: 'pqmandate'  },
+  { text: 'circular economy phase',  top: '12.02%', tab: 'circular'   },
 ]
 
 const ABOUT_LEFT = '87.45%'
 const ABOUT_SUBS = [
-  { text: 'our pilots',  top: '7.78%',  target: 'snap-uybpcer' as string | null },
-  { text: 'book a demo', top: '9.20%',  target: null },
-  { text: 'awards',      top: '10.61%', target: 'snap-bqegvir-2' as string | null },
-  { text: 'contact us',  top: '12.02%', target: 'contact' as string | null },
+  { text: 'book a demo', top: '7.78%',  target: null as string | null },
+  { text: 'awards',      top: '9.20%',  target: 'snap-bqegvir-2' as string | null },
+  { text: 'contact us',  top: '10.61%', target: 'contact' as string | null },
 ]
 
 const HERO_TYPING_TEXTS = ['Post Quantum Secured', 'Agentic AI']
@@ -173,7 +173,7 @@ export default function HeroNavSection() {
       {/* ── Hero background video ── */}
       <div className="absolute left-0 right-0 overflow-hidden bg-black" style={{ top: '14.6%', bottom: 0 }}>
         <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/hero background-compressed.webm" type="video/webm" />
+          <source src="/section1.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.63)' }} />
       </div>
@@ -313,8 +313,8 @@ export default function HeroNavSection() {
       ))}
 
       {/* ── Regulation sub-items ── */}
-      {REG_SUBS.map(({ text, top, target }) => (
-        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...DATE_LINK, left: REG_LEFT, top }}>{text}</a>
+      {REG_SUBS.map(({ text, top, tab }) => (
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo('snap-gap'); openRegulationTab(tab as Parameters<typeof openRegulationTab>[0]) }} style={{ ...DATE_LINK, left: REG_LEFT, top }}>{text}</a>
       ))}
 
       {/* ── About sub-items ── */}

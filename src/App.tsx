@@ -16,11 +16,13 @@ import FooterSection from './components/Footer/FooterSection'
 import BlogPage from './pages/BlogPage'
 import BookDemoModal from './components/BookDemo/BookDemoModal'
 import ContactModal from './components/Contact/ContactModal'
+import BookPilotModal from './components/BookPilot/BookPilotModal'
+import MobileApp from './components/Mobile/MobileApp'
 
 const SNAP_IDS = [
   'snap-hero',
   'snap-gap',
-  'snap-bqegvir', 'snap-bqegvir-2',
+  'snap-bqegvir',
   'snap-madpp-0', 'snap-madpp-1', 'snap-madpp-2',
   'snap-uybpcer',
   // 'snap-kwwsotwid',
@@ -38,7 +40,7 @@ function HomePage() {
   const [altNavVisible, setAltNavVisible] = useState(false)
   const location = useLocation()
 
-  useScrollSnap(SNAP_IDS)
+  useScrollSnap(SNAP_IDS, new Set(['snap-bqegvir']))
 
   // Instant jump to section when navigating back from blog pages
   useEffect(() => {
@@ -59,25 +61,30 @@ function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <AltNavbar visible={altNavVisible} />
-      <div id="snap-hero" ref={heroRef}><HeroNavSection /></div>
-      <div id="snap-gap"><NeedAndRegulationSection /></div>
-      <div id="snap-bqegvir" style={{ position: 'relative' }}>
-        <BQEGVIRSection />
-        <div id="snap-bqegvir-2" style={{ position: 'absolute', top: '58%' }} />
+    <>
+      <div className="hidden md:block min-h-screen bg-black text-white">
+        <AltNavbar visible={altNavVisible} />
+        <div id="snap-hero" ref={heroRef}><HeroNavSection /></div>
+        <div id="snap-gap"><NeedAndRegulationSection /></div>
+        <div id="snap-bqegvir" style={{ position: 'relative' }}>
+          <BQEGVIRSection />
+          <div id="snap-bqegvir-2" style={{ position: 'absolute', top: '58%' }} />
+        </div>
+        <MADPPSection />
+        <div id="snap-uybpcer"><UYBPCERSection /></div>
+        {/* <div id="snap-kwwsotwid"><KWWSOTWIDSection /></div> */}
+        <div id="snap-ydnlyc"><YDNLYCSection /></div>
+        <div id="snap-insight"><InsightSection /></div>
+        <div id="snap-bpap"><BPAPSection /></div>
+        <div id="snap-partners"><PartnersSection /></div>
+        {/* <div id="snap-regulation"><RegulationSection /></div> */}
+        <div id="snap-battery"><BatteryStorySection /></div>
+        <div id="snap-footer"><FooterSection /></div>
       </div>
-      <MADPPSection />
-      <div id="snap-uybpcer"><UYBPCERSection /></div>
-      {/* <div id="snap-kwwsotwid"><KWWSOTWIDSection /></div> */}
-      <div id="snap-ydnlyc"><YDNLYCSection /></div>
-      <div id="snap-insight"><InsightSection /></div>
-      <div id="snap-bpap"><BPAPSection /></div>
-      <div id="snap-partners"><PartnersSection /></div>
-      {/* <div id="snap-regulation"><RegulationSection /></div> */}
-      <div id="snap-battery"><BatteryStorySection /></div>
-      <div id="snap-footer"><FooterSection /></div>
-    </div>
+      <div className="md:hidden">
+        <MobileApp />
+      </div>
+    </>
   )
 }
 
@@ -86,6 +93,7 @@ function App() {
     <>
       <BookDemoModal />
       <ContactModal />
+      <BookPilotModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/blog/:id" element={<BlogPage />} />

@@ -29,11 +29,37 @@ export default function BlogPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#000' }}>
-      {/* Navbar — always visible on blog pages */}
-      <AltNavbar visible={true} />
+      {/* Desktop navbar — hidden on mobile */}
+      <div className="hidden md:block">
+        <AltNavbar visible={true} />
+      </div>
 
-      {/* Back link — sits below navbar */}
-      <div style={{ paddingTop: '4.83vw' }}>
+      {/* Mobile top bar — fixed, back arrow + logo */}
+      <div className="md:hidden" style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        height: '60px', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(8px)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        display: 'flex', alignItems: 'center', padding: '0 20px', gap: '12px',
+      }}>
+        <button
+          onClick={handleBack}
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px',
+            fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+            fontSize: '14px', letterSpacing: '0.06em', textTransform: 'uppercase', padding: 0,
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+          Back
+        </button>
+        <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '24px', width: 'auto', marginLeft: 'auto' }} draggable={false} />
+      </div>
+
+      {/* Desktop back link — sits below navbar */}
+      <div className="hidden md:block" style={{ paddingTop: '4.83vw' }}>
         <button
           onClick={handleBack}
           style={{
@@ -56,8 +82,13 @@ export default function BlogPage() {
         </button>
       </div>
 
-      {/* Blog content — padded to match site margins, max-width centred */}
-      <div style={{ padding: '0 8.14% clamp(48px, 6vw, 80px) 8.14%' }}>
+      {/* Blog content */}
+      <div className="hidden md:block" style={{ padding: '0 8.14% clamp(48px, 6vw, 80px) 8.14%' }}>
+        <BlogContent />
+      </div>
+
+      {/* Mobile blog content — padded below fixed top bar */}
+      <div className="md:hidden" style={{ paddingTop: '60px', padding: '60px 20px clamp(40px, 8vw, 60px)', overflowX: 'hidden' }}>
         <BlogContent />
       </div>
     </div>
