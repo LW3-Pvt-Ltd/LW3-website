@@ -316,8 +316,18 @@ function MobileHero() {
 // ══════════════════════════════════════════════════════════════════════════════
 // NEED & REGULATION
 // ══════════════════════════════════════════════════════════════════════════════
+const REG_TAB_DATA: Record<string, { heading: string; subheading?: string; body: string; badge: string; knowMore?: boolean }> = {
+  eubr:       { heading: 'EU Battery Regulation (2023/1542)', body: 'Replaces EU Battery Directive. Legal framework mandating battery passports for all EV, LMT, and industrial batteries over 2 kWh.', badge: 'LW3 Compliant' },
+  ibpan:      { heading: 'India Battery Aadhaar (BPAN)', body: "India's national battery identity framework aligning with international DPP standards. LW3 achieved 80% alignment in pilot deployments.", badge: '80% Aligned in Pilots' },
+  implwindow: { heading: 'Implementation Window', subheading: 'The Critical Preparation Phase', body: 'This is the active compliance window – the period to build the data infrastructure, supply chain traceability systems, and reporting pipelines needed before DPP mandates land. Companies that act now will be positioned to meet the Feb 2027 deadline.', badge: 'LW3 Targeted Completion', knowMore: true },
+  eudpp:      { heading: 'EU DPP Mandatory Deadline', body: 'All EV, LMT and industrial batteries sold in or exported to the EU must carry a fully compliant digital product passport from this date.', badge: 'LW3 Targeted Completion' },
+  pqmandate:  { heading: 'EU Post-quantum Cryptography Mandate', subheading: 'Quantum-Safe Infrastructure Required', body: 'Critical digital infrastructure — including DPP data platforms, battery registries, and authentication systems — must transition to post-quantum cryptographic standards.', badge: 'LW3 Targeted Completion' },
+  circular:   { heading: 'Full Lifecycle Transparency', body: 'Mandatory disclosure of recycled content percentages, battery collection rates, and material recovery efficiency. Producers must demonstrate closed-loop accountability from raw material sourcing through to end-of-life processing.', badge: 'LW3 Targeted Completion' },
+}
+
 function MobileNeedReg() {
-  const [view, setView] = useState<'penalty' | 'timeline'>('penalty')
+  const [view, setView] = useState<'penalty' | 'timeline' | 'detail'>('penalty')
+  const [activeTab, setActiveTab] = useState<string | null>(null)
 
   return (
     <div style={{ ...SECTION, background: '#000', position: 'relative' }}>
@@ -333,8 +343,8 @@ function MobileNeedReg() {
           {(['penalty', 'timeline'] as const).map(v => (
             <button key={v} onClick={() => setView(v)} style={{
               padding: '8px 16px', border: '1px solid rgba(255,255,255,0.4)',
-              background: view === v ? '#ffffff' : 'transparent',
-              color: view === v ? '#000000' : '#ffffff',
+              background: view === v || (view === 'detail' && v === 'timeline') ? '#ffffff' : 'transparent',
+              color: view === v || (view === 'detail' && v === 'timeline') ? '#000000' : '#ffffff',
               fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
               fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer',
             }}>{v === 'penalty' ? 'The Risk' : 'Timeline'}</button>
@@ -353,30 +363,70 @@ function MobileNeedReg() {
               Non-compliance with ESPR/EUDR regulations is subject to GDPR-style enforcement carrying financial penalties of up to 4% of global annual turnover, compounded by market bans and mandatory product recalls.
             </p>
           </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            {TIMELINE.map((item, i) => (
-              <button
-                key={item.date}
-                onClick={() => openRegulationTab(item.tab)}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
-                  padding: '14px 0', borderBottom: i < TIMELINE.length - 1 ? '1px solid rgba(255,255,255,0.15)' : 'none',
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px',
-                }}
-              >
-                <div>
-                  <p style={{ ...LABEL_SM, color: 'rgba(255,255,255,0.6)', margin: '0 0 4px' }}>{item.date}</p>
-                  <p style={{ fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0 }}>{item.label}</p>
-                </div>
-                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '18px', flexShrink: 0 }}>›</span>
-              </button>
-            ))}
-            <p style={{ ...BODY, fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginTop: '16px' }}>
-              LW3 is a participant in the EU-funded CIRPASS standardisation initiative, featured in the Final Report D3.1 Annex V9 (March 2024).
-            </p>
-          </div>
-        )}
+        ) : view === 'timeline' ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {TIMELINE.map((item, i) => (
+                <button
+                  key={item.date}
+                  onClick={() => { setActiveTab(item.tab); setView('detail') }}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
+                    padding: '14px 0', borderBottom: i < TIMELINE.length - 1 ? '1px solid rgba(255,255,255,0.15)' : 'none',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px',
+                  }}
+                >
+                  <div>
+                    <p style={{ ...LABEL_SM, color: 'rgba(255,255,255,0.6)', margin: '0 0 4px' }}>{item.date}</p>
+                    <p style={{ fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0 }}>{item.label}</p>
+                  </div>
+                  <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '18px', flexShrink: 0 }}>›</span>
+                </button>
+              ))}
+              <p style={{ ...BODY, fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginTop: '16px' }}>
+                LW3 is a participant in the EU-funded CIRPASS standardisation initiative, featured in the Final Report D3.1 Annex V9 (March 2024).
+              </p>
+            </div>
+          ) : activeTab && REG_TAB_DATA[activeTab] ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <button onClick={() => setView('timeline')} style={{
+                background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
+                gap: '6px', color: 'rgba(255,255,255,0.6)', fontFamily: "'D-DIN', sans-serif", fontSize: '13px', padding: 0,
+              }}>‹ Back</button>
+              <div>
+                <h3 style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '20px', color: '#ffffff', margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: '0.01em' }}>
+                  {REG_TAB_DATA[activeTab].heading}
+                </h3>
+                {REG_TAB_DATA[activeTab].subheading && (
+                  <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', fontSize: '15px', color: 'rgba(255,255,255,0.7)', margin: '0 0 16px' }}>
+                    {REG_TAB_DATA[activeTab].subheading}
+                  </p>
+                )}
+              </div>
+              <p style={{ ...BODY, fontSize: '15px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>
+                {REG_TAB_DATA[activeTab].body}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
+                <span style={{
+                  display: 'inline-block', alignSelf: 'flex-start',
+                  border: '1px solid rgba(29,158,117,0.6)', padding: '6px 14px', borderRadius: '2px',
+                  fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '12px',
+                  color: 'rgba(29,158,117,1)', letterSpacing: '0.08em', textTransform: 'uppercase',
+                }}>
+                  {REG_TAB_DATA[activeTab].badge}
+                </span>
+                {REG_TAB_DATA[activeTab].knowMore && (
+                  <a href="https://www.globalbattery.org/battery-passport/" target="_blank" rel="noopener noreferrer" style={{
+                    display: 'inline-block', border: '1px solid #ffffff', padding: '6px 14px',
+                    color: '#ffffff', textDecoration: 'none',
+                    fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '12px',
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                  }}>
+                    Know More
+                  </a>
+                )}
+              </div>
+            </div>
+          ) : null}
       </div>
     </div>
   )
@@ -698,7 +748,6 @@ function MobileBPAP() {
       </div>
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '12px' }}>
         <button onClick={openBookDemo} style={{ ...CTA_FILLED, flex: 1 }}>Book a Demo</button>
-        <button style={{ ...CTA, flex: 1 }}>See Patent</button>
       </div>
     </div>
   )
@@ -722,7 +771,7 @@ function MobilePartners() {
         <div className="mobile-partners-track">
           {[0, 1, 2].map(i => (
             <img key={i} src="/Carousel frame.svg" alt="" draggable={false}
-              style={{ height: '80px', width: 'auto', flexShrink: 0 }} />
+              style={{ height: '240px', width: 'auto', flexShrink: 0 }} />
           ))}
         </div>
       </div>
