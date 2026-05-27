@@ -124,9 +124,9 @@ const REG_SUBS = [
 
 const ABOUT_LEFT = '87.45%'
 const ABOUT_SUBS = [
-  { text: 'book a demo', top: '7.78%',  target: null as string | null },
-  { text: 'awards',      top: '9.20%',  target: 'snap-bqegvir-2' as string | null },
-  { text: 'contact us',  top: '10.61%', target: 'contact' as string | null },
+  { text: 'book a demo', top: '9.19%',  target: null as string | null },
+  { text: 'awards',      top: '10.61%', target: 'snap-bqegvir-2' as string | null },
+  { text: 'contact us',  top: '12.02%', target: 'contact' as string | null },
 ]
 
 const HERO_TYPING_TEXTS = ['Post Quantum Secured', 'Agentic AI']
