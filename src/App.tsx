@@ -22,7 +22,7 @@ import MobileApp from './components/Mobile/MobileApp'
 const SNAP_IDS = [
   'snap-hero',
   'snap-gap',
-  'snap-bqegvir',
+  'snap-bqegvir', 'snap-bqegvir-2',
   'snap-madpp-0', 'snap-madpp-1', 'snap-madpp-2',
   'snap-uybpcer',
   // 'snap-kwwsotwid',
