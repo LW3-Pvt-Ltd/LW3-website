@@ -771,7 +771,7 @@ function MobilePartners() {
         <div className="mobile-partners-track">
           {[0, 1, 2].map(i => (
             <img key={i} src="/Carousel frame.svg" alt="" draggable={false}
-              style={{ height: '240px', width: 'auto', flexShrink: 0 }} />
+              style={{ height: '400px', width: 'auto', flexShrink: 0 }} />
           ))}
         </div>
       </div>
