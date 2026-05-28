@@ -93,8 +93,8 @@ const DATE_LINK: React.CSSProperties = {
 // y ≈ 10px on nav canvas → 10/1089 = 0.92%
 const NAV_LINKS = [
   { label: 'Product',    left: '36.06%', target: 'snap-bpap'    },
-  { label: 'Technology', left: '52.49%', target: 'snap-madpp-0' },
-  { label: 'Regulation', left: '69.92%', target: 'snap-gap'     },
+  { label: 'Technology', left: '69.92%', target: 'snap-madpp-0' },
+  { label: 'Regulation', left: '52.49%', target: 'snap-gap'     },
   { label: 'About',      left: '87.45%', target: 'snap-bqegvir' },
 ]
 const NAV_TOP = '1.47%'
@@ -106,13 +106,13 @@ const PROD_SUBS = [
   { text: 'compliance automation', top: '12.29%', target: 'snap-uybpcer' },
 ]
 
-const TECH_LEFT = '52.49%'
+const TECH_LEFT = '69.92%'
 const TECH_SUBS = [
   { text: 'agentic ai intelligence', top: '10.61%', target: 'snap-madpp-0' },
   { text: 'pq secure blockchain',    top: '12.02%', target: 'snap-madpp-0' },
 ]
 
-const REG_LEFT = '69.92%'
+const REG_LEFT = '52.49%'
 const REG_SUBS = [
   { text: 'eubr enters force',       top: '4.96%',  tab: 'eubr'       },
   { text: 'carbon declarations',     top: '6.37%',  tab: 'ibpan'      },

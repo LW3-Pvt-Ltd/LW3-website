@@ -216,7 +216,7 @@ export default function BQEGVIRSection() {
           zIndex: 3,
         }}
       >
-        Top 3 Global — Cardano Venture Hub
+        Top 3 Global - Cardano Venture Hub
       </div>
       <div
         className="absolute"

@@ -16,17 +16,19 @@ export default function Blog3Content() {
       }}
     >
       {/* Kicker row */}
-      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0', paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
-        <KickerTag>Agentic AI</KickerTag>
-        <KickerDot />
-        <KickerTag>Battery Regulation</KickerTag>
-        <KickerDot />
+      <div style={{ paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
+          <KickerTag>Agentic AI</KickerTag>
+          <KickerDot />
+          <KickerTag>Battery Regulation</KickerTag>
+        </div>
         <span style={{
+          display: 'block',
           fontFamily: "'D-DIN', sans-serif",
           fontSize: 'clamp(12px, 1.58vw, 16.5px)',
           color: '#fff',
           letterSpacing: '0.04em',
-          marginLeft: '20px',
+          marginTop: 'clamp(10px, 1.2vw, 16px)',
           whiteSpace: 'nowrap',
         }}>April 2026 · LW3 Insights</span>
       </div>

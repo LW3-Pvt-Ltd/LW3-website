@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
 import { openBookPilot } from '../BookPilot/BookPilotModal'
@@ -123,9 +123,9 @@ const AWARDS = [
 
 // ── Blog insights ─────────────────────────────────────────────────────────────
 const BLOGS = [
-  { id: '1', title: 'Compliant by design', desc: "How LW3's Battery Passport Meets Europe's Twin Regulatory Frontier", img: '/1 Insight you can act on Data you can trust.webp' },
-  { id: '2', title: 'Programmable Money Meets the Battery Passport', desc: 'How eRupee and USDC Unlock Financial Traceability and an EoL Marketplace', img: '/2 Insight you can act on Data you can trust.webp' },
-  { id: '3', title: 'The Intelligent Passport', desc: 'How Agentic AI Transforms EU Battery Compliance from Record-Keeping to Real-Time Intelligence', img: '/3 Insight you can act on Data you can trust.webp' },
+  { id: '1', title: 'Compliant by design', desc: "How LW3's Battery Passport Meets Europe's Twin Regulatory Frontier", img: '/1 Insight you can act on Data you can trust.webp', tags: ['Regulatory Intelligence', 'Post-Quantum Security'] },
+  { id: '2', title: 'Programmable Money Meets the Battery Passport', desc: 'How eRupee and USDC Unlock Financial Traceability and an EoL Marketplace', img: '/2 Insight you can act on Data you can trust.webp', tags: ['Embedded Finance', 'Battery Passport'] },
+  { id: '3', title: 'The Intelligent Passport', desc: 'How Agentic AI Transforms EU Battery Compliance from Record-Keeping to Real-Time Intelligence', img: '/3 Insight you can act on Data you can trust.webp', tags: ['Agentic AI', 'Battery Regulation'] },
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -687,29 +687,48 @@ function MobileYDNLYC() {
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileInsight() {
   return (
-    <div style={{ ...SECTION, minHeight: 'auto', gap: '32px' }}>
-      <div>
+    <div style={{
+      scrollSnapAlign: 'start',
+      height: '100dvh',
+      background: '#000000',
+      borderTop: '1px solid rgba(255,255,255,0.2)',
+      display: 'flex', flexDirection: 'column',
+      boxSizing: 'border-box', overflow: 'hidden',
+    }}>
+      <div style={{ padding: '80px 24px 16px', flexShrink: 0 }}>
         <p style={{ ...LABEL_SM, marginBottom: '12px' }}>LW3 Insights</p>
         <h2 style={H2}>Insight you can act on</h2>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        {BLOGS.map((b) => (
-          <Link key={b.id} to={`/blog/${b.id}`} style={{ textDecoration: 'none' }}>
-            <div style={{
-              border: '1px solid rgba(255,255,255,0.2)',
-              display: 'flex', flexDirection: 'column', overflow: 'hidden',
-            }}>
-              <img src={b.img} alt="" draggable={false}
-                style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }} />
-              <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <p style={{ ...LABEL_SM, marginBottom: '4px' }}>April 2026 · LW3 Insights</p>
-                <p style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>{b.title}</p>
-                <p style={{ ...BODY, fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>{b.desc}</p>
-                <p style={{ ...LABEL_SM, color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Read more →</p>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '0 24px 40px', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {BLOGS.map((b) => (
+            <Link key={b.id} to={`/blog/${b.id}`} style={{ textDecoration: 'none' }}>
+              <div style={{
+                border: '1px solid rgba(255,255,255,0.2)',
+                display: 'flex', flexDirection: 'column', overflow: 'hidden',
+              }}>
+                <img src={b.img} alt="" draggable={false}
+                  style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }} />
+                <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {b.tags.map(tag => (
+                      <span key={tag} style={{
+                        fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+                        fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase',
+                        color: '#ffffff', border: '1px solid rgba(255,255,255,0.35)',
+                        padding: '3px 8px', whiteSpace: 'nowrap',
+                      }}>{tag}</span>
+                    ))}
+                  </div>
+                  <p style={{ ...LABEL_SM, marginTop: '8px', marginBottom: '2px' }}>April 2026 · LW3 Insights</p>
+                  <p style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>{b.title}</p>
+                  <p style={{ ...BODY, fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>{b.desc}</p>
+                  <p style={{ ...LABEL_SM, color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Read more →</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -760,19 +779,28 @@ function MobilePartners() {
   return (
     <div style={{ ...SECTION, minHeight: 'auto', gap: '24px', padding: '48px 24px' }}>
       <h2 style={H2}>Our Partners</h2>
-      <div style={{ overflow: 'hidden', position: 'relative' }}>
+      <div style={{ overflow: 'hidden', position: 'relative', height: '120px' }}>
         <style>{`
-          @keyframes mobilePartnersScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-100% / 3)); }
+          @keyframes mobilePartnersSlide {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
-          .mobile-partners-track { display: flex; animation: mobilePartnersScroll 28s linear infinite; }
+          .mobile-partners-track {
+            display: flex;
+            flex-direction: row;
+            width: max-content;
+            animation: mobilePartnersSlide 20s linear infinite;
+          }
+          .mobile-partners-track img {
+            height: 120px;
+            width: auto;
+            display: block;
+            flex-shrink: 0;
+          }
         `}</style>
         <div className="mobile-partners-track">
-          {[0, 1, 2].map(i => (
-            <img key={i} src="/Carousel frame.svg" alt="" draggable={false}
-              style={{ height: '400px', width: 'auto', flexShrink: 0 }} />
-          ))}
+          <img src="/Carousel frame.svg" alt="Partners" draggable={false} />
+          <img src="/Carousel frame.svg" alt="" draggable={false} />
         </div>
       </div>
     </div>
@@ -878,12 +906,21 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
 export default function MobileApp() {
   const [navOpen, setNavOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const location = useLocation()
 
   const scrollTo = (id: string) => {
     setNavOpen(false)
     const el = document.getElementById('mobile-' + id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    const target = (location.state as { scrollTo?: string } | null)?.scrollTo
+    if (target) {
+      const el = document.getElementById('mobile-' + target)
+      if (el) el.scrollIntoView({ behavior: 'instant' })
+    }
+  }, [])
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 0 }}>

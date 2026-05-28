@@ -3,13 +3,21 @@
 // Nav links + dropdowns use absolute x positions so they align exactly
 
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
 import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
 
-function scrollTo(id: string) {
-  const el = document.getElementById(id)
-  if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+function useScrollTo() {
+  const navigate = useNavigate()
+  return (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+    } else {
+      navigate('/', { state: { scrollTo: id } })
+    }
+  }
 }
 
 function BookDemoBtn() {
@@ -49,8 +57,8 @@ type Key = 'product' | 'technology' | 'regulation' | 'about'
 
 const LINKS: { key: Key; label: string; left: string; target: string }[] = [
   { key: 'product',    label: 'product',    left: '35.43%', target: 'snap-bpap'    },
-  { key: 'technology', label: 'technology', left: '45.04%', target: 'snap-madpp-0' },
-  { key: 'regulation', label: 'regulation', left: '54.86%', target: 'snap-gap'     },
+  { key: 'technology', label: 'technology', left: '54.86%', target: 'snap-madpp-0' },
+  { key: 'regulation', label: 'regulation', left: '45.04%', target: 'snap-gap'     },
   { key: 'about',      label: 'about',      left: '64.78%', target: 'snap-bqegvir' },
 ]
 
@@ -87,6 +95,7 @@ export default function AltNavbar({ visible }: Props) {
   const [active, setActive]   = useState<Key | null>(null)
   const [hidden, setHidden]   = useState(false)
   const lastY = useRef(0)
+  const scrollTo = useScrollTo()
 
   useEffect(() => {
     const onScroll = () => {

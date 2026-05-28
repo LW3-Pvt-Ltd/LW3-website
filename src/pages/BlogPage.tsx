@@ -35,11 +35,11 @@ export default function BlogPage() {
       </div>
 
       {/* Mobile top bar — fixed, back arrow + logo */}
-      <div className="md:hidden" style={{
+      <div className="flex items-center md:hidden" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         height: '60px', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(8px)',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
-        display: 'flex', alignItems: 'center', padding: '0 20px', gap: '12px',
+        padding: '0 20px', gap: '12px',
       }}>
         <button
           onClick={handleBack}
