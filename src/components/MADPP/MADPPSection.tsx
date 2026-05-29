@@ -102,6 +102,9 @@ export default function MADPPSection() {
   const num30Ref     = useRef<HTMLDivElement>(null)
   const num28Ref     = useRef<HTMLDivElement>(null)
   const madppHeadingRef = useRef<HTMLDivElement>(null)
+  const madppDescRef    = useRef<HTMLParagraphElement>(null)
+  const rtwfDescRef     = useRef<HTMLParagraphElement>(null)
+  const ddatDescRef     = useRef<HTMLParagraphElement>(null)
   const prevTriggered = useRef(false)
 
   // RTWF refs
@@ -165,8 +168,9 @@ export default function MADPPSection() {
     if (numbersTriggered && !prevTriggered.current) {
       prevTriggered.current = true
 
-      // 0. MADPP heading letter split
+      // 0. MADPP heading letter split + description word-by-word
       if (madppHeadingRef.current) gsap.fromTo(Array.from(madppHeadingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.028, ease: 'power3.out' })
+      if (madppDescRef.current) gsap.fromTo(Array.from(madppDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out', delay: 0.4 })
 
       // 1. Circles scale in from center with stagger
       gsap.set(circles, { scale: 0, transformOrigin: '50% 50%' })
@@ -204,6 +208,7 @@ export default function MADPPSection() {
     } else if (!numbersTriggered && prevTriggered.current) {
       prevTriggered.current = false
       if (madppHeadingRef.current) gsap.set(Array.from(madppHeadingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+      if (madppDescRef.current) gsap.set(Array.from(madppDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 })
       gsap.killTweensOf([...circles, ...lines])
       gsap.set(circles, { scale: 0 })
       lines.forEach((line, i) => {
@@ -238,9 +243,11 @@ export default function MADPPSection() {
       const steps = rtwfStepsRef.current.filter(Boolean) as HTMLDivElement[]
       gsap.set(steps, { opacity: 0, y: 18 })
       gsap.to(steps, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'power3.out', delay: 0.35 })
+      if (rtwfDescRef.current) gsap.fromTo(Array.from(rtwfDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out', delay: 0.4 })
     } else if (!rtwfTriggered && prevRtwf.current) {
       prevRtwf.current = false
       if (rtwfHeadingRef.current) gsap.set(Array.from(rtwfHeadingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+      if (rtwfDescRef.current) gsap.set(Array.from(rtwfDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 })
       if (rtwf5400Ref.current) rtwf5400Ref.current.textContent = '0'
       if (rtwf28Ref.current)   rtwf28Ref.current.textContent   = '0.0 sec'
       if (rtwf02Ref.current)   rtwf02Ref.current.textContent   = '0.0%'
@@ -256,6 +263,7 @@ export default function MADPPSection() {
       prevDdat.current = true
       const letters = ddatHeadingRef.current ? Array.from(ddatHeadingRef.current.querySelectorAll('span')) as HTMLElement[] : []
       gsap.fromTo(letters, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.028, ease: 'power3.out' })
+      if (ddatDescRef.current) gsap.fromTo(Array.from(ddatDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out', delay: 0.4 })
       const headers = ddatHeadersRef.current.filter(Boolean) as HTMLDivElement[]
       gsap.set(headers, { opacity: 0, y: 12 })
       gsap.to(headers, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', delay: 0.2 })
@@ -271,6 +279,7 @@ export default function MADPPSection() {
       if (ddatHeadingRef.current) gsap.set(Array.from(ddatHeadingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
       gsap.set(ddatHeadersRef.current.filter(Boolean), { opacity: 0, y: 12 })
       gsap.set(ddatPillsRef.current.filter(Boolean),   { scale: 0, opacity: 0 })
+      if (ddatDescRef.current) gsap.set(Array.from(ddatDescRef.current.querySelectorAll('span')), { y: 8, opacity: 0 })
       ddatSavingsRef.current.filter(Boolean).forEach((el, i) => { if (el) el.textContent = DDAT_SAVINGS[i].toFixed(1) + ' h/mo' })
     }
   }, [ddatTriggered])
@@ -378,9 +387,11 @@ export default function MADPPSection() {
             ))}
           </div>
 
-          <div key={numbersTriggered ? 'in2' : 'out2'} className="absolute" style={{ left: '8.23%', top: '47.62%', maxWidth: '18.74vw', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', lineHeight: 1.5, color: '#ffffff', animation: numbersTriggered ? 'madppWheelIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards' : 'none', transform: numbersTriggered ? undefined : 'translateY(40px)', opacity: numbersTriggered ? undefined : 0 }}>
-            Secure your present compliance and prepare you for future regulations on a unified platform across multiple regions
-          </div>
+          <p ref={madppDescRef} className="absolute" style={{ left: '8.23%', top: '47.62%', maxWidth: '18.74vw', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
+            {'Secure your present compliance and prepare you for future regulations on a unified platform across multiple regions'.split(' ').map((w, i, a) => (
+              <span key={i} style={{ display: 'inline-block', opacity: 0, marginRight: i < a.length - 1 ? '0.25em' : 0 }}>{w}</span>
+            ))}
+          </p>
 
           {/* ── DATA PANEL ── */}
           <div className="absolute" style={{ ...LABEL_STYLE, left: '37.45%', top: '6.79%' }}>SMART CONTRACTS DEPLOYED</div>
@@ -489,22 +500,11 @@ export default function MADPPSection() {
             </div>
           ))}
 
-          {/* Description — Figma x=128 y=470.92 on 1905×1064 canvas */}
-          <p key={rtwfTriggered ? 'in2' : 'out2'} className="absolute" style={{
-            left: '6.72%',
-            top: '44.26%',
-            width: '21.52%',
-            fontFamily: "'D-DIN', sans-serif",
-            fontSize: '1.26vw',
-            fontWeight: 400,
-            lineHeight: 1.5,
-            color: '#ffffff',
-            margin: 0,
-            animation: rtwfTriggered ? 'madppWheelIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards' : 'none',
-            transform: rtwfTriggered ? undefined : 'translateY(40px)',
-            opacity: rtwfTriggered ? undefined : 0,
-          }}>
-            See the anatomy of your workflows: every step taken, skipped, repeated, or delayed, displayed with precision.
+          {/* Description — word-by-word fade */}
+          <p ref={rtwfDescRef} className="absolute" style={{ left: '6.72%', top: '44.26%', width: '21.52%', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
+            {'See the anatomy of your workflows: every step taken, skipped, repeated, or delayed, displayed with precision.'.split(' ').map((w, i, a) => (
+              <span key={i} style={{ display: 'inline-block', opacity: 0, marginRight: i < a.length - 1 ? '0.25em' : 0 }}>{w}</span>
+            ))}
           </p>
 
           {/* Workflow labels — stagger in with GSAP */}
@@ -568,17 +568,11 @@ export default function MADPPSection() {
             <div><SplitLine text="AUTOMATION" /></div>
           </div>
 
-          {/* ── Left panel description ── */}
-          <p key={ddatTriggered ? 'in2' : 'out2'} className="absolute" style={{
-            left: '6.67%', top: '42.92%', width: '27%',
-            fontFamily: "'D-DIN', sans-serif",
-            fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.5,
-            color: '#ffffff', margin: 0,
-            animation: ddatTriggered ? 'madppWheelIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards' : 'none',
-            transform: ddatTriggered ? undefined : 'translateY(40px)',
-            opacity: ddatTriggered ? undefined : 0,
-          }}>
-            Prioritize the highest-impact reverse logistics workflows, eliminate manual custody handovers, and achieve EPR compliance with measurable, blockchain-verified ROI.
+          {/* ── Left panel description — word-by-word fade ── */}
+          <p ref={ddatDescRef} className="absolute" style={{ left: '6.67%', top: '42.92%', width: '27%', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
+            {'Prioritize the highest-impact reverse logistics workflows, eliminate manual custody handovers, and achieve EPR compliance with measurable, blockchain-verified ROI.'.split(' ').map((w, i, a) => (
+              <span key={i} style={{ display: 'inline-block', opacity: 0, marginRight: i < a.length - 1 ? '0.25em' : 0 }}>{w}</span>
+            ))}
           </p>
 
           {/* ── Column headers — GSAP stagger ── */}

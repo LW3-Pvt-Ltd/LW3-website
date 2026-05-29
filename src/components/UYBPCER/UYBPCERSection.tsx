@@ -36,8 +36,9 @@ const SANKEY_LABEL: React.CSSProperties = {
 const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? ' ' : ch}</span>)
 
 export default function UYBPCERSection() {
-  const sectionRef  = useRef<HTMLElement>(null)
-  const headingRef  = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+  const descRef    = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -47,9 +48,14 @@ export default function UYBPCERSection() {
       if (entry.isIntersecting) {
         gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
         if (headingRef.current) gsap.fromTo(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.025, ease: 'power3.out' })
+        if (descRef.current) {
+          const words = Array.from(descRef.current.querySelectorAll('span')) as HTMLElement[]
+          gsap.fromTo(words, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out', delay: 0.35 })
+        }
       } else {
         gsap.set(el, { opacity: 0, y: 50 })
         if (headingRef.current) gsap.set(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+        if (descRef.current) gsap.set(Array.from(descRef.current.querySelectorAll('span')), { y: 8, opacity: 0 })
       }
     }, { threshold: 0.15 })
     obs.observe(el)
@@ -122,8 +128,9 @@ export default function UYBPCERSection() {
         <div>{SL('reduction')}</div>
       </div>
 
-      {/* Description — D-DIN Regular 24px */}
+      {/* Description — word-by-word fade */}
       <p
+        ref={descRef}
         className="absolute"
         style={{
           left: '55.02%',
@@ -136,7 +143,9 @@ export default function UYBPCERSection() {
           margin: 0,
         }}
       >
-        Prioritize the highest-impact reverse logistics workflows, eliminate manual custody handovers, and achieve EPR compliance with measurable, blockchain-verified ROI.
+        {'Prioritize the highest-impact reverse logistics workflows, eliminate manual custody handovers, and achieve EPR compliance with measurable, blockchain-verified ROI.'.split(' ').map((word, i, arr) => (
+          <span key={i} style={{ display: 'inline-block', opacity: 0, marginRight: i < arr.length - 1 ? '0.25em' : 0 }}>{word}</span>
+        ))}
       </p>
 
       {/* ── Sankey diagram labels — D-DINCondensed Regular 12px = 0.63vw ── */}
