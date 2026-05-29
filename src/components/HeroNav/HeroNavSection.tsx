@@ -3,7 +3,8 @@
 // All x: item_start + left_inset — section left%.
 // All y: (figma_frame_y + 8.667) / 1089 × 100 — section top%.
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
 import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
@@ -132,12 +133,43 @@ const ABOUT_SUBS = [
 const HERO_TYPING_TEXTS = ['Post Quantum Secured', 'Agentic AI']
 
 export default function HeroNavSection() {
-  const [regIdx, setRegIdx] = useState(0)
   const [typed, setTyped] = useState('')
+  const tickerRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setRegIdx(i => (i + 1) % REGULATION_ITEMS.length), 3000)
-    return () => clearInterval(t)
+    const el = tickerRef.current
+    if (!el) return
+    let idx = 0
+
+    const cycle = () => {
+      const next = REGULATION_ITEMS[(idx + 1) % REGULATION_ITEMS.length]
+
+      // slide current out upward, then swap text and slide in from below
+      gsap.to(el, {
+        y: '-110%',
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.in',
+        onComplete: () => {
+          idx = (idx + 1) % REGULATION_ITEMS.length
+          el.textContent = next
+          gsap.fromTo(el,
+            { y: '110%', opacity: 0 },
+            { y: '0%', opacity: 1, duration: 0.7, ease: 'power3.out' }
+          )
+        },
+      })
+    }
+
+    // set initial text
+    el.textContent = REGULATION_ITEMS[0]
+    gsap.set(el, { y: '0%', opacity: 1 })
+
+    const interval = setInterval(cycle, 3000)
+    return () => {
+      clearInterval(interval)
+      gsap.killTweensOf(el)
+    }
   }, [])
 
   useEffect(() => {
@@ -228,17 +260,7 @@ export default function HeroNavSection() {
         Battery Passport
       </h1>
 
-      {/* ── "for" + rotating regulation label ── */}
-      {/* Figma: hero frame y=282 → SVG top=41.35%; for x=151, regulation x=192 */}
-      <style>{`
-        @keyframes wheelIn {
-          from { transform: translateY(110%); opacity: 0; }
-          to   { transform: translateY(0);    opacity: 1; }
-        }
-        .reg-wheel-item {
-          animation: wheelIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-      `}</style>
+      {/* ── "for" + rotating regulation label (GSAP wheel) ── */}
       <p style={{ position: 'absolute', left: '7.93%', top: '41.35%', margin: 0, zIndex: 2,
                   display: 'flex', alignItems: 'center', gap: '0.5em', whiteSpace: 'nowrap' }}>
         <span style={{
@@ -250,8 +272,7 @@ export default function HeroNavSection() {
         }}>for</span>
         <span style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.2 }}>
           <span
-            key={regIdx}
-            className="reg-wheel-item"
+            ref={tickerRef}
             style={{
               display: 'block',
               fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
@@ -261,9 +282,7 @@ export default function HeroNavSection() {
               color: '#ffffff',
               textTransform: 'uppercase',
             }}
-          >
-            {REGULATION_ITEMS[regIdx]}
-          </span>
+          />
         </span>
       </p>
 

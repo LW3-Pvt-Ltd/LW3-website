@@ -3,7 +3,8 @@
 // State 2: Regulation timeline + large arc on right
 // Transition: text + decorative circles slide right; main circle grows & moves right → regulation arc
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 // 'entering-start' = elements mount off-screen (no transition), 'entering' = slide back in
 type Phase = 'idle-1' | 'exiting' | 'idle-2' | 'entering-start' | 'entering'
@@ -150,6 +151,76 @@ export default function NeedAndRegulationSection() {
   const [circleTarget, setCircleTarget] = useState(C1)
   const [hoveredTab, setHoveredTab] = useState<HoveredTab>('eubr')
 
+  const sectionRef    = useRef<HTMLElement>(null)
+  const leftPanelRef  = useRef<HTMLDivElement>(null)
+  const rightPanelRef = useRef<HTMLDivElement>(null)
+  const counterRef    = useRef<HTMLSpanElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const prevPhaseRef  = useRef<Phase>('idle-1')
+
+  // Observe section enter/leave viewport + section fade
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    gsap.set(section, { opacity: 0, y: 50 })
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting)
+      if (entry.isIntersecting) gsap.to(section, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+      else gsap.set(section, { opacity: 0, y: 50 })
+    }, { threshold: 0.15 })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  // Trigger animations after React commits refs (runs after isVisible state update)
+  useEffect(() => {
+    const left    = leftPanelRef.current
+    const right   = rightPanelRef.current
+    const counter = counterRef.current
+
+    if (isVisible && left && right && counter) {
+      // Reset then animate in
+      gsap.killTweensOf([left, right, counter])
+      gsap.fromTo(left,  { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
+      gsap.fromTo(right, { x:  80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.15 })
+      const obj = { val: 0 }
+      gsap.to(obj, {
+        val: 4,
+        duration: 1.6,
+        ease: 'power2.out',
+        onUpdate() { counter.textContent = Math.round(obj.val) + '%' },
+      })
+    } else if (!isVisible && left && right && counter) {
+      // Reset to initial state when section leaves
+      gsap.killTweensOf([left, right, counter])
+      gsap.set(left,  { x: -80, opacity: 0 })
+      gsap.set(right, { x:  80, opacity: 0 })
+      if (counter) counter.textContent = '0%'
+    }
+  }, [isVisible])
+
+  // Re-run counter when returning from State 2 → State 1 via reverse arrow
+  useEffect(() => {
+    const prev = prevPhaseRef.current
+    prevPhaseRef.current = phase
+
+    // Only fire when transitioning back to idle-1 from a non-idle-1 phase
+    if (phase === 'idle-1' && prev !== 'idle-1' && isVisible) {
+      // phase becomes idle-1 after ANIM already elapsed — start counter immediately
+      const counter = counterRef.current
+      if (!counter) return
+      gsap.killTweensOf(counter)
+      counter.textContent = '0%'
+      const obj = { val: 0 }
+      gsap.to(obj, {
+        val: 4,
+        duration: 1.6,
+        ease: 'power2.out',
+        onUpdate() { counter.textContent = Math.round(obj.val) + '%' },
+      })
+    }
+  }, [phase, isVisible])
+
   useEffect(() => {
     const handler = (e: Event) => {
       const tab = (e as CustomEvent<{ tab: HoveredTab }>).detail?.tab
@@ -195,7 +266,7 @@ export default function NeedAndRegulationSection() {
       : { transform: 'translateX(0)',    transition: 'none' }
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1079' }}>
+    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1079' }}>
 
       {/* ── Background video (same as Regulation section) ── */}
       <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.25 }} autoPlay loop muted playsInline>
@@ -290,10 +361,10 @@ export default function NeedAndRegulationSection() {
       {/* ── STATE 1 text — slides right on exit ── */}
       {phase !== 'idle-2' && (
         <div style={{ position: 'absolute', inset: 0, ...slideOut, zIndex: 2 }}>
-          {/* 4% group — centered on arrow button */}
-          <div style={{ position: 'absolute', left: '22.36%', top: '50%', transform: 'translateY(-50%)', color: '#ffffff' }}>
+          {/* 4% group — left panel */}
+          <div ref={leftPanelRef} style={{ position: 'absolute', left: '22.36%', top: '50%', transform: 'translateY(-50%)', color: '#ffffff' }}>
             <p style={{ margin: 0, lineHeight: 1 }}>
-              <span style={{ fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '6.3vw', fontWeight: 700 }}>4%</span>
+              <span ref={counterRef} style={{ fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '6.3vw', fontWeight: 700 }}>0%</span>
               <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic', fontWeight: 400, fontSize: '2.1vw', marginLeft: '0.3em' }}>of</span>
             </p>
             <p style={{ margin: '0.3em 0 0', fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '0.945vw', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
@@ -301,8 +372,8 @@ export default function NeedAndRegulationSection() {
             </p>
           </div>
 
-          {/* Heading + Description — centered on arrow button */}
-          <div style={{ position: 'absolute', left: '50.03%', top: '50%', transform: 'translateY(-50%)', width: '35.38%' }}>
+          {/* Heading + Description — right panel */}
+          <div ref={rightPanelRef} style={{ position: 'absolute', left: '50.03%', top: '50%', transform: 'translateY(-50%)', width: '35.38%' }}>
             <p style={{ margin: 0, fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '1.68vw', fontWeight: 500, lineHeight: 1.1, textTransform: 'uppercase', color: '#ffffff' }}>
               GDPR Moment for Supply Chain is Here
             </p>

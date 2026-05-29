@@ -6,7 +6,8 @@
 // Numbers (D-DIN Bold 24px → 1.26vw) + Labels (D-DIN 13px → 0.68vw) — centered in boxes
 // Button (Front-CTA): x=156,y=944,w=438,h=67 → left=8.19%, top=89.14%, w=22.99%, h=6.33%
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { openBookPilot } from '../BookPilot/BookPilotModal'
 
 const BOX_STYLE: React.CSSProperties = {
@@ -96,8 +97,36 @@ function BookPilotBtn() {
 }
 
 export default function BatteryStorySection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+  const boxRefs    = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const el     = sectionRef.current
+    const boxEls = boxRefs.current.filter(Boolean) as HTMLDivElement[]
+    if (!el) return
+
+    gsap.set(el,     { opacity: 0, y: 50 })
+    gsap.set(boxEls, { clipPath: 'inset(0 100% 0 0)' })
+
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        gsap.to(el,     { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        gsap.to(boxEls, { clipPath: 'inset(0 0% 0 0)', duration: 0.7, stagger: 0.3, ease: 'power3.inOut', delay: 0.35 })
+        if (headingRef.current) gsap.fromTo(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.03, ease: 'power3.out' })
+      } else {
+        gsap.set(el,     { opacity: 0, y: 50 })
+        gsap.set(boxEls, { clipPath: 'inset(0 100% 0 0)' })
+        if (headingRef.current) gsap.set(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+      }
+    }, { threshold: 0.15 })
+
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1059', background: '#000000', borderBottom: '1px solid #ffffff' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1059', background: '#000000', borderBottom: '1px solid #ffffff' }}>
       {/* Battery illustration — SVG rect: x=1374 y=522 w=531 h=535 on 1905×1059 canvas */}
       <img
         src="/Battery Story background.webp"
@@ -108,6 +137,7 @@ export default function BatteryStorySection() {
 
       {/* Heading — D-DIN Bold 70px */}
       <div
+        ref={headingRef}
         className="absolute"
         style={{
           left: '8.14%',
@@ -120,12 +150,14 @@ export default function BatteryStorySection() {
           letterSpacing: '0.01em',
         }}
       >
-        Your Batteries<br />Have a Story<br />Let's Tell It
+        {["Your Batteries", "Have a Story", "Let's Tell It"].map((line, li) => (
+          <div key={li}>{line.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}</div>
+        ))}
       </div>
 
       {/* Stat boxes — number + label centered */}
       {boxes.map((box, i) => (
-        <div key={i} style={{ ...BOX_STYLE, left: box.left, top: box.top }}>
+        <div key={i} ref={el => { boxRefs.current[i] = el }} style={{ ...BOX_STYLE, left: box.left, top: box.top }}>
           <span style={{
             fontFamily: "'D-DIN-Bold', sans-serif",
             fontSize: '1.26vw',

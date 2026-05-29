@@ -1,7 +1,8 @@
 // BPAP section — SVG background + CSS text/buttons/video overlay
 // Canvas: 1905 × 1026   All positions as % of canvas dimensions
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 
 const BPAP_LINES = [
@@ -11,55 +12,91 @@ const BPAP_LINES = [
   'End-of-life and reverse flow coordination',
 ]
 
+// Splits a word into letter spans for GSAP targeting
+function SplitWord({ text, className }: { text: string; className?: string }) {
+  return (
+    <>
+      {text.split('').map((char, i) => (
+        <span
+          key={i}
+          className={className}
+          style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+        >
+          {char === ' ' ? ' ' : char}
+        </span>
+      ))}
+    </>
+  )
+}
+
 export default function BPAPSection() {
-  const [visibleLines, setVisibleLines] = useState<string[]>([])
-  const [currentTyped, setCurrentTyped] = useState('')
-  const [demoHovered, setDemoHovered] = useState(false)
+  const [demoHovered, setDemoHovered]   = useState(false)
+  const sectionRef  = useRef<HTMLElement>(null)
+  const agenticRef  = useRef<HTMLParagraphElement>(null)
+  const batteryRef  = useRef<HTMLParagraphElement>(null)
+  const linesRef    = useRef<HTMLDivElement>(null)
+  const linesAnimRef = useRef<gsap.core.Timeline | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
+  // IntersectionObserver + section fade
   useEffect(() => {
-    let textIdx = 0
-    let charIdx = 0
-    let timer: ReturnType<typeof setTimeout>
-
-    const typeNext = () => {
-      const current = BPAP_LINES[textIdx]
-      if (charIdx <= current.length) {
-        setCurrentTyped(current.slice(0, charIdx))
-        charIdx++
-        timer = setTimeout(typeNext, 60)
-      } else {
-        // Line done — lock it in, start next
-        setVisibleLines(prev => [...prev, current])
-        setCurrentTyped('')
-        textIdx++
-        charIdx = 0
-        if (textIdx < BPAP_LINES.length) {
-          timer = setTimeout(typeNext, 300)
-        } else {
-          // All 4 shown — wait, then remove one by one quickly, then loop
-          timer = setTimeout(() => {
-            const clearOneByOne = (remaining: number) => {
-              setVisibleLines(prev => prev.slice(0, remaining))
-              if (remaining > 0) {
-                timer = setTimeout(() => clearOneByOne(remaining - 1), 150)
-              } else {
-                textIdx = 0
-                charIdx = 0
-                timer = setTimeout(typeNext, 500)
-              }
-            }
-            clearOneByOne(BPAP_LINES.length - 1)
-          }, 2000)
-        }
-      }
-    }
-
-    typeNext()
-    return () => clearTimeout(timer)
+    const el = sectionRef.current
+    if (!el) return
+    gsap.set(el, { opacity: 0, y: 50 })
+    const obs = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting)
+      if (entry.isIntersecting) gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+      else gsap.set(el, { opacity: 0, y: 50 })
+    }, { threshold: 0.15 })
+    obs.observe(el)
+    return () => obs.disconnect()
   }, [])
 
+  // Letter split + stagger lines animation on visibility change
+  useEffect(() => {
+    const agentic = agenticRef.current
+    const battery = batteryRef.current
+    const container = linesRef.current
+    if (!agentic || !battery || !container) return
+
+    const letterEls = [
+      ...Array.from(agentic.querySelectorAll('span')),
+      ...Array.from(battery.querySelectorAll('span')),
+    ] as HTMLElement[]
+    const lineEls = Array.from(container.children) as HTMLElement[]
+
+    if (isVisible) {
+      // Kill any previous
+      gsap.killTweensOf(letterEls)
+      linesAnimRef.current?.kill()
+
+      // Letters: stagger in from below
+      gsap.fromTo(
+        letterEls,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, stagger: 0.03, ease: 'power3.out' }
+      )
+
+      // Lines: stagger in after letters finish (~letterEls.length * 0.03 + 0.55)
+      const linesDelay = letterEls.length * 0.03 + 0.2
+      gsap.set(lineEls, { y: 40, opacity: 0 })
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.2, delay: linesDelay })
+      tl.to(lineEls, { y: 0, opacity: 1, duration: 0.65, stagger: 0.18, ease: 'power3.out' })
+        .to({}, { duration: 2.2 })
+        .to(lineEls, { y: -30, opacity: 0, duration: 0.4, stagger: 0.1, ease: 'power2.in' })
+      linesAnimRef.current = tl
+
+    } else {
+      // Reset on leave
+      linesAnimRef.current?.kill()
+      gsap.killTweensOf(letterEls)
+      gsap.set(letterEls, { y: 40, opacity: 0 })
+      gsap.set(lineEls,   { y: 40, opacity: 0 })
+    }
+  }, [isVisible])
+
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1026' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1026' }}>
 
       {/* Background video */}
       <video
@@ -71,48 +108,46 @@ export default function BPAPSection() {
       </video>
       <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.68)', zIndex: 0 }} />
 
-
-{/* ── Left-side text + buttons (z-index: 1 ensures they sit above SVG) ── */}
-
-      {/* "AGENTIC" — D-DIN Regular 40px */}
+      {/* ── "AGENTIC" — split letters ── */}
       <p
+        ref={agenticRef}
         className="absolute text-[#f5f2ec] whitespace-nowrap"
         style={{
           zIndex: 1,
           left: '8.82%',
           top: '8.48%',
           fontFamily: "'D-DIN', sans-serif",
-          fontSize: '2.1vw',          /* 40px at 1905px canvas */
+          fontSize: '2.1vw',
           fontWeight: 'normal',
           lineHeight: 1.1,
           letterSpacing: '4px',
           margin: 0,
         }}
       >
-        AGENTIC
+        <SplitWord text="AGENTIC" />
       </p>
 
-      {/* "BATTERY PASSPORT" — D-DIN Bold 70px, two lines */}
+      {/* ── "BATTERY PASSPORT" — split letters ── */}
       <p
+        ref={batteryRef}
         className="absolute text-[#f5f2ec]"
         style={{
           zIndex: 1,
           left: '8.77%',
           top: '14.72%',
           fontFamily: "'D-DIN-Bold', sans-serif",
-          fontSize: '3.67vw',         /* 70px at 1905px canvas */
-          fontWeight: 'normal',       /* weight is baked into D-DIN-Bold face */
+          fontSize: '3.67vw',
+          fontWeight: 'normal',
           lineHeight: 1.1,
           letterSpacing: '7px',
           margin: 0,
         }}
       >
-        BATTERY<br />PASSPORT
+        <span style={{ display: 'block' }}><SplitWord text="BATTERY" /></span>
+        <span style={{ display: 'block' }}><SplitWord text="PASSPORT" /></span>
       </p>
 
-      {/* ── Buttons ───────────────────────────────────────────────── */}
-
-      {/* "Book a Demo" — outlined white button */}
+      {/* ── "Book a Demo" button ── */}
       <button
         onClick={openBookDemo}
         onMouseEnter={() => setDemoHovered(true)}
@@ -142,8 +177,7 @@ export default function BPAPSection() {
         Book a Demo
       </button>
 
-
-      {/* ── Stacking typing animation ── */}
+      {/* ── GSAP stagger lines ── */}
       <div
         style={{
           position: 'absolute',
@@ -151,26 +185,32 @@ export default function BPAPSection() {
           top: '45%',
           transform: 'translateY(-50%)',
           width: '31.86%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.6vw',
           zIndex: 1,
           textAlign: 'right',
+          overflow: 'hidden',
         }}
       >
-        {visibleLines.map((line, i) => (
-          <p key={i} style={{ margin: 0, fontFamily: "'D-DINCondensed-Bold', sans-serif", fontSize: '1.68vw', fontWeight: 'normal', lineHeight: 1.3, color: '#ffffff' }}>
-            {line}
-          </p>
-        ))}
-        {currentTyped && (
-          <p style={{ margin: 0, fontFamily: "'D-DINCondensed-Bold', sans-serif", fontSize: '1.68vw', fontWeight: 'normal', lineHeight: 1.3, color: '#ffffff' }}>
-            {currentTyped}
-            <span style={{ borderRight: '2px solid #ffffff', marginLeft: '2px', animation: 'blink 0.7s step-end infinite' }} />
-          </p>
-        )}
+        <div
+          ref={linesRef}
+          style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}
+        >
+          {BPAP_LINES.map((line, i) => (
+            <p
+              key={i}
+              style={{
+                margin: 0,
+                fontFamily: "'D-DINCondensed-Bold', sans-serif",
+                fontSize: '1.68vw',
+                fontWeight: 'normal',
+                lineHeight: 1.3,
+                color: '#ffffff',
+              }}
+            >
+              {line}
+            </p>
+          ))}
+        </div>
       </div>
-      <style>{`@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
 
     </section>
   )

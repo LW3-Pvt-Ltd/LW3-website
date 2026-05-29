@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 // BQEGVIR section — SVG background + CSS text overlay
 // Canvas: 1905 × 2969 | Frame "Main circle bodies" offset: x=-264, y=270
@@ -9,7 +10,44 @@ import { useState } from 'react'
 // "Near Zero Carbon Infrastructure": node 27:1660 canvas=(962,396) → left=50.49%, top=13.35%, maxW=6.78%  — D-DIN 19px → 1.00vw
 // "Agentic AI Intelligence":  node 27:1656 canvas=(431,563) → left=22.62%, top=18.97%, maxW=15.1% — D-DIN 19px → 1.00vw
 
+const animLetters = (el: HTMLElement, enter: boolean) => {
+  const spans = Array.from(el.querySelectorAll('span')) as HTMLElement[]
+  if (enter) gsap.fromTo(spans, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.028, ease: 'power3.out' })
+  else gsap.set(spans, { y: 30, opacity: 0 })
+}
+
 export default function BQEGVIRSection() {
+  const sectionRef  = useRef<HTMLElement>(null)
+  const heading1Ref = useRef<HTMLDivElement>(null)
+  const heading2Ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    gsap.set(el, { opacity: 0, y: 50 })
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        if (heading1Ref.current) animLetters(heading1Ref.current, true)
+      } else {
+        gsap.set(el, { opacity: 0, y: 50 })
+        if (heading1Ref.current) animLetters(heading1Ref.current, false)
+      }
+    }, { threshold: 0.1 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  // Separate observer for the bottom heading (at 94.34% of tall section)
+  useEffect(() => {
+    const el = heading2Ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      animLetters(el, entry.isIntersecting)
+    }, { threshold: 0.5 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
   const [rightHalfHovered, setRightHalfHovered] = useState(false)
   const [leftHalfHovered, setLeftHalfHovered] = useState(false)
   const [scHovered, setScHovered] = useState(false)
@@ -23,7 +61,7 @@ export default function BQEGVIRSection() {
   const [techBbqHovered, setTechBbqHovered] = useState(false)
   const [forbesHovered, setForbesHovered] = useState(false)
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 2969', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff', background: '#000000' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 2969', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff', background: '#000000' }}>
       <img
         src="/bqegvir-v14.svg"
         alt=""
@@ -46,40 +84,22 @@ export default function BQEGVIRSection() {
 
       />
 
-      {/* "Built for The Quantum Era" — D-DIN Bold 70px */}
+      {/* "Built for The Quantum Era" — letter split */}
       <div
+        ref={heading1Ref}
         className="absolute"
-        style={{
-          left: '8.35%',
-          top: '1.52%',
-          maxWidth: '46%',
-          fontFamily: "'D-DIN-Bold', sans-serif",
-          fontSize: '3.67vw',
-          lineHeight: 1.05,
-          color: '#ffffff',
-          letterSpacing: '0.01em',
-          zIndex: 3,
-        }}
+        style={{ left: '8.35%', top: '1.52%', maxWidth: '46%', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.05, color: '#ffffff', letterSpacing: '0.01em', zIndex: 3 }}
       >
-        Built for The Quantum Era
+        {'Built for The Quantum Era'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? ' ' : ch}</span>)}
       </div>
 
-      {/* "Globally validated, India-Rooted" — D-DIN Bold 70px */}
+      {/* "Globally validated, India-Rooted" — letter split, own observer */}
       <div
+        ref={heading2Ref}
         className="absolute"
-        style={{
-          left: '53.51%',
-          top: '94.34%',
-          maxWidth: '41%',
-          fontFamily: "'D-DIN-Bold', sans-serif",
-          fontSize: '3.67vw',
-          lineHeight: 1.05,
-          color: '#ffffff',
-          letterSpacing: '0.01em',
-          zIndex: 3,
-        }}
+        style={{ left: '53.51%', top: '94.34%', maxWidth: '41%', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.05, color: '#ffffff', letterSpacing: '0.01em', zIndex: 3 }}
       >
-        Globally validated, India-Rooted
+        {'Globally validated, India-Rooted'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}
       </div>
 
       {/* "Phygital Identity (IOT)" — D-DIN Regular 19px — node 27:1657, left of top intersection */}

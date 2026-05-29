@@ -7,6 +7,8 @@
 // Columns: left=31.70%/54.38%/77.06%, top=20.37% — headers D-DINCondensed-Bold 0.84vw
 // List items: D-DIN Regular 0.68vw, gap 30.59px → top steps of 9.58%
 
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { openContact } from '../Contact/ContactModal'
 
 function scrollTo(id: string) {
@@ -55,8 +57,23 @@ const TEXT_SM: React.CSSProperties = {
 }
 
 export default function FooterSection() {
+  const footerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = footerRef.current
+    if (!el) return
+    gsap.set(el, { opacity: 0 })
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) gsap.to(el, { opacity: 1, duration: 1.1, ease: 'power2.out' })
+      else gsap.set(el, { opacity: 0 })
+    }, { threshold: 0.1 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <footer
+      ref={footerRef}
       className="relative w-full"
       style={{ aspectRatio: '1905 / 319.21', background: '#0A0A08' }}
     >

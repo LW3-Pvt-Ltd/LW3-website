@@ -7,6 +7,9 @@
 // Font sizes at 1905px canvas:
 //   70px → 3.67vw  |  24px → 1.26vw  |  12px → 0.63vw
 
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+
 // Shimmer gradient: narrow grey stripe on white, sweeps left→right across 1905px canvas.
 // x1/x2 define a 200px-wide band; animateTransform translates it from -200 to +2105.
 // begin offsets stagger spatially left→right across the sankey layout.
@@ -30,9 +33,31 @@ const SANKEY_LABEL: React.CSSProperties = {
   position: 'absolute',
 }
 
+const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? ' ' : ch}</span>)
+
 export default function UYBPCERSection() {
+  const sectionRef  = useRef<HTMLElement>(null)
+  const headingRef  = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    gsap.set(el, { opacity: 0, y: 50 })
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        if (headingRef.current) gsap.fromTo(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.025, ease: 'power3.out' })
+      } else {
+        gsap.set(el, { opacity: 0, y: 50 })
+        if (headingRef.current) gsap.set(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+      }
+    }, { threshold: 0.15 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064', background: '#000000' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1064', background: '#000000' }}>
       <img
         src="/uybpcer-nobg.svg"
         alt=""
@@ -77,6 +102,7 @@ export default function UYBPCERSection() {
 
       {/* Heading — D-DIN Bold 70px */}
       <div
+        ref={headingRef}
         className="absolute"
         style={{
           left: '8.14%',
@@ -90,7 +116,10 @@ export default function UYBPCERSection() {
           letterSpacing: '0.01em',
         }}
       >
-        understand your battery passport compliance effort reduction
+        <div>{SL('understand your')}</div>
+        <div>{SL('battery passport')}</div>
+        <div>{SL('compliance effort')}</div>
+        <div>{SL('reduction')}</div>
       </div>
 
       {/* Description — D-DIN Regular 24px */}

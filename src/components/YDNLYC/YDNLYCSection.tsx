@@ -8,14 +8,36 @@
 // Font sizes at 1905px canvas:
 //   70px → 3.67vw  |  24px → 1.26vw
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
+
+const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)
 
 export default function YDNLYCSection() {
   const [btnHovered, setBtnHovered] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    gsap.set(el, { opacity: 0, y: 50 })
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        if (headingRef.current) gsap.fromTo(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.025, ease: 'power3.out' })
+      } else {
+        gsap.set(el, { opacity: 0, y: 50 })
+        if (headingRef.current) gsap.set(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
+      }
+    }, { threshold: 0.15 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   return (
-    <section className="relative w-full" style={{ aspectRatio: '1905 / 1064', borderTop: '1px solid #ffffff', background: '#000000' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1064', borderTop: '1px solid #ffffff', background: '#000000' }}>
       {/* Right panel background — x=789 to x=1905 = left 41.42%, width 58.58% */}
       <img
         src="/YDNLYC background.webp"
@@ -60,6 +82,7 @@ export default function YDNLYCSection() {
 
       {/* Heading — D-DIN Bold 70px */}
       <div
+        ref={headingRef}
         className="absolute"
         style={{
           left: '8.14%',
@@ -73,7 +96,9 @@ export default function YDNLYCSection() {
           letterSpacing: '0.01em',
         }}
       >
-        your data never leaves your control
+        <div>{SL('your data')}</div>
+        <div>{SL('never leaves')}</div>
+        <div>{SL('your control')}</div>
       </div>
 
       {/* Description — D-DIN Regular 24px */}
