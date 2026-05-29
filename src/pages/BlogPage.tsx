@@ -2,11 +2,12 @@
 // Blog 1: node 1:720 | Blog 2: node 1:796 | Blog 3: node 1:888
 
 import { useParams, useNavigate } from 'react-router-dom'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import Blog1Content from '../components/Blog/Blog1Content'
-import Blog2Content from '../components/Blog/Blog2Content'
-import Blog3Content from '../components/Blog/Blog3Content'
+
+const Blog1Content = lazy(() => import('../components/Blog/Blog1Content'))
+const Blog2Content = lazy(() => import('../components/Blog/Blog2Content'))
+const Blog3Content = lazy(() => import('../components/Blog/Blog3Content'))
 
 const BLOG_COMPONENTS: Record<string, React.ComponentType> = {
   '1': Blog1Content,
@@ -84,12 +85,16 @@ export default function BlogPage() {
 
       {/* Blog content */}
       <div className="hidden md:block" style={{ padding: '0 8.14% clamp(48px, 6vw, 80px) 8.14%' }}>
-        <BlogContent />
+        <Suspense fallback={<div style={{ color: '#fff', padding: '2vw' }}>Loading…</div>}>
+          <BlogContent />
+        </Suspense>
       </div>
 
       {/* Mobile blog content — padded below fixed top bar */}
       <div className="md:hidden" style={{ paddingTop: '60px', padding: '60px 20px clamp(40px, 8vw, 60px)', overflowX: 'hidden' }}>
-        <BlogContent />
+        <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
+          <BlogContent />
+        </Suspense>
       </div>
     </div>
   )

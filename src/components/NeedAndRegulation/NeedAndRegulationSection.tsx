@@ -268,9 +268,9 @@ export default function NeedAndRegulationSection() {
   return (
     <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ aspectRatio: '1905 / 1079' }}>
 
-      {/* ── Background video (same as Regulation section) ── */}
+      {/* ── Background video — lazy loaded ── */}
       <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.25 }} autoPlay loop muted playsInline>
-        <source src="/section2.webm" type="video/webm" />
+        {isVisible && <source src="/section2.webm" type="video/webm" />}
       </video>
 
       {/* ── Animated main circle (grows & moves right into regulation arc) ── */}

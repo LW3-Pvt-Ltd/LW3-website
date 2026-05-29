@@ -98,13 +98,13 @@ export default function BPAPSection() {
   return (
     <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1026' }}>
 
-      {/* Background video */}
+      {/* Background video — lazy loaded */}
       <video
         className="absolute inset-0 w-full h-full block"
         style={{ objectFit: 'cover', zIndex: 0 }}
         autoPlay loop muted playsInline
       >
-        <source src="/section3.webm" type="video/webm" />
+        {isVisible && <source src="/section3.webm" type="video/webm" />}
       </video>
       <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.68)', zIndex: 0 }} />
 

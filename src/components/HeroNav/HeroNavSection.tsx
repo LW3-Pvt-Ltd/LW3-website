@@ -210,10 +210,13 @@ export default function HeroNavSection() {
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.73)' }} />
       </div>
 
-      {/* ── Hero SVG (nav elements only, background stripped) ── */}
+      {/* ── Hero SVG (vectors only, background stripped) ── */}
       <img src="/nav-hero-nobg.svg" alt="" className="relative w-full h-auto block" style={{ zIndex: 1 }} draggable={false} />
 
-      {/* ── Nav bar SVG (background, icon boxes — no text, no logo) ── */}
+      {/* ── Nav bar background texture — height capped to nav bar (164/1089 = 15.06%) ── */}
+      <img src="/nav-top-bg.webp" alt="" draggable={false}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '15.06%', objectFit: 'cover', zIndex: 2 }} />
+      {/* ── Nav bar SVG (vectors only, icon boxes — no text, no logo) ── */}
       <img src="/nav-top-notxt.svg" alt="" className="absolute w-full h-auto block" style={{ top: 0, left: 0, zIndex: 2 }} draggable={false} />
 
       {/* ── POST QUANTUM SECURED ── */}
