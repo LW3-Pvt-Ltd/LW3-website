@@ -315,7 +315,7 @@ export default function HeroNavSection() {
       {/* ── Logo ── */}
       <img
         src="/Latest updated logo.svg"
-        alt="LW3"
+        alt="LW3 Logistics W3"
         draggable={false}
         style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', width: '18.11%', height: 'auto', zIndex: 3 }}
       />

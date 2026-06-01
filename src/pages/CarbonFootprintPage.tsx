@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, carbonFootprintSeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, carbonFootprintSeo } from '../lib/seo'
 
 const CarbonFootprint1Content = lazy(() => import('../components/CarbonFootprint/CarbonFootprint1Content'))
 
@@ -20,6 +20,7 @@ export default function CarbonFootprintPage() {
     window.scrollTo(0, 0)
     setSeoMeta(carbonFootprintSeo)
     injectArticleSchema(carbonFootprintSeo.title, carbonFootprintSeo.description, 'https://www.lw3.world/carbon-footprint/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Carbon Footprint Engine', url: 'https://www.lw3.world/carbon-footprint/1' }])
   }, [id])
 
   return (

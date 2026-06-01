@@ -135,7 +135,7 @@ export default function AltNavbar({ visible }: Props) {
         {/* Logo SVG */}
         <img
           src="/Latest updated logo.svg"
-          alt="LW3"
+          alt="LW3 Logistics W3"
           draggable={false}
           style={{ position: 'absolute', left: '8.14vw', top: '50%', transform: 'translateY(-50%)', width: '18.11vw', minWidth: '180px', height: 'auto' }}
         />

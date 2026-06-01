@@ -161,6 +161,16 @@ Full D-DIN family saved to `src/assets/fonts/` (OTF):
 
 ---
 
+## SEO Status
+
+**Audit Date:** 2026-06-01  
+**Audit Source:** www.lw3.world_issues_20260601.xlsx (90+ issues found)  
+**Foundation Built:** ✅ robots.txt, sitemap.xml, meta tag utility, index.html enhanced  
+**Critical Issues:** 5xx errors, duplicate titles/descriptions, HTTPS certs, mixed content, broken JS/CSS  
+**Next:** Fix critical issues per `SEO_ACTION_PLAN.md`
+
+---
+
 ## Decisions Log
 
 | Date | Decision | Reason |
@@ -190,3 +200,4 @@ Full D-DIN family saved to `src/assets/fonts/` (OTF):
 | 2026-05-21 | MADPP section fully converted to CSS — SVG is background only | Final SVG: madpp-section-final.svg (circles, connector lines, background rects only). All text/buttons/capsules/triangles in MADPPSection.tsx as CSS. Heading: D-DIN-Bold 3.67vw. Description + Book a Demo button: D-DIN 1.26vw. Data panel labels: D-DINCondensed 1.05vw rgba(255,255,255,0.5). Big numbers: Winter Sans Trial 3.15vw. Capsules: CSS pill (border 1px #1D9E75, borderRadius 9999px) centered on number midpoint using font_pct=5.64% of section height. Triangle: CSS border trick 0.296vw×0.512vw. Insight label + body: D-DIN 0.84vw. Button hover: white bg, black text. Bottom border + vertical divider (x=34.88%): 1px solid white CSS. Cache-busting: rename SVG on each strip pass to avoid browser caching. |
 | 2026-05-21 | BPAP section text + buttons converted to CSS overlay | Stripped 7 elements from SVG (2x #F5F2EC text paths, 2x rects + text for each button) → saved bpap-section-notxt.svg. "AGENTIC" (2.1vw, D-DIN), "BATTERY PASSPORT" (3.67vw bold, two lines), "Book a Demo" (outlined white, 10.92%×5.56%), "See Patent Here" (solid white bg, 10.15%×5.69%) all positioned as % of 1905×1026 canvas. Video + passport card placeholders left for user to swap in. |
 | 2026-05-21 | MADPP circles panel text converted to CSS — madpp-section-v2.svg | Stripped all 8 path-text glyphs (Post Quantum Security, Agentic AI, Block chain, 30%, 2.8%, Automation in reverse logistics, Component Circularity). Frame at x=1031,y=74 in 1905×1064. Circle labels: D-DINCondensed 1.05vw, center left:73.81%. 30%: Winter Sans Trial 2.73vw. 2.8%: 1.58vw. Connector labels: 1.05vw left-aligned. |
+| 2026-06-01 | SEO foundation built: robots.txt, sitemap.xml, src/lib/seo.ts utility, index.html enhanced | Audit found 90+ issues; foundation prevents future crawl/indexing problems. App.tsx now calls setSeoMeta() on homepage load. |

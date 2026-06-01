@@ -1,4 +1,4 @@
-// Phygital IOT Article 1 — "Phygital Identity: Bridging the Physical and Digital in Battery Lifecycle Management"
+// Phygital IOT Article 1 - "Phygital Identity: Bridging the Physical and Digital in Battery Lifecycle Management"
 
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
@@ -74,7 +74,7 @@ function Callout({ children }: { children: React.ReactNode }) {
 
 export default function PhygitalIOT1Content() {
   return (
-    <div style={{
+    <article style={{
       background: '#000',
       width: '100%',
       maxWidth: '1048px',
@@ -84,6 +84,7 @@ export default function PhygitalIOT1Content() {
       fontFamily: "'D-DIN', sans-serif",
       color: '#fff',
     }}>
+      <header>
       {/* Kicker row */}
       <div style={{ paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
@@ -118,6 +119,16 @@ export default function PhygitalIOT1Content() {
         Phygital Identity: Bridging the Physical and Digital in Battery Lifecycle Management
       </h1>
 
+      {/* Hero image */}
+      <div style={{ width: '100%', marginTop: 'clamp(20px, 2.5vw, 32px)' }}>
+        <img
+          src="/Phygital Identity bcg.webp"
+          alt="Phygital Identity IOT"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+          draggable={false}
+        />
+      </div>
+
       {/* Standfirst */}
       <div style={{
         borderBottom: '1px solid #fff',
@@ -131,9 +142,11 @@ export default function PhygitalIOT1Content() {
           color: '#fff',
           margin: 0,
         }}>
-          Every battery cell has a physical identity — a chemistry, a manufacturing origin, a degradation curve. LW3's Phygital IOT layer anchors that identity on-chain, making it tamper-proof, machine-readable, and globally verifiable across the entire lifecycle.
+          Every battery cell has a physical identity - a chemistry, a manufacturing origin, a degradation curve. LW3's Phygital IOT layer anchors that identity on-chain, making it tamper-proof, machine-readable, and globally verifiable across the entire lifecycle.
         </p>
       </div>
+
+      </header>
 
       {/* Byline */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: 'clamp(16px, 2vw, 24px)' }}>
@@ -147,7 +160,7 @@ export default function PhygitalIOT1Content() {
           fontFamily: "'D-DIN-Bold', sans-serif",
           fontSize: 'clamp(14px, 1.72vw, 18px)',
           color: '#fff',
-        }}>LW</div>
+        }}>LW3</div>
         <div>
           <div style={{ fontFamily: "'D-DIN-Bold', sans-serif", fontSize: 'clamp(12px, 1.53vw, 16px)', color: '#fff' }}>LW3 Research</div>
           <div style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(11px, 1.34vw, 14px)', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>8 min read</div>
@@ -158,7 +171,7 @@ export default function PhygitalIOT1Content() {
 
       <SectionHeading>What Is Phygital Identity?</SectionHeading>
       <BodyText>
-        The term "phygital" describes the convergence of physical objects and their digital counterparts. In the context of battery technology, it means every physical cell — manufactured in a factory, installed in a vehicle, decommissioned at end-of-life — carries a corresponding digital identity that travels with it, immutably, across every handoff in the supply chain.
+        The term "phygital" describes the convergence of physical objects and their digital counterparts. In the context of battery technology, it means every physical cell - manufactured in a factory, installed in a vehicle, decommissioned at end-of-life - carries a corresponding digital identity that travels with it, immutably, across every handoff in the supply chain.
       </BodyText>
       <BodyText>
         LW3 implements this through a combination of IoT sensor data, cryptographic hashing, and post-quantum secure blockchain anchoring. The result is a Battery Passport that is not merely a document, but a living, real-time record of a battery's physical state.
@@ -173,7 +186,7 @@ export default function PhygitalIOT1Content() {
         At the core of LW3's Phygital IOT architecture is a sensor network that captures state-of-health (SoH), state-of-charge (SoC), temperature profiles, cycle counts, and charge/discharge events directly from the battery management system (BMS). These readings are signed at the device level and written to the blockchain at defined intervals, creating an auditable trail that cannot be retroactively altered.
       </BodyText>
       <BodyText>
-        Unlike traditional telematics solutions that store data in centralised databases, LW3's approach ensures that the physical measurements and their on-chain records are cryptographically bound. Any tampering with the physical sensor output or the on-chain record breaks the cryptographic proof — making fraud immediately detectable.
+        Unlike traditional telematics solutions that store data in centralised databases, LW3's approach ensures that the physical measurements and their on-chain records are cryptographically bound. Any tampering with the physical sensor output or the on-chain record breaks the cryptographic proof - making fraud immediately detectable.
       </BodyText>
 
       <Divider />
@@ -183,15 +196,15 @@ export default function PhygitalIOT1Content() {
         Current IoT security relies heavily on elliptic-curve cryptography (ECC) for device authentication and data signing. With the emergence of quantum computing, ECC-based signatures face a harvest-now-decrypt-later threat: adversaries can collect signed IoT data today and break the signatures once sufficiently powerful quantum processors become available.
       </BodyText>
       <BodyText>
-        LW3 embeds NIST-standardised post-quantum cryptographic algorithms (specifically lattice-based schemes from the CRYSTALS family) at the IoT signing layer. This means that even data captured today remains cryptographically valid and tamper-evident decades into the future — critical for batteries with 10–15 year operational lifespans.
+        LW3 embeds NIST-standardised post-quantum cryptographic algorithms (specifically lattice-based schemes from the CRYSTALS family) at the IoT signing layer. This means that even data captured today remains cryptographically valid and tamper-evident decades into the future - critical for batteries with 10-15 year operational lifespans.
       </BodyText>
 
       <SectionHeading>EU Battery Regulation Compliance Through Phygital IOT</SectionHeading>
       <BodyText>
-        The EU Battery Regulation (2023/1542) mandates a Battery Passport for industrial and EV batteries from February 2027. The regulation requires real-time performance data, carbon footprint declarations, recycled content percentages, and supply chain due diligence — all machine-readable and accessible to regulators, recyclers, and second-life operators.
+        The EU Battery Regulation (2023/1542) mandates a Battery Passport for industrial and EV batteries from February 2027. The regulation requires real-time performance data, carbon footprint declarations, recycled content percentages, and supply chain due diligence - all machine-readable and accessible to regulators, recyclers, and second-life operators.
       </BodyText>
       <BodyText>
-        LW3's Phygital IOT layer directly fulfils Articles 14 and 77 of the regulation by providing a continuously updated, independently verifiable record of each battery's physical state. The IoT-anchored data satisfies the "real-time performance" requirement, while the blockchain record satisfies the "tamper-proof audit trail" requirement — in a single integrated system.
+        LW3's Phygital IOT layer directly fulfils Articles 14 and 77 of the regulation by providing a continuously updated, independently verifiable record of each battery's physical state. The IoT-anchored data satisfies the "real-time performance" requirement, while the blockchain record satisfies the "tamper-proof audit trail" requirement - in a single integrated system.
       </BodyText>
 
       <Callout>
@@ -203,7 +216,7 @@ export default function PhygitalIOT1Content() {
         One of the most commercially significant applications of Phygital IOT is second-life battery assessment. Today, the second-life market is constrained by the inability to reliably determine a used battery's remaining capacity and safety profile. Without a trustworthy history, repurposers apply conservative derating factors that destroy value.
       </BodyText>
       <BodyText>
-        With LW3's continuous IoT anchoring, a battery arriving at a second-life facility carries its complete operational history on-chain. Repurposers can programmatically query cycle counts, peak temperatures, charge patterns, and SoH trajectory — and price the asset accordingly. This unlocks an estimated 30–40% additional residual value per battery pack compared to current market practices.
+        With LW3's continuous IoT anchoring, a battery arriving at a second-life facility carries its complete operational history on-chain. Repurposers can programmatically query cycle counts, peak temperatures, charge patterns, and SoH trajectory - and price the asset accordingly. This unlocks an estimated 30-40% additional residual value per battery pack compared to current market practices.
       </BodyText>
 
       <Divider />
@@ -213,13 +226,13 @@ export default function PhygitalIOT1Content() {
         The LW3 Phygital IOT stack operates in three layers:
       </BodyText>
       <BodyText>
-        <strong style={{ color: '#fff' }}>Layer 1 — Edge (Device):</strong> Post-quantum signed sensor readings generated at the BMS level. Data is hashed locally before transmission, ensuring raw data integrity even if the communication channel is compromised.
+        <strong style={{ color: '#fff' }}>Layer 1 - Edge (Device):</strong> Post-quantum signed sensor readings generated at the BMS level. Data is hashed locally before transmission, ensuring raw data integrity even if the communication channel is compromised.
       </BodyText>
       <BodyText>
-        <strong style={{ color: '#fff' }}>Layer 2 — Network (Aggregation):</strong> Signed data packets are aggregated and batched for efficient on-chain writing. LW3 uses a Cardano-based settlement layer for its combination of formal verification, low-cost transaction settlement, and existing CIRPASS EU standardisation alignment.
+        <strong style={{ color: '#fff' }}>Layer 2 - Network (Aggregation):</strong> Signed data packets are aggregated and batched for efficient on-chain writing. LW3 uses a Cardano-based settlement layer for its combination of formal verification, low-cost transaction settlement, and existing CIRPASS EU standardisation alignment.
       </BodyText>
       <BodyText>
-        <strong style={{ color: '#fff' }}>Layer 3 — Chain (Immutable Record):</strong> Anchored hashes and metadata form the canonical Battery Passport record. Smart contracts govern access permissions, ensuring that recyclers, regulators, and OEMs each see exactly the data they are entitled to — no more, no less.
+        <strong style={{ color: '#fff' }}>Layer 3 - Chain (Immutable Record):</strong> Anchored hashes and metadata form the canonical Battery Passport record. Smart contracts govern access permissions, ensuring that recyclers, regulators, and OEMs each see exactly the data they are entitled to - no more, no less.
       </BodyText>
 
       <SectionHeading>What Comes Next</SectionHeading>
@@ -247,6 +260,6 @@ export default function PhygitalIOT1Content() {
           }}>{tag}</span>
         ))}
       </div>
-    </div>
+    </article>
   )
 }

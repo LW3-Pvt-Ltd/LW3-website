@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, agenticAISeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, agenticAISeo } from '../lib/seo'
 
 const AgenticAI1Content = lazy(() => import('../components/AgenticAI/AgenticAI1Content'))
 
@@ -22,6 +22,7 @@ export default function AgenticAIPage() {
     window.scrollTo(0, 0)
     setSeoMeta(agenticAISeo)
     injectArticleSchema(agenticAISeo.title, agenticAISeo.description, 'https://www.lw3.world/agentic-ai/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Agentic AI Intelligence', url: 'https://www.lw3.world/agentic-ai/1' }])
   }, [id])
 
   return (

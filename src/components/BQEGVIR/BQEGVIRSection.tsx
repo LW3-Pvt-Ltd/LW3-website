@@ -463,6 +463,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setAgHovered(true)}
           onMouseLeave={() => setAgHovered(false)}
+          onClick={() => navigate('/agentic-ai/1')}
         />
         {/* Right crescent — Supply Chain Finance */}
         <path
@@ -473,6 +474,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setScHovered(true)}
           onMouseLeave={() => setScHovered(false)}
+          onClick={() => navigate('/supply-chain-finance/1')}
         />
         {/* Left half of small intersection circle — Phygital Identity (IOT) */}
         <path
@@ -493,6 +495,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setRightHalfHovered(true)}
           onMouseLeave={() => setRightHalfHovered(false)}
+          onClick={() => navigate('/near-zero-carbon/1')}
         />
         <path d="M 952 270.691 A 173.02 173.02 0 0 1 952 616.731" fill="none" stroke="white" strokeWidth="1.38972" style={{ pointerEvents: 'none' }} />
         {/* Left half of inner circle [1] — Post Quantum Secure Blockchain */}
@@ -503,6 +506,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setPqHovered(true)}
           onMouseLeave={() => setPqHovered(false)}
+          onClick={() => navigate('/post-quantum/1')}
         />
         {/* Right half of inner circle [1] — Carbon Footprint Engine */}
         <path
@@ -512,6 +516,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setCfHovered(true)}
           onMouseLeave={() => setCfHovered(false)}
+          onClick={() => navigate('/carbon-footprint/1')}
         />
         {/* Left half of small middle circle [3] — CIRPASS EU Standardisation */}
         <path

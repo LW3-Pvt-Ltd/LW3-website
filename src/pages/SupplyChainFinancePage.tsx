@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, supplyChainFinanceSeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, supplyChainFinanceSeo } from '../lib/seo'
 
 const SupplyChainFinance1Content = lazy(() => import('../components/SupplyChainFinance/SupplyChainFinance1Content'))
 
@@ -22,6 +22,7 @@ export default function SupplyChainFinancePage() {
     window.scrollTo(0, 0)
     setSeoMeta(supplyChainFinanceSeo)
     injectArticleSchema(supplyChainFinanceSeo.title, supplyChainFinanceSeo.description, 'https://www.lw3.world/supply-chain-finance/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Supply Chain Finance', url: 'https://www.lw3.world/supply-chain-finance/1' }])
   }, [id])
 
   return (

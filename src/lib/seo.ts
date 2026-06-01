@@ -187,6 +187,20 @@ export function injectArticleSchema(title: string, description: string, url: str
   injectJsonLd('article-schema', schema)
 }
 
+export function injectBreadcrumbSchema(items: { name: string; url: string }[]) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  }
+  injectJsonLd('breadcrumb-schema', schema)
+}
+
 function injectJsonLd(id: string, data: object) {
   let el = document.getElementById(id)
   if (!el) {

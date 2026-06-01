@@ -80,7 +80,7 @@ export default function FooterSection() {
       {/* LW3 logo */}
       <img
         src="/Latest updated logo.svg"
-        alt="LW3 — accelerating sustainable traceability"
+        alt="LW3 - Logistics W3"
         draggable={false}
         style={{
           position: 'absolute',

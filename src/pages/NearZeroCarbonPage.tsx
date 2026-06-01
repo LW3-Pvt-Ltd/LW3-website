@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, nearZeroCarbonSeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, nearZeroCarbonSeo } from '../lib/seo'
 
 const NearZeroCarbon1Content = lazy(() => import('../components/NearZeroCarbon/NearZeroCarbon1Content'))
 
@@ -22,6 +22,7 @@ export default function NearZeroCarbonPage() {
     window.scrollTo(0, 0)
     setSeoMeta(nearZeroCarbonSeo)
     injectArticleSchema(nearZeroCarbonSeo.title, nearZeroCarbonSeo.description, 'https://www.lw3.world/near-zero-carbon/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Near Zero Carbon Infrastructure', url: 'https://www.lw3.world/near-zero-carbon/1' }])
   }, [id])
 
   return (

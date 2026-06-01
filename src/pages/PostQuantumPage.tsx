@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, postQuantumSeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, postQuantumSeo } from '../lib/seo'
 
 const PostQuantum1Content = lazy(() => import('../components/PostQuantum/PostQuantum1Content'))
 
@@ -20,6 +20,7 @@ export default function PostQuantumPage() {
     window.scrollTo(0, 0)
     setSeoMeta(postQuantumSeo)
     injectArticleSchema(postQuantumSeo.title, postQuantumSeo.description, 'https://www.lw3.world/post-quantum/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Post Quantum Secure Blockchain', url: 'https://www.lw3.world/post-quantum/1' }])
   }, [id])
 
   return (

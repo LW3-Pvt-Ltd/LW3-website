@@ -4,7 +4,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, blog1Seo, blog2Seo, blog3Seo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, blog1Seo, blog2Seo, blog3Seo } from '../lib/seo'
 
 const Blog1Content = lazy(() => import('../components/Blog/Blog1Content'))
 const Blog2Content = lazy(() => import('../components/Blog/Blog2Content'))
@@ -37,6 +37,7 @@ export default function BlogPage() {
     const seo = seoMap[id ?? '1'] ?? blog1Seo
     setSeoMeta(seo)
     injectArticleSchema(seo.title, seo.description, articleUrls[id ?? '1'] ?? articleUrls['1'], '2026-04-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Insights', url: 'https://www.lw3.world/' }, { name: seo.title.split(' | ')[0], url: articleUrls[id ?? '1'] ?? articleUrls['1'] }])
   }, [id])
 
   return (

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, phygitalIOTSeo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, phygitalIOTSeo } from '../lib/seo'
 
 const PhygitalIOT1Content = lazy(() => import('../components/PhygitalIOT/PhygitalIOT1Content'))
 
@@ -22,6 +22,7 @@ export default function PhygitalIOTPage() {
     window.scrollTo(0, 0)
     setSeoMeta(phygitalIOTSeo)
     injectArticleSchema(phygitalIOTSeo.title, phygitalIOTSeo.description, 'https://www.lw3.world/phygital-iot/1', '2026-05-01')
+    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Technology', url: 'https://www.lw3.world/' }, { name: 'Phygital Identity (IoT)', url: 'https://www.lw3.world/phygital-iot/1' }])
   }, [id])
 
   return (
