@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 
 // BQEGVIR section — SVG background + CSS text overlay
@@ -17,6 +18,7 @@ const animLetters = (el: HTMLElement, enter: boolean) => {
 }
 
 export default function BQEGVIRSection() {
+  const navigate = useNavigate()
   const sectionRef  = useRef<HTMLElement>(null)
   const heading1Ref = useRef<HTMLDivElement>(null)
   const heading2Ref = useRef<HTMLDivElement>(null)
@@ -480,6 +482,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setLeftHalfHovered(true)}
           onMouseLeave={() => setLeftHalfHovered(false)}
+          onClick={() => navigate('/phygital-iot/1')}
         />
         <path d="M 952 270.691 A 173.02 173.02 0 0 0 952 616.731" fill="none" stroke="white" strokeWidth="1.38972" style={{ pointerEvents: 'none' }} />
         {/* Right half of small intersection circle — Near Zero Carbon Infrastructure */}

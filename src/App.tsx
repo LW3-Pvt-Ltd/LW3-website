@@ -14,6 +14,7 @@ import BQEGVIRSection from './components/BQEGVIR/BQEGVIRSection'
 import BatteryStorySection from './components/BatteryStory/BatteryStorySection'
 import FooterSection from './components/Footer/FooterSection'
 import BlogPage from './pages/BlogPage'
+import PhygitalIOTPage from './pages/PhygitalIOTPage'
 import BookDemoModal from './components/BookDemo/BookDemoModal'
 import ContactModal from './components/Contact/ContactModal'
 import BookPilotModal from './components/BookPilot/BookPilotModal'
@@ -97,6 +98,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/blog/:id" element={<BlogPage />} />
+        <Route path="/phygital-iot/:id" element={<PhygitalIOTPage />} />
+        <Route path="/phygital-iot" element={<PhygitalIOTPage />} />
       </Routes>
     </>
   )
