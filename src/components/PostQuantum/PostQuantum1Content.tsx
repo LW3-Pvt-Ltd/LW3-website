@@ -122,7 +122,7 @@ export default function PostQuantum1Content() {
       {/* Hero image */}
       <div style={{ width: '100%', marginTop: 'clamp(20px, 2.5vw, 32px)' }}>
         <img
-          src="/Quantum.png"
+          src="/Quantum.webp"
           alt="Post Quantum Secure Blockchain"
           style={{ width: '100%', height: 'auto', display: 'block' }}
           draggable={false}

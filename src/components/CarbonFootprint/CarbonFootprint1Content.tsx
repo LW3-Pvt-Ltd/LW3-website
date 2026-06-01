@@ -122,7 +122,7 @@ export default function CarbonFootprint1Content() {
       {/* Hero image */}
       <div style={{ width: '100%', marginTop: 'clamp(20px, 2.5vw, 32px)' }}>
         <img
-          src="/Carbon footprint.png"
+          src="/Carbon footprint.webp"
           alt="Carbon Footprint Engine"
           style={{ width: '100%', height: 'auto', display: 'block' }}
           draggable={false}
