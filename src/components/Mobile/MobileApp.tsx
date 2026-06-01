@@ -480,7 +480,7 @@ function MobileBQEGVIR() {
           style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)' }} />
         <div style={{ position: 'absolute', inset: 0, padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px' }}>
-          <p style={{ ...H2, fontSize: '20px', margin: 0 }}>Globally Validated, India-Rooted</p>
+          <h2 style={{ ...H2, fontSize: '20px', margin: 0 }}>Globally Validated, India-Rooted</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {AWARDS.map(a => (
               <span key={a} style={{ ...TEAL_BADGE, fontSize: '11px', padding: '4px 10px' }}>{a}</span>
