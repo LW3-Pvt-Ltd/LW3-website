@@ -375,9 +375,9 @@ export default function NeedAndRegulationSection() {
 
           {/* Heading + Description — right panel */}
           <div ref={rightPanelRef} style={{ position: 'absolute', left: '50.03%', top: '50%', transform: 'translateY(-50%)', width: '35.38%' }}>
-            <p style={{ margin: 0, fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '1.68vw', fontWeight: 500, lineHeight: 1.1, textTransform: 'uppercase', color: '#ffffff' }}>
-              GDPR Moment for Supply Chain is Here
-            </p>
+            <h2 style={{ margin: 0, fontFamily: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif", fontSize: '1.68vw', fontWeight: 500, lineHeight: 1.1, textTransform: 'uppercase', color: '#ffffff' }}>
+              GDPR-Style Enforcement is Here for ESPR &amp; EUDR
+            </h2>
             <p style={{ margin: '0.6em 0 0', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.4, color: '#ffffff' }}>
               Non-compliance with ESPR/EUDR regulations is subject to GDPR-style enforcement-carrying financial penalties of up to 4% of global annual turnover, compounded by market bans and mandatory product recalls.
             </p>

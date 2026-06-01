@@ -112,7 +112,7 @@ const CARD_IMGS = [
 
 export default function InsightSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const headingRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const cardRefs   = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -148,7 +148,7 @@ export default function InsightSection() {
         draggable={false}
       />
       {/* Heading — D-DIN Bold 70px */}
-      <div
+      <h2
         ref={headingRef}
         className="absolute"
         style={{
@@ -161,12 +161,13 @@ export default function InsightSection() {
           color: '#ffffff',
           textTransform: 'uppercase',
           letterSpacing: '0.01em',
+          margin: 0,
         }}
       >
         {['insight you can act on', 'data you can trust'].map((line, li) => (
           <div key={li}>{line.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}</div>
         ))}
-      </div>
+      </h2>
 
       {/* Blog card columns — each a positioned wrapper for GSAP stagger */}
       {blogs.map((blog, i) => (
