@@ -105,6 +105,7 @@ export default function BPAPSection() {
         autoPlay loop muted playsInline
       >
         {isVisible && <source src="/section3.webm" type="video/webm" />}
+        {isVisible && <source src="/section3.mp4" type="video/mp4" />}
       </video>
       <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.68)', zIndex: 0 }} />
 

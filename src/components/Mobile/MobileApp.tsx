@@ -289,6 +289,7 @@ function MobileHero() {
       {/* Background video */}
       <video style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} autoPlay loop muted playsInline>
         <source src="/section1.webm" type="video/webm" />
+        <source src="/section1.mp4" type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
 
@@ -334,6 +335,7 @@ function MobileNeedReg() {
       {/* Background video */}
       <video style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.3 }} autoPlay loop muted playsInline>
         <source src="/section2.webm" type="video/webm" />
+        <source src="/section2.mp4" type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)' }} />
 
@@ -748,6 +750,7 @@ function MobileBPAP() {
     <div style={{ ...SECTION, position: 'relative', overflow: 'hidden' }}>
       <video style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.3 }} autoPlay loop muted playsInline>
         <source src="/section3.webm" type="video/webm" />
+        <source src="/section3.mp4" type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '4px', flexShrink: 0 }}>

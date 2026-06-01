@@ -206,6 +206,7 @@ export default function HeroNavSection() {
       <div className="absolute left-0 right-0 overflow-hidden bg-black" style={{ top: '14.6%', bottom: 0 }}>
         <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
           <source src="/section1.webm" type="video/webm" />
+          <source src="/section1.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.73)' }} />
       </div>

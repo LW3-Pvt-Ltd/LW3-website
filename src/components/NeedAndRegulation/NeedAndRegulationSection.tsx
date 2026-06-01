@@ -271,6 +271,7 @@ export default function NeedAndRegulationSection() {
       {/* ── Background video — lazy loaded ── */}
       <video className="absolute inset-0 w-full h-full block" style={{ objectFit: 'cover', opacity: 0.25 }} autoPlay loop muted playsInline>
         {isVisible && <source src="/section2.webm" type="video/webm" />}
+        {isVisible && <source src="/section2.mp4" type="video/mp4" />}
       </video>
 
       {/* ── Animated main circle (grows & moves right into regulation arc) ── */}
