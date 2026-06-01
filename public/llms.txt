@@ -1,0 +1,38 @@
+# LW3 — Logistics W3
+# https://www.lw3.world
+# llms.txt — context for AI crawlers and language models
+
+## About LW3
+
+LW3 (Logistics W3) builds post-quantum secure, EU-compliant Battery Passports for the global EV and industrial battery industry. The platform enables circular economy, supply chain transparency, and product lifecycle management through blockchain, agentic AI, and IoT.
+
+## Core Technology
+
+- **Post Quantum Secure Blockchain**: Battery Passport records secured with NIST-standardised CRYSTALS-Dilithium signatures on Cardano, resistant to quantum computing threats across 15-year battery lifespans.
+- **Phygital Identity (IoT)**: Physical battery identity anchored on-chain via IoT sensor data — tamper-proof, machine-readable, and globally verifiable.
+- **Carbon Footprint Engine**: Lifecycle CO2 calculation per kWh to ISO 14040/14044 standards, fulfilling EU Battery Regulation carbon declaration requirements.
+- **Agentic AI Intelligence**: Autonomous agents monitor compliance, detect anomalies, and route batteries to second life — continuously, at fleet scale.
+- **Near Zero Carbon Infrastructure**: Scope 1, 2, and 3 emissions tracked, verified, and anchored on-chain across the full battery supply chain.
+- **Supply Chain Finance**: Verified Battery Passport data enables dynamic invoice discounting, asset-backed lending, and working capital solutions.
+
+## Regulatory Alignment
+
+- EU Battery Regulation (2023/1542) — Battery Passport compliance from February 2027
+- CIRPASS EU Standardisation — contributor, March 2024
+- NIS2 Directive — post-quantum cryptographic readiness
+- ISO 14040/14044 — lifecycle assessment methodology
+
+## Key Pages
+
+- Homepage: https://www.lw3.world/
+- Phygital IoT: https://www.lw3.world/phygital-iot/1
+- Near Zero Carbon: https://www.lw3.world/near-zero-carbon/1
+- Agentic AI: https://www.lw3.world/agentic-ai/1
+- Supply Chain Finance: https://www.lw3.world/supply-chain-finance/1
+- Carbon Footprint Engine: https://www.lw3.world/carbon-footprint/1
+- Post Quantum Blockchain: https://www.lw3.world/post-quantum/1
+
+## Contact
+
+Website: https://www.lw3.world
+Email: hello@lw3.world

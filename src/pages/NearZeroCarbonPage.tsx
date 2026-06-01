@@ -1,52 +1,35 @@
-// Blog page — renders CSS-based blog content components (converted from Figma design)
-// Blog 1: node 1:720 | Blog 2: node 1:796 | Blog 3: node 1:888
-
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
-import { setSeoMeta, injectArticleSchema, blog1Seo, blog2Seo, blog3Seo } from '../lib/seo'
+import { setSeoMeta, injectArticleSchema, nearZeroCarbonSeo } from '../lib/seo'
 
-const Blog1Content = lazy(() => import('../components/Blog/Blog1Content'))
-const Blog2Content = lazy(() => import('../components/Blog/Blog2Content'))
-const Blog3Content = lazy(() => import('../components/Blog/Blog3Content'))
+const NearZeroCarbon1Content = lazy(() => import('../components/NearZeroCarbon/NearZeroCarbon1Content'))
 
-const BLOG_COMPONENTS: Record<string, React.ComponentType> = {
-  '1': Blog1Content,
-  '2': Blog2Content,
-  '3': Blog3Content,
+const ARTICLE_COMPONENTS: Record<string, React.ComponentType> = {
+  '1': NearZeroCarbon1Content,
 }
 
-export default function BlogPage() {
+export default function NearZeroCarbonPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const BlogContent = BLOG_COMPONENTS[id ?? '1'] ?? BLOG_COMPONENTS['1']
+  const ArticleContent = ARTICLE_COMPONENTS[id ?? '1'] ?? ARTICLE_COMPONENTS['1']
 
   const handleBack = () => {
-    navigate('/', { state: { scrollTo: 'snap-insight' } })
-  }
-
-  const seoMap: Record<string, typeof blog1Seo> = { '1': blog1Seo, '2': blog2Seo, '3': blog3Seo }
-  const articleUrls: Record<string, string> = {
-    '1': 'https://www.lw3.world/blog/1',
-    '2': 'https://www.lw3.world/blog/2',
-    '3': 'https://www.lw3.world/blog/3',
+    navigate('/', { state: { scrollTo: 'snap-bqegvir' } })
   }
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-    const seo = seoMap[id ?? '1'] ?? blog1Seo
-    setSeoMeta(seo)
-    injectArticleSchema(seo.title, seo.description, articleUrls[id ?? '1'] ?? articleUrls['1'], '2026-04-01')
+    setSeoMeta(nearZeroCarbonSeo)
+    injectArticleSchema(nearZeroCarbonSeo.title, nearZeroCarbonSeo.description, 'https://www.lw3.world/near-zero-carbon/1', '2026-05-01')
   }, [id])
 
   return (
     <div style={{ minHeight: '100vh', background: '#000' }}>
-      {/* Desktop navbar — hidden on mobile */}
       <div className="hidden md:block">
         <AltNavbar visible={true} />
       </div>
 
-      {/* Mobile top bar — fixed, back arrow + logo */}
       <div className="flex items-center md:hidden" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         height: '60px', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(8px)',
@@ -70,7 +53,6 @@ export default function BlogPage() {
         <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '24px', width: 'auto', marginLeft: 'auto' }} draggable={false} />
       </div>
 
-      {/* Desktop back link — sits below navbar */}
       <div className="hidden md:block" style={{ paddingTop: '4.83vw' }}>
         <button
           onClick={handleBack}
@@ -82,7 +64,6 @@ export default function BlogPage() {
             fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
             fontSize: 'clamp(10px, 0.84vw, 14px)',
             color: 'rgba(255,255,255,0.6)',
-            textDecoration: 'none',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             background: 'none',
@@ -94,17 +75,15 @@ export default function BlogPage() {
         </button>
       </div>
 
-      {/* Blog content */}
       <div className="hidden md:block" style={{ padding: '0 8.14% clamp(48px, 6vw, 80px) 8.14%' }}>
         <Suspense fallback={<div style={{ color: '#fff', padding: '2vw' }}>Loading…</div>}>
-          <BlogContent />
+          <ArticleContent />
         </Suspense>
       </div>
 
-      {/* Mobile blog content — padded below fixed top bar */}
       <div className="md:hidden" style={{ paddingTop: '60px', padding: '60px 20px clamp(40px, 8vw, 60px)', overflowX: 'hidden' }}>
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
-          <BlogContent />
+          <ArticleContent />
         </Suspense>
       </div>
     </div>
