@@ -33,7 +33,7 @@ export default function BPAPSection() {
   const [demoHovered, setDemoHovered]   = useState(false)
   const sectionRef  = useRef<HTMLElement>(null)
   const agenticRef  = useRef<HTMLParagraphElement>(null)
-  const batteryRef  = useRef<HTMLParagraphElement>(null)
+  const batteryRef  = useRef<HTMLHeadingElement>(null)
   const linesRef    = useRef<HTMLDivElement>(null)
   const linesAnimRef = useRef<gsap.core.Timeline | null>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -129,7 +129,7 @@ export default function BPAPSection() {
       </p>
 
       {/* ── "BATTERY PASSPORT" — split letters ── */}
-      <p
+      <h2
         ref={batteryRef}
         className="absolute text-[#f5f2ec]"
         style={{
@@ -146,7 +146,7 @@ export default function BPAPSection() {
       >
         <span style={{ display: 'block' }}><SplitWord text="BATTERY" /></span>
         <span style={{ display: 'block' }}><SplitWord text="PASSPORT" /></span>
-      </p>
+      </h2>
 
       {/* ── "Book a Demo" button ── */}
       <button

@@ -20,8 +20,8 @@ const animLetters = (el: HTMLElement, enter: boolean) => {
 export default function BQEGVIRSection() {
   const navigate = useNavigate()
   const sectionRef  = useRef<HTMLElement>(null)
-  const heading1Ref = useRef<HTMLDivElement>(null)
-  const heading2Ref = useRef<HTMLDivElement>(null)
+  const heading1Ref = useRef<HTMLHeadingElement>(null)
+  const heading2Ref = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -87,22 +87,22 @@ export default function BQEGVIRSection() {
       />
 
       {/* "Built for The Quantum Era" — letter split */}
-      <div
+      <h2
         ref={heading1Ref}
         className="absolute"
         style={{ left: '8.35%', top: '1.52%', maxWidth: '46%', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.05, color: '#ffffff', letterSpacing: '0.01em', zIndex: 3 }}
       >
         {'Built for The Quantum Era'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? ' ' : ch}</span>)}
-      </div>
+      </h2>
 
       {/* "Globally validated, India-Rooted" — letter split, own observer */}
-      <div
+      <h2
         ref={heading2Ref}
         className="absolute"
         style={{ left: '53.51%', top: '94.34%', maxWidth: '41%', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.05, color: '#ffffff', letterSpacing: '0.01em', zIndex: 3 }}
       >
         {'Globally validated, India-Rooted'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}
-      </div>
+      </h2>
 
       {/* "Phygital Identity (IOT)" — D-DIN Regular 19px — node 27:1657, left of top intersection */}
       <div

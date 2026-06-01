@@ -17,7 +17,7 @@ const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ disp
 export default function YDNLYCSection() {
   const [btnHovered, setBtnHovered] = useState(false)
   const sectionRef  = useRef<HTMLElement>(null)
-  const headingRef  = useRef<HTMLDivElement>(null)
+  const headingRef  = useRef<HTMLHeadingElement>(null)
   const descRef     = useRef<HTMLParagraphElement>(null)
   const squareRefs  = useRef<(HTMLDivElement | null)[]>([])
 
@@ -89,7 +89,7 @@ export default function YDNLYCSection() {
       />
 
       {/* Heading — D-DIN Bold 70px */}
-      <div
+      <h2
         ref={headingRef}
         className="absolute"
         style={{
@@ -107,7 +107,7 @@ export default function YDNLYCSection() {
         <div>{SL('your data')}</div>
         <div>{SL('never leaves')}</div>
         <div>{SL('your control')}</div>
-      </div>
+      </h2>
 
       {/* Description — word-by-word fade */}
       <p

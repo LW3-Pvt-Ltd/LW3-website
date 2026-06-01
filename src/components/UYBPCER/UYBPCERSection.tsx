@@ -37,7 +37,7 @@ const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ disp
 
 export default function UYBPCERSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const headingRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const descRef    = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function UYBPCERSection() {
       </svg>
 
       {/* Heading — D-DIN Bold 70px */}
-      <div
+      <h2
         ref={headingRef}
         className="absolute"
         style={{
@@ -126,7 +126,7 @@ export default function UYBPCERSection() {
         <div>{SL('battery passport')}</div>
         <div>{SL('compliance effort')}</div>
         <div>{SL('reduction')}</div>
-      </div>
+      </h2>
 
       {/* Description — word-by-word fade */}
       <p

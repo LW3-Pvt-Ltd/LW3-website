@@ -101,14 +101,14 @@ export default function MADPPSection() {
   const linesRef     = useRef<SVGLineElement[]>([])
   const num30Ref     = useRef<HTMLDivElement>(null)
   const num28Ref     = useRef<HTMLDivElement>(null)
-  const madppHeadingRef = useRef<HTMLDivElement>(null)
+  const madppHeadingRef = useRef<HTMLHeadingElement>(null)
   const madppDescRef    = useRef<HTMLParagraphElement>(null)
   const rtwfDescRef     = useRef<HTMLParagraphElement>(null)
   const ddatDescRef     = useRef<HTMLParagraphElement>(null)
   const prevTriggered = useRef(false)
 
   // RTWF refs
-  const rtwfHeadingRef  = useRef<HTMLDivElement>(null)
+  const rtwfHeadingRef  = useRef<HTMLHeadingElement>(null)
   const rtwf5400Ref     = useRef<HTMLSpanElement>(null)
   const rtwf28Ref       = useRef<HTMLSpanElement>(null)
   const rtwf02Ref       = useRef<HTMLSpanElement>(null)
@@ -116,7 +116,7 @@ export default function MADPPSection() {
   const prevRtwf        = useRef(false)
 
   // DDAt refs
-  const ddatHeadingRef  = useRef<HTMLDivElement>(null)
+  const ddatHeadingRef  = useRef<HTMLHeadingElement>(null)
   const ddatHeadersRef  = useRef<(HTMLDivElement | null)[]>([])
   const ddatRowsRef     = useRef<(HTMLDivElement | null)[]>([])
   const ddatPillsRef    = useRef<(HTMLDivElement | null)[]>([])
@@ -381,11 +381,11 @@ export default function MADPPSection() {
           />
 
           {/* ── LEFT PANEL heading — letter split ── */}
-          <div ref={madppHeadingRef} className="absolute" style={{ left: '8.35%', top: '7.59%', maxWidth: '18.74vw', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.02, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.01em' }}>
+          <h2 ref={madppHeadingRef} className="absolute" style={{ left: '8.35%', top: '7.59%', maxWidth: '18.74vw', fontFamily: "'D-DIN-Bold', sans-serif", fontSize: '3.67vw', lineHeight: 1.02, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.01em' }}>
             {['MOST', 'ADVANCED', 'DIGITAL', 'PRODUCT', 'PASSPORT'].map((word, wi) => (
               <div key={wi}><SplitLine text={word} /></div>
             ))}
-          </div>
+          </h2>
 
           <p ref={madppDescRef} className="absolute" style={{ left: '8.23%', top: '47.62%', maxWidth: '18.74vw', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
             {'Secure your present compliance and prepare you for future regulations on a unified platform across multiple regions'.split(' ').map((w, i, a) => (
@@ -529,7 +529,7 @@ export default function MADPPSection() {
           ))}
 
           {/* Real Time Work Flow heading — letter split */}
-          <div ref={rtwfHeadingRef} className="absolute" style={{
+          <h2 ref={rtwfHeadingRef} className="absolute" style={{
             left: '6.68%', top: '23.47%',
             fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif",
             fontSize: '3.67vw', fontWeight: 700, lineHeight: 1,
@@ -537,7 +537,7 @@ export default function MADPPSection() {
           }}>
             <div><SplitLine text="REAL TIME" /></div>
             <div><SplitLine text="WORK FLOW" /></div>
-          </div>
+          </h2>
         </div>
 
         {/* ── DDAt LAYER ── */}
@@ -558,7 +558,7 @@ export default function MADPPSection() {
           />
 
           {/* ── Left panel heading — letter split ── */}
-          <div ref={ddatHeadingRef} className="absolute" style={{
+          <h2 ref={ddatHeadingRef} className="absolute" style={{
             left: '6.88%', top: '23.47%',
             fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif",
             fontSize: '3.67vw', fontWeight: 700, lineHeight: 1.02,
@@ -566,7 +566,7 @@ export default function MADPPSection() {
           }}>
             <div><SplitLine text="DATA DRIVEN" /></div>
             <div><SplitLine text="AUTOMATION" /></div>
-          </div>
+          </h2>
 
           {/* ── Left panel description — word-by-word fade ── */}
           <p ref={ddatDescRef} className="absolute" style={{ left: '6.67%', top: '42.92%', width: '27%', fontFamily: "'D-DIN', sans-serif", fontSize: '1.26vw', fontWeight: 400, lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
