@@ -13,6 +13,7 @@ import InsightSection from './components/Insight/InsightSection'
 import PartnersSection from './components/Partners/PartnersSection'
 import BQEGVIRSection from './components/BQEGVIR/BQEGVIRSection'
 import BatteryStorySection from './components/BatteryStory/BatteryStorySection'
+import SEOTextSection from './components/SEOText/SEOTextSection'
 import FooterSection from './components/Footer/FooterSection'
 import BlogPage from './pages/BlogPage'
 import PhygitalIOTPage from './pages/PhygitalIOTPage'
@@ -88,6 +89,7 @@ function HomePage() {
         <div id="snap-partners"><PartnersSection /></div>
         {/* <div id="snap-regulation"><RegulationSection /></div> */}
         <div id="snap-battery"><BatteryStorySection /></div>
+        <SEOTextSection />
         <div id="snap-footer"><FooterSection /></div>
       </div>
       <div className="md:hidden">
