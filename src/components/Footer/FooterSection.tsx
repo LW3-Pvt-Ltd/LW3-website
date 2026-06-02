@@ -8,6 +8,7 @@
 // List items: D-DIN Regular 0.68vw, gap 30.59px → top steps of 9.58%
 
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { openContact } from '../Contact/ContactModal'
 
@@ -38,9 +39,10 @@ const cols = [
     left: '77.06%',
     heading: 'About',
     items: [
-      { label: 'Awards',     target: 'snap-bqegvir-2' },
-      { label: 'Regulation', target: 'snap-gap'       },
-      { label: 'Contact us', target: 'contact'        },
+      { label: 'What is LW3?', target: 'what-is-lw3'   },
+      { label: 'Awards',       target: 'snap-bqegvir-2' },
+      { label: 'Regulation',   target: 'snap-gap'       },
+      { label: 'Contact us',   target: 'contact'        },
     ],
   },
 ]
@@ -57,6 +59,7 @@ const TEXT_SM: React.CSSProperties = {
 }
 
 export default function FooterSection() {
+  const navigate = useNavigate()
   const footerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -127,7 +130,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else scrollTo(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3'); else scrollTo(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,

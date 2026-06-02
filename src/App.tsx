@@ -13,8 +13,8 @@ import InsightSection from './components/Insight/InsightSection'
 import PartnersSection from './components/Partners/PartnersSection'
 import BQEGVIRSection from './components/BQEGVIR/BQEGVIRSection'
 import BatteryStorySection from './components/BatteryStory/BatteryStorySection'
-import SEOTextSection from './components/SEOText/SEOTextSection'
 import FooterSection from './components/Footer/FooterSection'
+import WhatIsLW3Page from './pages/WhatIsLW3Page'
 import BlogPage from './pages/BlogPage'
 import PhygitalIOTPage from './pages/PhygitalIOTPage'
 import NearZeroCarbonPage from './pages/NearZeroCarbonPage'
@@ -89,7 +89,6 @@ function HomePage() {
         <div id="snap-partners"><PartnersSection /></div>
         {/* <div id="snap-regulation"><RegulationSection /></div> */}
         <div id="snap-battery"><BatteryStorySection /></div>
-        <SEOTextSection />
         <div id="snap-footer"><FooterSection /></div>
       </div>
       <div className="md:hidden">
@@ -120,6 +119,7 @@ function App() {
         <Route path="/carbon-footprint" element={<CarbonFootprintPage />} />
         <Route path="/post-quantum/:id" element={<PostQuantumPage />} />
         <Route path="/post-quantum" element={<PostQuantumPage />} />
+        <Route path="/what-is-lw3" element={<WhatIsLW3Page />} />
       </Routes>
     </>
   )

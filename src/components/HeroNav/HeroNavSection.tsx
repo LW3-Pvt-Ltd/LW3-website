@@ -4,6 +4,7 @@
 // All y: (figma_frame_y + 8.667) / 1089 × 100 — section top%.
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
@@ -125,6 +126,7 @@ const REG_SUBS = [
 
 const ABOUT_LEFT = '87.45%'
 const ABOUT_SUBS = [
+  { text: 'what is lw3', top: '7.78%',  target: 'what-is-lw3' as string | null },
   { text: 'book a demo', top: '9.19%',  target: null as string | null },
   { text: 'awards',      top: '10.61%', target: 'snap-bqegvir-2' as string | null },
   { text: 'contact us',  top: '12.02%', target: 'contact' as string | null },
@@ -133,6 +135,7 @@ const ABOUT_SUBS = [
 const HERO_TYPING_TEXTS = ['Post Quantum Secured', 'Agentic AI']
 
 export default function HeroNavSection() {
+  const navigate = useNavigate()
   const [typed, setTyped] = useState('')
   const tickerRef = useRef<HTMLSpanElement>(null)
 
@@ -342,7 +345,7 @@ export default function HeroNavSection() {
 
       {/* ── About sub-items ── */}
       {ABOUT_SUBS.map(({ text, top, target }) => (
-        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) openBookDemo(); else if (target === 'contact') openContact(); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) openBookDemo(); else if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3'); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
       ))}
 
     </section>
