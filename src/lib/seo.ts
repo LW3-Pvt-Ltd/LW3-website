@@ -62,7 +62,7 @@ function updateLinkTag(rel: string, href: string) {
   element.setAttribute('href', href)
 }
 
-const BASE_KEYWORDS = 'battery passport, digital product passport, circular economy, EU battery regulation, post-quantum security, supply chain transparency, product traceability, sustainability reporting, product lifecycle management, eu green deal, environmentally friendly, blockchain, LW3, Logistics W3'
+const BASE_KEYWORDS = 'battery passport, digital product passport, circular economy, EU battery regulation, post-quantum security, supply chain transparency, product traceability, sustainability reporting, product lifecycle management, eu green deal, environmentally friendly, blockchain, LW3, Logistics W3, EV battery traceability, Battery Adhaar, BPAN, ESPR regulation, EUDR, supply chain visibility, product recall management, IoT quality assurance, product authentication, traceability regulations, end-to-end supply chain transparency, green hydrogen digital product passport, battery waste management, supply chain traceability'
 
 // ── Page SEO configs ──────────────────────────────────────────────
 
