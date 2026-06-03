@@ -850,6 +850,7 @@ function MobileBatteryStory() {
 // FOOTER
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
+  const [openSection, setOpenSection] = useState<string | null>(null)
   const cols = [
     {
       heading: 'Product',
@@ -869,37 +870,62 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
     {
       heading: 'About',
       items: [
+        { label: 'What is LW3?', id: 'what-is-lw3' },
         { label: 'Awards', id: 'snap-bqegvir' },
         { label: 'Regulation', id: 'snap-gap' },
         { label: 'Contact us', id: 'contact' },
       ],
     },
   ]
+  const navigate = useNavigate()
   return (
-    <div style={{ background: '#0A0A08', padding: '48px 24px 40px', borderTop: '1px solid rgba(255,255,255,0.15)', scrollSnapAlign: 'start' }}>
-      <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '36px', width: 'auto', marginBottom: '16px' }} draggable={false} />
-      <p style={{ ...BODY, fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginBottom: '40px', maxWidth: '280px' }}>
-        Accelerating Sustainable Traceability. India's full-stack cryptographic battery passport platform.
-      </p>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px 16px', marginBottom: '40px' }}>
-        {cols.map(col => (
-          <div key={col.heading}>
-            <p style={{ ...LABEL_SM, fontSize: '10px', marginBottom: '12px' }}>{col.heading}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+    <div style={{ background: '#0A0A08', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+      {/* Logo + tagline */}
+      <div style={{ padding: '36px 24px 24px' }}>
+        <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '32px', width: 'auto', marginBottom: '12px' }} draggable={false} />
+        <p style={{ ...BODY, fontSize: '12px', color: 'rgba(255,255,255,0.45)', margin: 0, maxWidth: '260px' }}>
+          Accelerating Sustainable Traceability. India's full-stack cryptographic battery passport platform.
+        </p>
+      </div>
+
+      {/* Accordion sections */}
+      {cols.map(col => (
+        <div key={col.heading} style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <button
+            onClick={() => setOpenSection(openSection === col.heading ? null : col.heading)}
+            style={{
+              width: '100%', background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '16px 24px',
+              color: '#ffffff',
+            }}
+          >
+            <span style={{ fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '13px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>{col.heading}</span>
+            <span style={{ fontSize: '18px', color: 'rgba(255,255,255,0.3)', transform: openSection === col.heading ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>+</span>
+          </button>
+          {openSection === col.heading && (
+            <div style={{ padding: '0 24px 16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {col.items.map(it => (
                 <button
                   key={it.label}
-                  onClick={() => it.id === 'contact' ? openContact() : scrollTo(it.id)}
-                  style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', textAlign: 'left', cursor: 'pointer', fontFamily: "'D-DIN', sans-serif", fontSize: '13px', padding: 0 }}
+                  onClick={() => {
+                    if (it.id === 'contact') { openContact(); return }
+                    if (it.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
+                    scrollTo(it.id)
+                  }}
+                  style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.65)', textAlign: 'left', cursor: 'pointer', fontFamily: "'D-DIN', sans-serif", fontSize: '14px', padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                 >
                   {it.label}
+                  <span style={{ opacity: 0.3, fontSize: '12px' }}>↗</span>
                 </button>
               ))}
             </div>
-          </div>
-        ))}
-      </div>
-      <p style={{ ...BODY, fontSize: '12px', color: 'rgba(255,255,255,0.35)', marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px' }}>
+          )}
+        </div>
+      ))}
+
+      {/* Copyright */}
+      <p style={{ ...BODY, fontSize: '11px', color: 'rgba(255,255,255,0.3)', margin: 0, padding: '20px 24px 36px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         DPIIT Reg. No. 121125 · Guwahati, Assam, India<br />Incubated at T-Hub, Hyderabad
       </p>
     </div>
