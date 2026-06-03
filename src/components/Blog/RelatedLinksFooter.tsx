@@ -1,0 +1,86 @@
+// Related links footer — shown at bottom of blog pages 1, 2, 3
+// 3-column grid layout, dot separators, footer style
+
+import { useNavigate } from 'react-router-dom'
+
+const ALL_PAGES = [
+  { label: 'Phygital Identity (IoT)',                       path: '/phygital-iot/1' },
+  { label: 'Near Zero Carbon Infrastructure',               path: '/near-zero-carbon/1' },
+  { label: 'Agentic AI Intelligence',                       path: '/agentic-ai/1' },
+  { label: 'Supply Chain Finance',                          path: '/supply-chain-finance/1' },
+  { label: 'Carbon Footprint Engine',                       path: '/carbon-footprint/1' },
+  { label: 'Post Quantum Secure Blockchain',                path: '/post-quantum/1' },
+  { label: 'Compliant by Design',                           path: '/blog/1' },
+  { label: 'Programmable Money Meets the Battery Passport', path: '/blog/2' },
+  { label: 'The Intelligent Passport',                      path: '/blog/3' },
+  { label: "Green Hydrogen's Digital Product Passport",     path: '/blog/4' },
+  { label: 'Global Product Traceability Regulations',       path: '/blog/5' },
+  { label: 'Product Traceability for Food',                 path: '/blog/6' },
+  { label: 'How Traceability Enhances Product Safety',      path: '/blog/7' },
+  { label: 'Indian Battery Traceability: Battery Adhaar',   path: '/blog/8' },
+]
+
+export default function RelatedLinksFooter({ currentPath }: { currentPath: string }) {
+  const navigate = useNavigate()
+  const links = ALL_PAGES.filter(p => p.path !== currentPath)
+
+  // Split into 3 columns
+  const col1 = links.slice(0, Math.ceil(links.length / 3))
+  const col2 = links.slice(Math.ceil(links.length / 3), Math.ceil(links.length / 3) * 2)
+  const col3 = links.slice(Math.ceil(links.length / 3) * 2)
+
+  const linkStyle: React.CSSProperties = {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: '0',
+    fontFamily: "'D-DIN', sans-serif",
+    fontSize: 'clamp(11px, 0.94vw, 13px)',
+    color: 'rgba(255,255,255,0.45)',
+    textAlign: 'left',
+    lineHeight: 1.7,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    transition: 'color 0.2s ease',
+    width: '100%',
+  }
+
+  const renderLinks = (list: typeof links) => list.map(link => (
+    <button
+      key={link.path}
+      onClick={() => navigate(link.path, { state: { from: 'blog', returnTo: currentPath } })}
+      style={linkStyle}
+      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+    >
+      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0, display: 'inline-block' }} />
+      {link.label}
+    </button>
+  ))
+
+  return (
+    <div style={{
+      borderTop: '1px solid rgba(255,255,255,0.1)',
+      marginTop: 'clamp(32px, 4vw, 56px)',
+      paddingTop: 'clamp(24px, 3vw, 40px)',
+      paddingBottom: 'clamp(48px, 6vw, 80px)',
+    }}>
+      <p style={{
+        fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+        fontSize: 'clamp(10px, 0.84vw, 12px)',
+        letterSpacing: '0.18em',
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255,0.25)',
+        margin: '0 0 clamp(20px, 2.5vw, 32px)',
+      }}>
+        More from LW3
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 clamp(24px, 3vw, 48px)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col1)}</div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col2)}</div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col3)}</div>
+      </div>
+    </div>
+  )
+}

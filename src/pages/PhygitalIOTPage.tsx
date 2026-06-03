@@ -1,6 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
+import RelatedLinksFooter from '../components/Blog/RelatedLinksFooter'
 import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, phygitalIOTSeo } from '../lib/seo'
 
 const PhygitalIOT1Content = lazy(() => import('../components/PhygitalIOT/PhygitalIOT1Content'))
@@ -12,10 +13,22 @@ const ARTICLE_COMPONENTS: Record<string, React.ComponentType> = {
 export default function PhygitalIOTPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const location = useLocation()
   const ArticleContent = ARTICLE_COMPONENTS[id ?? '1'] ?? ARTICLE_COMPONENTS['1']
 
   const handleBack = () => {
-    navigate('/', { state: { scrollTo: 'snap-bqegvir' } })
+    const from = (location.state as { from?: string } | null)?.from
+    if (from === 'blog') {
+      const returnTo = (location.state as { returnTo?: string } | null)?.returnTo
+      if (returnTo) navigate(returnTo)
+      else navigate(-1)
+    } else if (from === 'homepage-section') {
+      navigate('/', { state: { scrollTo: (location.state as { scrollTo?: string } | null)?.scrollTo } })
+    } else if (from === 'what-is-lw3') {
+      const scrollSection = (location.state as { scrollSection?: string } | null)?.scrollSection
+      navigate('/what-is-lw3', { state: { scrollSection } })
+    }
+    else navigate('/', { state: { scrollTo: 'snap-bqegvir' } })
   }
 
   useLayoutEffect(() => {
@@ -84,6 +97,7 @@ export default function PhygitalIOTPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '2vw' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/phygital-iot/1" />
       </div>
 
       {/* Mobile article content */}

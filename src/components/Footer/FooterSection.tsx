@@ -130,7 +130,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3'); else scrollTo(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else scrollTo(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,

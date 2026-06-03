@@ -54,10 +54,12 @@ function HomePage() {
   useEffect(() => {
     setSeoMeta(homepageSeo)
     injectOrganisationSchema()
-    const target = (location.state as { scrollTo?: string } | null)?.scrollTo
-    if (target) {
-      const el = document.getElementById(target)
+    const state = location.state as { scrollTo?: string; restoreScrollY?: number } | null
+    if (state?.scrollTo) {
+      const el = document.getElementById(state.scrollTo)
       if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY)
+    } else if (state?.restoreScrollY !== undefined) {
+      window.scrollTo(0, state.restoreScrollY)
     }
   }, [])
 

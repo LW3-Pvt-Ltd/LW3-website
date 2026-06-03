@@ -1,38 +1,30 @@
-# LW3 — Logistics W3
-# https://www.lw3.world
-# llms.txt — context for AI crawlers and language models
+# LW3 - Logistics W3
 
-## About LW3
+> LW3 (Logistics W3) builds post-quantum secure, EU-compliant Battery Passports for the global EV and industrial battery industry. The platform enables circular economy, supply chain transparency, and product lifecycle management through blockchain, agentic AI, and IoT.
 
-LW3 (Logistics W3) builds post-quantum secure, EU-compliant Battery Passports for the global EV and industrial battery industry. The platform enables circular economy, supply chain transparency, and product lifecycle management through blockchain, agentic AI, and IoT.
+## Pages
 
-## Core Technology
-
-- **Post Quantum Secure Blockchain**: Battery Passport records secured with NIST-standardised CRYSTALS-Dilithium signatures on Cardano, resistant to quantum computing threats across 15-year battery lifespans.
-- **Phygital Identity (IoT)**: Physical battery identity anchored on-chain via IoT sensor data — tamper-proof, machine-readable, and globally verifiable.
-- **Carbon Footprint Engine**: Lifecycle CO2 calculation per kWh to ISO 14040/14044 standards, fulfilling EU Battery Regulation carbon declaration requirements.
-- **Agentic AI Intelligence**: Autonomous agents monitor compliance, detect anomalies, and route batteries to second life — continuously, at fleet scale.
-- **Near Zero Carbon Infrastructure**: Scope 1, 2, and 3 emissions tracked, verified, and anchored on-chain across the full battery supply chain.
-- **Supply Chain Finance**: Verified Battery Passport data enables dynamic invoice discounting, asset-backed lending, and working capital solutions.
+- [Homepage](https://www.lw3.world/): LW3 Battery Passport platform - post-quantum blockchain, agentic AI, and IoT for EU battery regulation compliance.
+- [What is LW3?](https://www.lw3.world/what-is-lw3): Full overview of LW3's technology, regulatory alignment, and use cases.
+- [Phygital Identity (IoT)](https://www.lw3.world/phygital-iot/1): Physical battery identity anchored on-chain via IoT sensor data - tamper-proof, machine-readable, and globally verifiable.
+- [Near Zero Carbon Infrastructure](https://www.lw3.world/near-zero-carbon/1): Scope 1, 2, and 3 emissions tracked, verified, and anchored on-chain across the full battery supply chain.
+- [Agentic AI Intelligence](https://www.lw3.world/agentic-ai/1): Autonomous agents monitor compliance, detect anomalies, and route batteries to second life at fleet scale.
+- [Supply Chain Finance](https://www.lw3.world/supply-chain-finance/1): Verified Battery Passport data enables dynamic invoice discounting, asset-backed lending, and working capital solutions.
+- [Carbon Footprint Engine](https://www.lw3.world/carbon-footprint/1): Lifecycle CO2 calculation per kWh to ISO 14040/14044 standards for EU Battery Regulation carbon declaration.
+- [Post Quantum Secure Blockchain](https://www.lw3.world/post-quantum/1): Battery Passport records secured with NIST-standardised CRYSTALS-Dilithium signatures on Cardano.
 
 ## Regulatory Alignment
 
-- EU Battery Regulation (2023/1542) — Battery Passport compliance from February 2027
-- CIRPASS EU Standardisation — contributor, March 2024
-- NIS2 Directive — post-quantum cryptographic readiness
-- ISO 14040/14044 — lifecycle assessment methodology
+- [EU Battery Regulation (2023/1542)](https://www.lw3.world/): Battery Passport compliance mandate from February 2027.
+- [CIRPASS EU Standardisation](https://www.lw3.world/): LW3 is a recognised contributor, March 2024.
+- [NIS2 Directive](https://www.lw3.world/post-quantum/1): Post-quantum cryptographic readiness for critical infrastructure.
+- [ISO 14040/14044](https://www.lw3.world/carbon-footprint/1): Lifecycle assessment methodology for carbon footprint declarations.
+- [India Battery Adhaar (BPAN)](https://www.lw3.world/): India's national battery identity framework - LW3 achieved 80% alignment in pilot deployments.
+- [ESPR - Ecodesign for Sustainable Products Regulation](https://www.lw3.world/): EU regulation requiring digital product passports for sustainable product compliance.
+- [EUDR - EU Deforestation Regulation](https://www.lw3.world/): Supply chain traceability and due diligence compliance.
 
-## Key Pages
+## Optional
 
-- Homepage: https://www.lw3.world/
-- Phygital IoT: https://www.lw3.world/phygital-iot/1
-- Near Zero Carbon: https://www.lw3.world/near-zero-carbon/1
-- Agentic AI: https://www.lw3.world/agentic-ai/1
-- Supply Chain Finance: https://www.lw3.world/supply-chain-finance/1
-- Carbon Footprint Engine: https://www.lw3.world/carbon-footprint/1
-- Post Quantum Blockchain: https://www.lw3.world/post-quantum/1
-
-## Contact
-
-Website: https://www.lw3.world
-Email: hello@lw3.world
+- [Blog: Battery Passport Meets EU Regulatory Frontier](https://www.lw3.world/blog/1): How LW3's Battery Passport satisfies the EU Battery Regulation and post-quantum mandates simultaneously.
+- [Blog: Programmable Money Meets the Battery Passport](https://www.lw3.world/blog/2): How programmable finance and blockchain Battery Passports unlock supply chain finance.
+- [Blog: Agentic AI Transforms EU Battery Compliance](https://www.lw3.world/blog/3): How agentic AI turns EU Battery Regulation compliance from a manual burden into an automated process.

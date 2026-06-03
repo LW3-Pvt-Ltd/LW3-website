@@ -83,6 +83,7 @@ const DROPDOWNS: Record<Key, DropdownItem[]> = {
     { label: 'circular economy phase', target: 'snap-gap', regTab: 'circular'   },
   ],
   about: [
+    { label: 'what is lw3', target: 'what-is-lw3' },
     { label: 'book a demo', target: null },
     { label: 'awards',      target: 'snap-bqegvir-2' },
     { label: 'contact us',  target: 'contact'      },
@@ -96,6 +97,7 @@ export default function AltNavbar({ visible }: Props) {
   const [hidden, setHidden]   = useState(false)
   const lastY = useRef(0)
   const scrollTo = useScrollTo()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => {
@@ -192,6 +194,7 @@ export default function AltNavbar({ visible }: Props) {
                 setActive(null)
                 if (target === null) openBookDemo()
                 else if (target === 'contact') openContact()
+                else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } })
                 else {
                   scrollTo(target)
                   if (regTab) openRegulationTab(regTab as Parameters<typeof openRegulationTab>[0])

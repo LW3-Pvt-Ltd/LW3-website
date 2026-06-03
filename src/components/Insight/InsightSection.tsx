@@ -70,6 +70,7 @@ function ReadMoreBtn({ left, blogId }: { left: string; blogId: string }) {
   return (
     <Link
       to={`/blog/${blogId}`}
+      state={{ from: 'snap-insight' }}
       style={{
         position: 'absolute',
         top: '77.22%',

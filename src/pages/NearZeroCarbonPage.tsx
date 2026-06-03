@@ -1,6 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
+import RelatedLinksFooter from '../components/Blog/RelatedLinksFooter'
 import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, nearZeroCarbonSeo } from '../lib/seo'
 
 const NearZeroCarbon1Content = lazy(() => import('../components/NearZeroCarbon/NearZeroCarbon1Content'))
@@ -12,10 +13,22 @@ const ARTICLE_COMPONENTS: Record<string, React.ComponentType> = {
 export default function NearZeroCarbonPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const location = useLocation()
   const ArticleContent = ARTICLE_COMPONENTS[id ?? '1'] ?? ARTICLE_COMPONENTS['1']
 
   const handleBack = () => {
-    navigate('/', { state: { scrollTo: 'snap-bqegvir' } })
+    const from = (location.state as { from?: string } | null)?.from
+    if (from === 'blog') {
+      const returnTo = (location.state as { returnTo?: string } | null)?.returnTo
+      if (returnTo) navigate(returnTo)
+      else navigate(-1)
+    } else if (from === 'homepage-section') {
+      navigate('/', { state: { scrollTo: (location.state as { scrollTo?: string } | null)?.scrollTo } })
+    } else if (from === 'what-is-lw3') {
+      const scrollSection = (location.state as { scrollSection?: string } | null)?.scrollSection
+      navigate('/what-is-lw3', { state: { scrollSection } })
+    }
+    else navigate('/', { state: { scrollTo: 'snap-bqegvir' } })
   }
 
   useLayoutEffect(() => {
@@ -80,6 +93,7 @@ export default function NearZeroCarbonPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '2vw' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/near-zero-carbon/1" />
       </div>
 
       <div className="md:hidden" style={{ paddingTop: '60px', padding: '60px 20px clamp(40px, 8vw, 60px)', overflowX: 'hidden' }}>

@@ -9,6 +9,7 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import InsightsWidget from '../InsightsWidget/InsightsWidget'
 
 // Shimmer gradient: narrow grey stripe on white, sweeps left→right across 1905px canvas.
 // x1/x2 define a 200px-wide band; animateTransform translates it from -200 to +2105.
@@ -198,6 +199,12 @@ export default function UYBPCERSection() {
       <span style={{ ...SANKEY_LABEL, left: '59.06%', top: '77.82%' }}>
         Reverse logistics
       </span>
+      <InsightsWidget
+        position="bottom-right"
+        visibleCards={['/phygital-iot/1', '/near-zero-carbon/1', '/blog/4']}
+        sectionRef={sectionRef}
+        scrollBackTo="snap-uybpcer"
+      />
     </section>
   )
 }

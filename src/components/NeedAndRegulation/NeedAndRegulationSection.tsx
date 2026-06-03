@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import InsightsWidget from '../InsightsWidget/InsightsWidget'
 
 // 'entering-start' = elements mount off-screen (no transition), 'entering' = slide back in
 type Phase = 'idle-1' | 'exiting' | 'idle-2' | 'entering-start' | 'entering'
@@ -155,6 +156,7 @@ export default function NeedAndRegulationSection() {
   const leftPanelRef  = useRef<HTMLDivElement>(null)
   const rightPanelRef = useRef<HTMLDivElement>(null)
   const counterRef    = useRef<HTMLSpanElement>(null)
+  const widgetRef     = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const prevPhaseRef  = useRef<Phase>('idle-1')
 
@@ -238,6 +240,7 @@ export default function NeedAndRegulationSection() {
       // Forward: slide out → grow circle → show state 2
       setPhase('exiting')
       requestAnimationFrame(() => setCircleTarget(C2))
+      if (widgetRef.current) gsap.to(widgetRef.current, { x: 120, opacity: 0, duration: ANIM / 1000 * 0.8, ease: 'power2.in' })
       setTimeout(() => setPhase('idle-2'), ANIM)
     } else if (phase === 'idle-2') {
       // Reverse: mount elements off-screen, then slide back in + shrink circle
@@ -246,6 +249,7 @@ export default function NeedAndRegulationSection() {
       requestAnimationFrame(() => requestAnimationFrame(() => {
         setPhase('entering')
         setCircleTarget(C1)
+        if (widgetRef.current) gsap.to(widgetRef.current, { x: 0, opacity: 1, duration: ANIM / 1000 * 0.8, ease: 'power3.out', delay: 0.1 })
       }))
       setTimeout(() => setPhase('idle-1'), ANIM)
     }
@@ -428,6 +432,14 @@ export default function NeedAndRegulationSection() {
         </div>
       )}
 
+      <InsightsWidget
+        position="bottom-right"
+        visibleCards={['/post-quantum/1', '/blog/5', '/blog/8']}
+        sectionRef={sectionRef}
+        bottomOffset="7%"
+        widgetRef={widgetRef}
+        scrollBackTo="snap-gap"
+      />
     </section>
   )
 }

@@ -8,6 +8,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import InsightsWidget from '../InsightsWidget/InsightsWidget'
 
 const LABEL_STYLE: React.CSSProperties = {
   fontFamily: "'D-DINCondensed', sans-serif",
@@ -665,6 +666,13 @@ export default function MADPPSection() {
         </div>
 
       </div>
+      <InsightsWidget
+        position="bottom-left"
+        visibleCards={['/agentic-ai/1', '/supply-chain-finance/1', '/carbon-footprint/1']}
+        sectionRef={wrapperRef as React.RefObject<HTMLElement>}
+        fixed
+        scrollBackTo="snap-madpp-0"
+      />
     </div>
   )
 }

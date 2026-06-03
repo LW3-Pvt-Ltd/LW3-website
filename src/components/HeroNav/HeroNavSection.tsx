@@ -345,7 +345,7 @@ export default function HeroNavSection() {
 
       {/* ── About sub-items ── */}
       {ABOUT_SUBS.map(({ text, top, target }) => (
-        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) openBookDemo(); else if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3'); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) openBookDemo(); else if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
       ))}
 
     </section>

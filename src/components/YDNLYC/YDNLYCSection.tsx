@@ -11,6 +11,7 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
+import InsightsWidget from '../InsightsWidget/InsightsWidget'
 
 const SL = (t: string) => t.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)
 
@@ -156,6 +157,12 @@ export default function YDNLYCSection() {
       >
         BOOK A DEMO
       </button>
+      <InsightsWidget
+        position="bottom-right"
+        visibleCards={['/post-quantum/1', '/phygital-iot/1', '/near-zero-carbon/1']}
+        sectionRef={sectionRef}
+        scrollBackTo="snap-ydnlyc"
+      />
     </section>
   )
 }
