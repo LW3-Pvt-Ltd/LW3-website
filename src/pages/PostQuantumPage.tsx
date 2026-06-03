@@ -81,6 +81,7 @@ export default function PostQuantumPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/post-quantum/1" />
       </div>
     </div>
   )

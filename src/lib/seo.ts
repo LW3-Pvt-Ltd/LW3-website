@@ -148,6 +148,25 @@ export const postQuantumSeo: SEOConfig = {
 
 // ── JSON-LD structured data ───────────────────────────────────────
 
+export function injectWebSiteSchema() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Logistics W3',
+    url: SITE_URL,
+    description: 'LW3 builds post-quantum secure, EU-compliant Battery Passports enabling circular economy and supply chain transparency across the global EV battery lifecycle.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  }
+  injectJsonLd('website-schema', schema)
+}
+
 export function injectOrganisationSchema() {
   const schema = {
     '@context': 'https://schema.org',

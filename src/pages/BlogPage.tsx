@@ -149,6 +149,7 @@ export default function BlogPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <BlogContent />
         </Suspense>
+        <RelatedLinksFooter currentPath={`/blog/${id}`} />
       </div>
     </div>
   )

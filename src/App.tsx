@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useScrollSnap } from './hooks/useScrollSnap'
-import { setSeoMeta, homepageSeo, injectOrganisationSchema } from './lib/seo'
+import { setSeoMeta, homepageSeo, injectOrganisationSchema, injectWebSiteSchema } from './lib/seo'
 import HeroNavSection from './components/HeroNav/HeroNavSection'
 import AltNavbar from './components/AltNav/AltNavbar'
 import NeedAndRegulationSection from './components/NeedAndRegulation/NeedAndRegulationSection'
@@ -54,6 +54,7 @@ function HomePage() {
   useEffect(() => {
     setSeoMeta(homepageSeo)
     injectOrganisationSchema()
+    injectWebSiteSchema()
     const state = location.state as { scrollTo?: string; restoreScrollY?: number } | null
     if (state?.scrollTo) {
       const el = document.getElementById(state.scrollTo)

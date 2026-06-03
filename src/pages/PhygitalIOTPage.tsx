@@ -105,6 +105,7 @@ export default function PhygitalIOTPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/phygital-iot/1" />
       </div>
     </div>
   )

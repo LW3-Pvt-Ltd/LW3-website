@@ -100,6 +100,7 @@ export default function NearZeroCarbonPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/near-zero-carbon/1" />
       </div>
     </div>
   )

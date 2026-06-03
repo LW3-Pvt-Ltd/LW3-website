@@ -81,6 +81,7 @@ export default function CarbonFootprintPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/carbon-footprint/1" />
       </div>
     </div>
   )

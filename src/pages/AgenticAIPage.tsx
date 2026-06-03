@@ -88,6 +88,7 @@ export default function AgenticAIPage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/agentic-ai/1" />
       </div>
     </div>
   )

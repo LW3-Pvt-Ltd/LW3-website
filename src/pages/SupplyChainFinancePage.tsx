@@ -88,6 +88,7 @@ export default function SupplyChainFinancePage() {
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <ArticleContent />
         </Suspense>
+        <RelatedLinksFooter currentPath="/supply-chain-finance/1" />
       </div>
     </div>
   )
