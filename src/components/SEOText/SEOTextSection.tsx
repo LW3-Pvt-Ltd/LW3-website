@@ -133,7 +133,7 @@ export default function SEOTextSection() {
       <div id="core-technology" className="block md:hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '0 20px' }}>
         <button onClick={() => setRegOpen(o => !o)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 0', borderBottom: regOpen ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
           <h3 style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.4)', margin: 0, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Regulatory Alignment</h3>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '20px', transform: regOpen ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>+</span>
+          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '16px', transform: regOpen ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>›</span>
         </button>
         {regOpen && <div style={{ display: 'flex', flexDirection: 'column', paddingBottom: '16px' }}>{REGULATIONS.map(item => <div key={item} style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1, padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item}</div>)}</div>}
       </div>
@@ -142,7 +142,7 @@ export default function SEOTextSection() {
       <div className="block md:hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '0 20px' }}>
         <button onClick={() => setUseCaseOpen(o => !o)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 0', borderBottom: useCaseOpen ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
           <h3 style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.4)', margin: 0, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Use Cases</h3>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '20px', transform: useCaseOpen ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>+</span>
+          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '16px', transform: useCaseOpen ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>›</span>
         </button>
         {useCaseOpen && <div style={{ display: 'flex', flexDirection: 'column', paddingBottom: '16px' }}>{USE_CASES.map(item => <div key={item} style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1, padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item}</div>)}</div>}
       </div>

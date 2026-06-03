@@ -191,7 +191,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
               }}
             >
               {group.label}
-              <span style={{ fontSize: '18px', opacity: 0.5, transform: expanded === group.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>↓</span>
+              <span style={{ fontSize: '16px', opacity: 0.5, transform: expanded === group.label ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }}>›</span>
             </button>
             {expanded === group.label && (
               <div style={{ paddingBottom: '12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -644,7 +644,7 @@ function MobileUYBPCER() {
               fontSize: '15px', letterSpacing: '0.06em', textTransform: 'uppercase',
             }}>
               {f.label}
-              <span style={{ opacity: 0.5, transform: open === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s', fontSize: '20px', flexShrink: 0 }}>+</span>
+              <span style={{ opacity: 0.5, transform: open === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s', fontSize: '20px', flexShrink: 0 }}>›</span>
             </button>
             {open === i && (
               <div style={{ paddingBottom: '14px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -901,7 +901,7 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
             }}
           >
             <span style={{ fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '13px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>{col.heading}</span>
-            <span style={{ fontSize: '18px', color: 'rgba(255,255,255,0.3)', transform: openSection === col.heading ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>+</span>
+            <span style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)', transform: openSection === col.heading ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s ease', lineHeight: 1 }}>›</span>
           </button>
           {openSection === col.heading && (
             <div style={{ padding: '0 24px 16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
