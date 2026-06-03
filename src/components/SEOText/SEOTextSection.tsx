@@ -67,7 +67,7 @@ export default function SEOTextSection() {
     <section style={{ background: '#000', position: 'relative', overflow: 'hidden' }}>
 
       {/* ── Hero block — same on all sizes ── */}
-      <div style={{ padding: 'clamp(28px, 3.5vw, 48px) 8.14% clamp(20px, 2.5vw, 32px)' }}>
+      <div className="pt-0 md:pt-12" style={{ paddingLeft: '8.14%', paddingRight: '8.14%', paddingBottom: 'clamp(20px, 2.5vw, 32px)' }}>
         <p style={{ fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: 'clamp(11px, 0.84vw, 13px)', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', margin: '0 0 clamp(12px, 1.5vw, 20px)' }}>About</p>
         <h2 style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: 'clamp(32px, 4.2vw, 64px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: '#fff', margin: '0 0 clamp(20px, 2.5vw, 36px)', maxWidth: '820px' }}>What is LW3?</h2>
         <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(14px, 1.15vw, 17px)', lineHeight: 1.85, color: 'rgba(255,255,255,0.65)', margin: 0, maxWidth: '680px' }}>
