@@ -70,7 +70,7 @@ export default function RelatedLinksFooter({ currentPath }: { currentPath: strin
       </div>
 
       {/* Mobile: 2 columns with horizontal dividers */}
-      <div className="md:hidden" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+      <div className="md:hidden grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
         {links.map((link, i) => (
           <button
             key={link.path}
