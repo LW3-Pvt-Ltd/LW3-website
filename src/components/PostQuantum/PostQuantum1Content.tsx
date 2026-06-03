@@ -87,7 +87,7 @@ export default function PostQuantum1Content() {
       <header>
       {/* Kicker row */}
       <div style={{ paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: '4px', rowGap: '8px' }}>
           <KickerTag>Post-Quantum</KickerTag>
           <KickerDot />
           <KickerTag>Blockchain</KickerTag>

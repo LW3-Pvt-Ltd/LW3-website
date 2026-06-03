@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { openBookDemo } from '../BookDemo/BookDemoModal'
 import { openContact } from '../Contact/ContactModal'
 import { openBookPilot } from '../BookPilot/BookPilotModal'
@@ -46,7 +46,6 @@ const SECTION: React.CSSProperties = {
   minHeight: '100dvh', background: '#000000', padding: '80px 24px 40px',
   display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
   boxSizing: 'border-box', borderTop: '1px solid rgba(255,255,255,0.2)',
-  scrollSnapAlign: 'start',
 }
 
 // ── Regulation items (hero rotation) ─────────────────────────────────────────
@@ -133,6 +132,7 @@ const BLOGS = [
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo: (id: string) => void }) {
   const [expanded, setExpanded] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   const NAV_GROUPS = [
     {
@@ -157,6 +157,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
     {
       label: 'About',
       items: [
+        { label: 'What is LW3?', id: 'what-is-lw3' },
         { label: 'Awards', id: 'snap-bqegvir' },
         { label: 'Contact us', id: 'contact' },
       ],
@@ -200,6 +201,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
                     onClick={() => {
                       onClose()
                       if (item.id === 'contact') { openContact(); return }
+                      if (item.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
                       scrollTo(item.id)
                       if ('tab' in item && item.tab) openRegulationTab(item.tab)
                     }}
@@ -438,13 +440,14 @@ function MobileNeedReg() {
 // BQEGVIR — Built for the Quantum Era
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileBQEGVIR() {
+  const navigate = useNavigate()
   const TECHNOLOGIES = [
-    { name: 'Phygital Identity', sub: 'IoT Layer' },
-    { name: 'Near Zero Carbon Infrastructure', sub: '' },
-    { name: 'Post Quantum Secure Blockchain', sub: 'PQC Standards' },
-    { name: 'Carbon Footprint Engine', sub: '' },
-    { name: 'Agentic AI', sub: 'Real-time intelligence' },
-    { name: 'Supply Chain Finance', sub: '' },
+    { name: 'Phygital Identity', sub: 'IoT Layer',             path: '/phygital-iot/1' },
+    { name: 'Near Zero Carbon Infrastructure', sub: '',         path: '/near-zero-carbon/1' },
+    { name: 'Post Quantum Secure Blockchain', sub: 'PQC Standards', path: '/post-quantum/1' },
+    { name: 'Carbon Footprint Engine', sub: '',                 path: '/carbon-footprint/1' },
+    { name: 'Agentic AI', sub: 'Real-time intelligence',       path: '/agentic-ai/1' },
+    { name: 'Supply Chain Finance', sub: '',                    path: '/supply-chain-finance/1' },
   ]
   return (
     <div style={{ ...SECTION, minHeight: 'auto', padding: '0', gap: '0', position: 'relative', overflow: 'hidden' }}>
@@ -464,13 +467,14 @@ function MobileBQEGVIR() {
       {/* Technology grid */}
       <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', background: '#000' }}>
         {TECHNOLOGIES.map(t => (
-          <div key={t.name} style={{
+          <button key={t.name} onClick={() => navigate(t.path)} style={{
             border: '1px solid rgba(255,255,255,0.2)', padding: '14px 12px',
             display: 'flex', flexDirection: 'column', gap: '4px',
+            background: 'none', cursor: 'pointer', textAlign: 'left',
           }}>
             <p style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '13px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>{t.name}</p>
             {t.sub && <p style={{ ...LABEL_SM, fontSize: '10px', margin: 0 }}>{t.sub}</p>}
-          </div>
+          </button>
         ))}
       </div>
 
@@ -690,7 +694,6 @@ function MobileYDNLYC() {
 function MobileInsight() {
   return (
     <div style={{
-      scrollSnapAlign: 'start',
       height: '100dvh',
       background: '#000000',
       borderTop: '1px solid rgba(255,255,255,0.2)',
@@ -723,7 +726,7 @@ function MobileInsight() {
                     ))}
                   </div>
                   <p style={{ ...LABEL_SM, marginTop: '8px', marginBottom: '2px' }}>April 2026 · LW3 Insights</p>
-                  <p style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>{b.title}</p>
+                  <h3 style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '16px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>{b.title}</h3>
                   <p style={{ ...BODY, fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>{b.desc}</p>
                   <p style={{ ...LABEL_SM, color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Read more →</p>
                 </div>
@@ -940,7 +943,6 @@ export default function MobileApp() {
         className="mobile-scroll"
         style={{
           height: '100dvh', overflowY: 'scroll',
-          scrollSnapType: 'y mandatory',
           WebkitOverflowScrolling: 'touch',
         }}
       >
@@ -955,6 +957,28 @@ export default function MobileApp() {
         <div id="mobile-snap-partners"><MobilePartners /></div>
         <div id="mobile-snap-battery"><MobileBatteryStory /></div>
         <div id="mobile-snap-footer"><MobileFooter scrollTo={scrollTo} /></div>
+        {/* Invisible SEO links — all 14 pages always in DOM for Google mobile indexing */}
+        <div aria-hidden="true" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}>
+          {[
+            ['/phygital-iot/1', 'Phygital Identity IoT'],
+            ['/near-zero-carbon/1', 'Near Zero Carbon Infrastructure'],
+            ['/agentic-ai/1', 'Agentic AI Intelligence'],
+            ['/supply-chain-finance/1', 'Supply Chain Finance'],
+            ['/carbon-footprint/1', 'Carbon Footprint Engine'],
+            ['/post-quantum/1', 'Post Quantum Secure Blockchain'],
+            ['/blog/1', 'Compliant by Design'],
+            ['/blog/2', 'Programmable Money Meets the Battery Passport'],
+            ['/blog/3', 'The Intelligent Passport'],
+            ['/blog/4', "Green Hydrogen's Digital Product Passport"],
+            ['/blog/5', 'Global Product Traceability Regulations'],
+            ['/blog/6', 'Product Traceability for Food'],
+            ['/blog/7', 'How Traceability Enhances Product Safety'],
+            ['/blog/8', 'Indian Battery Traceability Battery Adhaar'],
+            ['/what-is-lw3', 'What is LW3'],
+          ].map(([path, label]) => (
+            <Link key={path} to={path} tabIndex={-1}>{label}</Link>
+          ))}
+        </div>
       </div>
     </div>
   )

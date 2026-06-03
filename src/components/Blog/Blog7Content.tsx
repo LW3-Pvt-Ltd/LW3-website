@@ -28,7 +28,7 @@ export default function Blog7Content() {
     <article style={{ background: '#000', width: '100%', maxWidth: '1048px', margin: '0 auto', padding: '0', boxSizing: 'border-box', fontFamily: "'D-DIN', sans-serif", color: '#fff' }}>
       <header>
         <div style={{ paddingTop: 'clamp(20px, 3.27vw, 34px)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: '4px', rowGap: '8px' }}>
             <KickerTag>Product Safety</KickerTag>
             <KickerDot />
             <KickerTag>Traceability</KickerTag>

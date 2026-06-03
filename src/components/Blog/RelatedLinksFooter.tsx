@@ -24,41 +24,9 @@ export default function RelatedLinksFooter({ currentPath }: { currentPath: strin
   const navigate = useNavigate()
   const links = ALL_PAGES.filter(p => p.path !== currentPath)
 
-  // Split into 3 columns
-  const col1 = links.slice(0, Math.ceil(links.length / 3))
-  const col2 = links.slice(Math.ceil(links.length / 3), Math.ceil(links.length / 3) * 2)
-  const col3 = links.slice(Math.ceil(links.length / 3) * 2)
+  const handleClick = (path: string) => navigate(path, { state: { from: 'blog', returnTo: currentPath } })
 
-  const linkStyle: React.CSSProperties = {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '0',
-    fontFamily: "'D-DIN', sans-serif",
-    fontSize: 'clamp(11px, 0.94vw, 13px)',
-    color: 'rgba(255,255,255,0.45)',
-    textAlign: 'left',
-    lineHeight: 1.7,
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    transition: 'color 0.2s ease',
-    width: '100%',
-  }
-
-  const renderLinks = (list: typeof links) => list.map(link => (
-    <button
-      key={link.path}
-      onClick={() => navigate(link.path, { state: { from: 'blog', returnTo: currentPath } })}
-      style={linkStyle}
-      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
-    >
-      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0, display: 'inline-block' }} />
-      {link.label}
-    </button>
-  ))
-
+  // Desktop: 3 columns | Mobile: 2 columns with horizontal dividers
   return (
     <div style={{
       borderTop: '1px solid rgba(255,255,255,0.1)',
@@ -76,10 +44,57 @@ export default function RelatedLinksFooter({ currentPath }: { currentPath: strin
       }}>
         More from LW3
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 clamp(24px, 3vw, 48px)' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col1)}</div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col2)}</div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>{renderLinks(col3)}</div>
+
+      {/* Desktop: 3 columns */}
+      <div className="hidden md:grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 clamp(24px, 3vw, 48px)' }}>
+        {[
+          links.slice(0, Math.ceil(links.length / 3)),
+          links.slice(Math.ceil(links.length / 3), Math.ceil(links.length / 3) * 2),
+          links.slice(Math.ceil(links.length / 3) * 2),
+        ].map((col, ci) => (
+          <div key={ci} style={{ display: 'flex', flexDirection: 'column' }}>
+            {col.map(link => (
+              <button
+                key={link.path}
+                onClick={() => handleClick(link.path)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(11px, 0.94vw, 13px)', color: 'rgba(255,255,255,0.45)', textAlign: 'left', lineHeight: 1.7, display: 'flex', alignItems: 'center', gap: '8px', transition: 'color 0.2s ease', width: '100%' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+              >
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', flexShrink: 0, display: 'inline-block' }} />
+                {link.label}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile: 2 columns with horizontal dividers */}
+      <div className="md:hidden" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+        {links.map((link, i) => (
+          <button
+            key={link.path}
+            onClick={() => handleClick(link.path)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              padding: '12px 0',
+              borderTop: i >= 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+              fontFamily: "'D-DIN', sans-serif",
+              fontSize: '12px',
+              color: 'rgba(255,255,255,0.45)',
+              textAlign: 'left',
+              lineHeight: 1.5,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '6px',
+            }}
+          >
+            <span>{link.label}</span>
+            <span style={{ opacity: 0.35, flexShrink: 0, fontSize: '10px' }}>↗</span>
+          </button>
+        ))}
       </div>
     </div>
   )
