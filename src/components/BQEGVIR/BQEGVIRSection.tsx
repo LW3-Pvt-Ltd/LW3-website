@@ -256,7 +256,7 @@ export default function BQEGVIRSection() {
           zIndex: 3,
         }}
       >
-        Feb-2023
+        Feb-2025
       </div>
 
       {/* "Global Startup Pitch Winner" — D-DIN Regular 34px — node 27:1651, far left bottom */}
@@ -526,6 +526,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setCirpassHovered(true)}
           onMouseLeave={() => setCirpassHovered(false)}
+          onClick={() => window.open('https://cirpassproject.eu/', '_blank')}
         />
         {/* Right half of small middle circle [3] — Top 3 Global Cardano Venture Hub */}
         <path
@@ -535,6 +536,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setCardanoHovered(true)}
           onMouseLeave={() => setCardanoHovered(false)}
+          onClick={() => window.open('https://cardanofoundation.org/', '_blank')}
         />
         {/* Left crescent of circle [2] minus circle [3] minus circle [4] — Global Startup Pitch Winner */}
         <path
@@ -545,6 +547,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setGspHovered(true)}
           onMouseLeave={() => setGspHovered(false)}
+          onClick={() => window.open('https://www.prnewswire.com/in/news-releases/algorand-awards-10-000-to-the-winner-of-creating-impact-pitch-competition-for-innovation-in-blockchain-302004296.html', '_blank')}
         />
         {/* Right half of inner lower circle [4] — Forbes DGEMS S200 Cohort */}
         <path
@@ -554,6 +557,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setForbesHovered(true)}
           onMouseLeave={() => setForbesHovered(false)}
+          onClick={() => window.open('https://ms.forbesindia.com/dgems-forbes/select-200-of-2025/', '_blank')}
         />
         {/* Left half of inner lower circle [4] — TechBBQ Copenhagen Top 10 */}
         <path
@@ -563,6 +567,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setTechBbqHovered(true)}
           onMouseLeave={() => setTechBbqHovered(false)}
+          onClick={() => window.open('https://www.linkedin.com/posts/lw3-private-limited_techbbq2025-nordicindia-circulareconomy-activity-7365292411100573696-TM3J/', '_blank')}
         />
         {/* Right crescent of circle [2] minus circle [3] minus circle [4] — India-EU EV Battery Technologies Winner */}
         <path
@@ -573,6 +578,7 @@ export default function BQEGVIRSection() {
           style={{ pointerEvents: 'all', cursor: 'pointer', transition: 'fill 0.25s ease' }}
           onMouseEnter={() => setIndiaEuHovered(true)}
           onMouseLeave={() => setIndiaEuHovered(false)}
+          onClick={() => window.open('https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/six-companies-selected-europe-and-india-during-battery-recycling-technologies-matchmaking-event-2024-07-16_en', '_blank')}
         />
       </svg>
     </section>
