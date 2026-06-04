@@ -112,12 +112,12 @@ const TIMELINE = [
 
 // ── Awards ────────────────────────────────────────────────────────────────────
 const AWARDS = [
-  'Global Startup Pitch Winner',
-  'India-EU EV Battery Technologies Winner',
-  'Forbes DGEMS S200 Cohort',
-  'TechBBQ Copenhagen Top 10',
-  'CIRPASS EU Standardisation',
-  'Top 3 Global Cardano Venture Hub',
+  { label: 'Global Startup Pitch Winner',           href: 'https://www.prnewswire.com/in/news-releases/algorand-awards-10-000-to-the-winner-of-creating-impact-pitch-competition-for-innovation-in-blockchain-302004296.html' },
+  { label: 'India-EU EV Battery Technologies Winner', href: 'https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/six-companies-selected-europe-and-india-during-battery-recycling-technologies-matchmaking-event-2024-07-16_en' },
+  { label: 'Forbes DGEMS S200 Cohort',              href: 'https://ms.forbesindia.com/dgems-forbes/select-200-of-2025/' },
+  { label: 'TechBBQ Copenhagen Top 10',             href: 'https://www.linkedin.com/posts/lw3-private-limited_techbbq2025-nordicindia-circulareconomy-activity-7365292411100573696-TM3J/' },
+  { label: 'CIRPASS EU Standardisation',            href: 'https://cirpassproject.eu/' },
+  { label: 'Top 3 Global Cardano Venture Hub',      href: 'https://cardanofoundation.org/' },
 ]
 
 // ── Blog insights ─────────────────────────────────────────────────────────────
@@ -487,7 +487,7 @@ function MobileBQEGVIR() {
           <h2 style={{ ...H2, fontSize: '20px', margin: 0 }}>Globally Validated, India-Rooted</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {AWARDS.map(a => (
-              <span key={a} style={{ ...TEAL_BADGE, fontSize: '11px', padding: '4px 10px' }}>{a}</span>
+              <a key={a.label} href={a.href} target="_blank" rel="noopener noreferrer" style={{ ...TEAL_BADGE, fontSize: '11px', padding: '4px 10px', textDecoration: 'none', cursor: 'pointer' }}>{a.label}</a>
             ))}
           </div>
         </div>
