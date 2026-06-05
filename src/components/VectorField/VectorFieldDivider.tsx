@@ -1,21 +1,27 @@
 import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 // VectorFieldDivider — full-width minus site side padding (8.14% each side)
-// Height = 25% of inner width (1:4 ratio)
-// White dashes on black, mouse-reactive
+// Height = 25% of inner width. Rectangle vector field matching VectorFieldInline.
 
-const SIDE_PAD_PCT = 0.0814   // matches site's 8.14% padding
-const COLS = 48               // horizontal grid density
-const LINE_LEN_RATIO = 0.38   // dash length as fraction of cell size
-const LINE_WIDTH = 1.2
-const BASE_ANGLE = 0          // default angle (horizontal)
-const INFLUENCE_RADIUS_RATIO = 0.35  // mouse influence as fraction of canvas width
+const SIDE_PAD_PCT = 0.0814
+const COLS = 36
+const ROWS = 10
+const HALF_W = 0.38              // half-length (wide axis, fraction of cellW)
+const HALF_H = 0.07              // half-thickness (narrow axis, fraction of cellW)
+const MIN_SCALE = 0.15
+const LERP = 0.08
+const INFLUENCE_RADIUS_RATIO = 0.6
 
 export default function VectorFieldDivider() {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef    = useRef<HTMLCanvasElement>(null)
   const mouseRef     = useRef<{ x: number; y: number } | null>(null)
-  const rafRef       = useRef<number>(0)
+  const anglesRef    = useRef<Float32Array | null>(null)
+  const targetsRef   = useRef<Float32Array | null>(null)
+  const scalesRef    = useRef<Float32Array | null>(null)
+  const tScalesRef   = useRef<Float32Array | null>(null)
+  const dimsRef      = useRef({ w: 0, h: 0, cellW: 0 })
 
   useEffect(() => {
     const container = containerRef.current
@@ -23,66 +29,94 @@ export default function VectorFieldDivider() {
     if (!container || !canvas) return
 
     const ctx = canvas.getContext('2d')!
-    let w = 0, h = 0, cellW = 0, cellH = 0, rows = 0
 
     function resize() {
-      w = container!.offsetWidth
-      h = Math.round(w * 0.25)
+      const w     = container!.offsetWidth
+      const cellW = w / COLS
+      const h     = Math.round(ROWS * cellW)
+
       canvas!.width  = w
       canvas!.height = h
       container!.style.height = h + 'px'
-      cellW = w / COLS
-      rows  = Math.ceil(h / cellW)
-      cellH = cellW
+
+      dimsRef.current = { w, h, cellW }
+
+      const count = COLS * ROWS
+      anglesRef.current  = new Float32Array(count)
+      targetsRef.current = new Float32Array(count)
+      scalesRef.current  = new Float32Array(count).fill(1)
+      tScalesRef.current = new Float32Array(count).fill(1)
     }
 
     function draw() {
-      ctx.clearRect(0, 0, w, h)
-      ctx.strokeStyle = 'rgba(255,255,255,0.7)'
-      ctx.lineWidth   = LINE_WIDTH
-      ctx.lineCap     = 'round'
+      const { w, h, cellW } = dimsRef.current
+      if (!w) return
 
-      const mouse        = mouseRef.current
-      const influenceR   = w * INFLUENCE_RADIUS_RATIO
-      const halfLen      = (cellW * LINE_LEN_RATIO) / 2
+      const angles  = anglesRef.current!
+      const targets = targetsRef.current!
+      const scales  = scalesRef.current!
+      const tScales = tScalesRef.current!
+      const mouse   = mouseRef.current
+      const influenceR = w * INFLUENCE_RADIUS_RATIO
+      const hwBase  = cellW * HALF_W
+      const hh      = cellW * HALF_H
 
       for (let col = 0; col < COLS; col++) {
-        for (let row = 0; row < rows; row++) {
-          const cx = (col + 0.5) * cellW
-          const cy = (row + 0.5) * cellH
-
-          let angle = BASE_ANGLE
+        for (let row = 0; row < ROWS; row++) {
+          const idx = col * ROWS + row
+          const cx  = (col + 0.5) * cellW
+          const cy  = (row + 0.5) * cellW
 
           if (mouse) {
             const dx   = cx - mouse.x
             const dy   = cy - mouse.y
             const dist = Math.sqrt(dx * dx + dy * dy)
             if (dist < influenceR) {
-              const targetAngle = Math.atan2(dy, dx)
-              const blend       = 1 - dist / influenceR
-              angle = BASE_ANGLE + (targetAngle - BASE_ANGLE) * blend
+              const blend = 1 - dist / influenceR
+              targets[idx] = Math.atan2(dy, dx) * blend
+              tScales[idx] = 1 - blend * (1 - MIN_SCALE)
+            } else {
+              targets[idx] = 0
+              tScales[idx] = 1
             }
+          } else {
+            targets[idx] = 0
+            tScales[idx] = 1
           }
 
-          const cos = Math.cos(angle)
-          const sin = Math.sin(angle)
+          let diff = targets[idx] - angles[idx]
+          if (diff >  Math.PI) diff -= 2 * Math.PI
+          if (diff < -Math.PI) diff += 2 * Math.PI
+          angles[idx] += diff * LERP
 
-          ctx.beginPath()
-          ctx.moveTo(cx - cos * halfLen, cy - sin * halfLen)
-          ctx.lineTo(cx + cos * halfLen, cy + sin * halfLen)
-          ctx.stroke()
+          scales[idx] += (tScales[idx] - scales[idx]) * LERP
         }
       }
 
-      rafRef.current = requestAnimationFrame(draw)
+      ctx.clearRect(0, 0, w, h)
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth   = 1.0
+
+      for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+          const idx = col * ROWS + row
+          const cx  = (col + 0.5) * cellW
+          const cy  = (row + 0.5) * cellW
+          const a   = angles[idx]
+          const hw  = hwBase * scales[idx]
+
+          ctx.save()
+          ctx.translate(cx, cy)
+          ctx.rotate(a)
+          ctx.strokeRect(-hw, -hh, hw * 2, hh * 2)
+          ctx.restore()
+        }
+      }
     }
 
     function onMouseMove(e: MouseEvent) {
       const rect = canvas!.getBoundingClientRect()
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      }
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
 
     function onMouseLeave() {
@@ -90,7 +124,7 @@ export default function VectorFieldDivider() {
     }
 
     resize()
-    draw()
+    gsap.ticker.add(draw)
 
     const ro = new ResizeObserver(resize)
     ro.observe(container)
@@ -98,7 +132,7 @@ export default function VectorFieldDivider() {
     canvas.addEventListener('mouseleave', onMouseLeave)
 
     return () => {
-      cancelAnimationFrame(rafRef.current)
+      gsap.ticker.remove(draw)
       ro.disconnect()
       canvas.removeEventListener('mousemove', onMouseMove)
       canvas.removeEventListener('mouseleave', onMouseLeave)
@@ -115,10 +149,7 @@ export default function VectorFieldDivider() {
       }}
     >
       <div ref={containerRef} style={{ width: '100%', position: 'relative' }}>
-        <canvas
-          ref={canvasRef}
-          style={{ display: 'block', width: '100%', cursor: 'crosshair' }}
-        />
+        <canvas ref={canvasRef} style={{ display: 'block', width: '100%' }} />
       </div>
     </div>
   )
