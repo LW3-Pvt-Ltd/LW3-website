@@ -1,5 +1,7 @@
 // Supply Chain Finance Article 1
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -197,6 +199,7 @@ export default function SupplyChainFinance1Content() {
 
       <Divider />
 
+      <VectorFieldInline />
       <SectionHeading>Blockchain Settlement and Smart Contract Automation</SectionHeading>
       <BodyText>
         LW3's supply chain finance layer uses the same Cardano-based blockchain infrastructure as the rest of the Battery Passport stack. Smart contracts govern payment triggers - for example, releasing funds to a supplier when the Battery Passport records that a shipment has passed a compliance check, or automatically adjusting a credit line when a battery's state-of-health crosses a defined threshold.

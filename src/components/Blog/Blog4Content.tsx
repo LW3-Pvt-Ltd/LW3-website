@@ -1,5 +1,7 @@
 // Blog 4 - "Green Hydrogen's Digital Product Passport: Enhancing Transparency and Sustainability"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(10px, 1.15vw, 12px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '2px', padding: '3px 10px', display: 'inline-block' }}>{children}</span>
@@ -83,6 +85,7 @@ export default function Blog4Content() {
 
       <Divider />
 
+      <VectorFieldInline />
       <SectionHeading>Policy, Regulation, and the Global Push</SectionHeading>
       <BodyText>The European Union is leading the charge in adopting digital product passports as part of its broader push towards a circular economy. The EU promotes these passports to standardise and boost their widespread use, with regulations aiming for consistency across member states. The United States and Japan are also exploring frameworks for digital tools to ensure sustainable production of green hydrogen.</BodyText>
       <BodyText>International bodies are setting guidelines to harmonise standards across borders. Key regulatory areas include standardisation of digital passport formats, data security, and alignment with environmental and industry standards. As demand for green hydrogen grows, certifications backed by digital passports become indispensable for market access.</BodyText>

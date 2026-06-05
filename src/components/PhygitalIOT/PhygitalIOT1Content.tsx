@@ -1,5 +1,7 @@
 // Phygital IOT Article 1 - "Phygital Identity: Bridging the Physical and Digital in Battery Lifecycle Management"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -199,6 +201,7 @@ export default function PhygitalIOT1Content() {
         LW3 embeds NIST-standardised post-quantum cryptographic algorithms (specifically lattice-based schemes from the CRYSTALS family) at the IoT signing layer. This means that even data captured today remains cryptographically valid and tamper-evident decades into the future - critical for batteries with 10-15 year operational lifespans.
       </BodyText>
 
+      <VectorFieldInline />
       <SectionHeading>EU Battery Regulation Compliance Through Phygital IOT</SectionHeading>
       <BodyText>
         The EU Battery Regulation (2023/1542) mandates a Battery Passport for industrial and EV batteries from February 2027. The regulation requires real-time performance data, carbon footprint declarations, recycled content percentages, and supply chain due diligence - all machine-readable and accessible to regulators, recyclers, and second-life operators.

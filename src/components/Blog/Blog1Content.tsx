@@ -2,6 +2,8 @@
 // Pixel-perfect recreation from Figma node 1:720 (canvas: 1048px wide)
 // All sizes expressed as fractions of 1048px → converted to % or em relative to container
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 export default function Blog1Content() {
   // Scaling: Figma canvas = 1048px wide. We render inside a max-1048px container.
   // Font sizes are kept as px values intended for 1048px layout (they scale via the vw container).
@@ -138,6 +140,7 @@ export default function Blog1Content() {
         </HighlightBox>
 
         {/* Section 3 */}
+        <VectorFieldInline />
         <Heading2>LW3's Battery Passport: one solution, two regulatory fronts</Heading2>
         <BodyPara>
           LW3 has engineered its Battery Passport platform at the intersection of these dual mandates. Built on a permissioned blockchain substrate, every battery record is immutably logged, timestamped, and cryptographically signed using NIST-standardised post-quantum algorithms - not as a future upgrade, but as the default architecture today.

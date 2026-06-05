@@ -1,5 +1,7 @@
 // Carbon Footprint Engine Article 1
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -208,6 +210,7 @@ export default function CarbonFootprint1Content() {
 
       <Divider />
 
+      <VectorFieldInline />
       <SectionHeading>On-Chain Anchoring and Verification</SectionHeading>
       <BodyText>
         Every carbon footprint calculation produced by the engine is cryptographically signed and written to the Battery Passport on-chain. The signature covers both the result and the underlying input data references, creating an audit trail that shows exactly what data was used, when the calculation was performed, and by which version of the engine methodology.

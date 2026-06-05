@@ -1,5 +1,7 @@
 // Near Zero Carbon Infrastructure Article 1
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -219,6 +221,7 @@ export default function NearZeroCarbon1Content() {
 
       <Divider />
 
+      <VectorFieldInline />
       <SectionHeading>CIRPASS Alignment and EU Standardisation</SectionHeading>
       <BodyText>
         LW3's carbon infrastructure is built in alignment with the CIRPASS (Common Framework for Circular Product Passport) EU standardisation initiative, in which LW3 participated as a recognised contributor in March 2024. CIRPASS defines the data schema, interoperability standards, and access control requirements for product passports across the EU - including batteries.

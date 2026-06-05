@@ -1,5 +1,7 @@
 // Blog 6 - "Food Traceability: Ensuring Safety & Transparency"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return <span style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(10px, 1.15vw, 12px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '2px', padding: '3px 10px', display: 'inline-block' }}>{children}</span>
 }
@@ -75,6 +77,7 @@ export default function Blog6Content() {
       <BodyText><strong style={{ color: '#fff' }}>Supply chain connectivity:</strong> Seamless communication among supply chain partners enables real-time tracking. Integration with existing systems enhances operational efficiency.</BodyText>
       <BodyText><strong style={{ color: '#fff' }}>Analytics:</strong> Analysing traceability data reveals trends and opportunities for improvement, helping businesses make informed decisions and reduce waste.</BodyText>
 
+      <VectorFieldInline />
       <SectionHeading>Technologies Powering Food Traceability</SectionHeading>
       <BodyText>RFID technology facilitates automatic tracking throughout the product journey, minimising human error. Barcodes provide a cost-effective solution for product identification. Blockchain is becoming a game-changer - its immutable ledger enhances transparency and trust, allowing stakeholders to verify the integrity of each product's journey.</BodyText>
       <BodyText>IoT devices enable real-time monitoring of environmental conditions like temperature during transportation, ensuring products remain in optimal condition. Cloud-based platforms provide accessible data storage and sharing across the supply chain. Together, these technologies make the food supply chain more transparent and reliable.</BodyText>

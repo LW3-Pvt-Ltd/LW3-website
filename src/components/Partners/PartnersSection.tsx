@@ -5,6 +5,7 @@
 
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
+import VectorFieldDivider from '../VectorField/VectorFieldDivider'
 
 export default function PartnersSection() {
   const trackRef   = useRef<HTMLDivElement>(null)
@@ -39,50 +40,53 @@ export default function PartnersSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
-      style={{ aspectRatio: '1905 / 541', background: '#000000', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff' }}
+      className="relative w-full"
+      style={{ background: '#000000', borderTop: '1px solid #ffffff', borderBottom: '1px solid #ffffff' }}
     >
-      {/* Heading */}
-      <div
-        ref={headingRef}
-        style={{
-          position: 'absolute',
-          left: '8.32%',
-          top: '16.82%',
-          fontFamily: "'D-DIN-Bold', sans-serif",
-          fontSize: '3.67vw',
-          lineHeight: 1.05,
-          color: '#ffffff',
-          textTransform: 'uppercase',
-          letterSpacing: '0.01em',
-          zIndex: 2,
-          pointerEvents: 'none',
-        }}
-      >
-        {'Our Partners'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}
-      </div>
-
-      {/* Carousel band */}
-      <div
-        style={{ position: 'absolute', left: 0, right: 0, top: '36.97%', height: '36.41%', overflow: 'hidden' }}
-        onMouseEnter={pause}
-        onMouseLeave={resume}
-      >
+      {/* Main content area \u2014 flexbox with vw-based heights */}
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        {/* Heading */}
         <div
-          ref={trackRef}
-          style={{ display: 'flex', height: '100%', willChange: 'transform' }}
+          ref={headingRef}
+          style={{
+            padding: '2.78vw 0 0 8.32%',
+            fontFamily: "'D-DIN-Bold', sans-serif",
+            fontSize: '3.67vw',
+            lineHeight: 1.05,
+            color: '#ffffff',
+            textTransform: 'uppercase',
+            letterSpacing: '0.01em',
+            pointerEvents: 'none',
+          }}
         >
-          {[0, 1, 2].map(i => (
-            <img
-              key={i}
-              src="/Carousel frame.svg"
-              alt=""
-              draggable={false}
-              style={{ height: '100%', width: 'auto', flexShrink: 0 }}
-            />
-          ))}
+          {'Our Partners'.split('').map((ch, i) => <span key={i} style={{ display: 'inline-block', opacity: 0 }}>{ch === ' ' ? '\u00A0' : ch}</span>)}
+        </div>
+
+        {/* Carousel band \u2014 15.5vw = 50% larger than original 10.34vw */}
+        <div
+          style={{ width: '100%', height: '20vw', overflow: 'hidden' }}
+          onMouseEnter={pause}
+          onMouseLeave={resume}
+        >
+          <div
+            ref={trackRef}
+            style={{ display: 'flex', height: '100%', willChange: 'transform' }}
+          >
+            {[0, 1, 2].map(i => (
+              <img
+                key={i}
+                src="/Carousel frame.svg"
+                alt=""
+                draggable={false}
+                style={{ height: '20vw', width: 'auto', flexShrink: 0, display: 'block' }}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Vector field \u2014 inside Partners, above bottom border */}
+      <VectorFieldDivider />
     </section>
   )
 }

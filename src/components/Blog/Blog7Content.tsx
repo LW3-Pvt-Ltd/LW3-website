@@ -1,5 +1,7 @@
 // Blog 7 - "How Traceability Enhances Product Safety Standards: A Modern Guide"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return <span style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(10px, 1.15vw, 12px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '2px', padding: '3px 10px', display: 'inline-block' }}>{children}</span>
 }
@@ -73,6 +75,7 @@ export default function Blog7Content() {
       <BodyText>Blockchain acts as a decentralised, immutable digital ledger. When a manufacturer records a production event, it enters the blockchain. As the product moves through the supply chain, new blocks are added. Because this information cannot be altered or deleted, it creates a tamper-proof record - the foundation of verifiable product safety.</BodyText>
       <BodyText>IoT devices such as smart sensors monitor temperature, humidity, and conditions in real time. If a sensitive shipment exceeds safe parameters, the IoT sensor alerts the manufacturer immediately - allowing intervention before an unsafe product reaches the consumer. The GS1 global data synchronisation network standardises barcodes and product data worldwide, ensuring that a product scanned in one country registers identical safety data in another.</BodyText>
 
+      <VectorFieldInline />
       <SectionHeading>The Rise of Digital Product Passports</SectionHeading>
       <BodyText>Digital product passport technology is revolutionising how we interact with goods. These digital records travel with the product, accessible via a simple QR code scan. They provide regulators and consumers with comprehensive data on origins, safety certifications, and recycling instructions - drastically reducing the risk of counterfeit or unsafe goods entering the market.</BodyText>
       <BodyText>By authenticating raw material provenance, companies prove their goods are sourced responsibly. Organisations aligning with frameworks like ISO 22005 traceability standards signal a universally recognised baseline of safety and accountability. This level of transparency builds lasting consumer trust - when buyers can scan a product and see its entire history, brand loyalty follows.</BodyText>

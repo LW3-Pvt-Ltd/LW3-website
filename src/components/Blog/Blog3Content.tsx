@@ -1,6 +1,8 @@
 // Blog 3 - "The Intelligent Passport: How Agentic AI Transforms EU Battery Compliance"
 // Pixel-perfect recreation from Figma node 1:888 (canvas: 1048px wide)
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 export default function Blog3Content() {
   return (
     <div
@@ -131,6 +133,7 @@ export default function Blog3Content() {
           </AgentCard>
         </div>
 
+        <VectorFieldInline />
         <Heading2>Why agents, not dashboards</Heading2>
         <BodyPara>
           The distinction matters. A dashboard shows you what has happened. An agent acts on what is happening - and, increasingly, on what is about to happen. When a supplier updates a material certification, the Traceability Agent reconciles it against the passport record and flags discrepancies before they become audit findings. When a battery's capacity drops below a regulatory performance threshold, the Performance Agent updates the passport and triggers the End-of-Life Agent to assess second-life routing. The system operates as an interconnected compliance loop, not a set of siloed reports.

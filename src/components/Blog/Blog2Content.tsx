@@ -1,6 +1,8 @@
 // Blog 2 - "Programmable Money Meets the Battery Passport"
 // Pixel-perfect recreation from Figma node 1:796 (canvas: 1048px wide)
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 export default function Blog2Content() {
   return (
     <div
@@ -126,6 +128,7 @@ export default function Blog2Content() {
           "When the passport and the payment share a single source of truth, financial traceability becomes a feature of compliance - not a separate exercise."
         </PullQuote>
 
+        <VectorFieldInline />
         <Heading2>Smart contract settlement across the supply chain</Heading2>
         <BodyPara>
           The supply chain is where embedded finance creates the most immediate operational lift. A cobalt shipment arrives with a verified due-diligence certificate; the Traceability Agent reconciles it against the passport; the smart contract releases payment in eRupee or USDC the same instant - no invoice cycle, no 60-day terms, no reconciliation overhead. A recycled-content threshold is met; the procurement contract auto-settles. A state-of-health milestone triggers a service-provider performance bonus; it is paid atomically against the telemetry update.

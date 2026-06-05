@@ -1,6 +1,7 @@
 // What is LW3 - desktop unchanged from last commit, mobile-only additions below
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import VectorFieldInline from '../VectorField/VectorFieldInline'
 
 const METRICS = [
   { value: '5',    label: 'Global Recognitions' },
@@ -244,6 +245,11 @@ export default function SEOTextSection() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ── Vector field break before awards ── */}
+      <div style={{ padding: '0 8.14%' }}>
+        <VectorFieldInline />
       </div>
 
       {/* ── Awards strip — same on all sizes ── */}

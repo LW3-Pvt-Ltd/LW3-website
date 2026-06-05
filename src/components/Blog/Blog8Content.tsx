@@ -1,5 +1,7 @@
 // Blog 8 - "Indian Battery Traceability: Battery Adhaar & Regulations"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return <span style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(10px, 1.15vw, 12px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '2px', padding: '3px 10px', display: 'inline-block' }}>{children}</span>
 }
@@ -75,6 +77,7 @@ export default function Blog8Content() {
       <BodyText><strong style={{ color: '#fff' }}>Environmental Protection Regulations:</strong> Push for reduced carbon footprint, encouraging manufacturers to implement traceability to adhere to environmental laws and support sustainability goals.</BodyText>
       <BodyText>Together, these regulations provide a framework for safe, transparent, and responsible battery manufacturing. Indian manufacturers are aligning their processes to meet these increasing demands - and those that do will be better positioned to meet international standards including the EU Battery Regulation.</BodyText>
 
+      <VectorFieldInline />
       <SectionHeading>Technologies Powering Indian Battery Traceability</SectionHeading>
       <BodyText>IoT devices provide real-time tracking and monitoring of battery components throughout the supply chain. Blockchain technology ensures data integrity and transparency - creating immutable records that prove authenticity and origin, preventing counterfeit products from entering the market. Advanced software platforms facilitate seamless data analytics, real-time collection, secure sharing among stakeholders, and automated traceability documentation.</BodyText>
       <BodyText>LW3's post-quantum secure blockchain infrastructure provides Indian manufacturers with a future-proof foundation for battery traceability - securing records against both current and emerging quantum computing threats across 15-year battery lifespans.</BodyText>

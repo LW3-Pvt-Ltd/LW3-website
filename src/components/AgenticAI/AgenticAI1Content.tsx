@@ -1,5 +1,7 @@
 // Agentic AI Intelligence Article 1
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -197,6 +199,7 @@ export default function AgenticAI1Content() {
 
       <Divider />
 
+      <VectorFieldInline />
       <SectionHeading>Post-Quantum Secure Agent Communication</SectionHeading>
       <BodyText>
         Every action taken by an LW3 AI agent is cryptographically signed before being written to the Battery Passport. This creates an auditable, tamper-evident record of every automated decision - who or what made it, when, on the basis of what data, and with what outcome. In the post-quantum security model, these signatures use NIST-standardised lattice-based algorithms, ensuring that the audit trail remains verifiable even as quantum computing advances.

@@ -1,5 +1,7 @@
 // Blog 5 - "Global Product Traceability Regulations: Key Insights"
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return <span style={{ fontFamily: "'D-DIN', sans-serif", fontSize: 'clamp(10px, 1.15vw, 12px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '2px', padding: '3px 10px', display: 'inline-block' }}>{children}</span>
 }
@@ -75,6 +77,7 @@ export default function Blog5Content() {
       <SectionHeading>Asia-Pacific: Evolving Standards</SectionHeading>
       <BodyText>Asia-Pacific traceability standards are quickly evolving. China's Food Safety Law mandates detailed records of food supply chains. Japan's Pharmaceutical Affairs Law ensures traceability and quality control in pharmaceuticals. India's Battery Adhaar (BPAN) framework is establishing digital traceability for the battery sector, aligning with international DPP standards with 80% alignment achieved in pilot deployments.</BodyText>
 
+      <VectorFieldInline />
       <SectionHeading>Technologies Powering Supply Chain Traceability</SectionHeading>
       <BodyText>Blockchain provides an immutable ledger ensuring secure, transparent records. IoT devices deliver real-time data on product conditions and locations. RFID tags enable precise identification throughout the supply chain. AI enhances data analysis to predict trends and improve traceability outcomes. Together, these technologies empower businesses to meet regulatory requirements while reducing costs.</BodyText>
 

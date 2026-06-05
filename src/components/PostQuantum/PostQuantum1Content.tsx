@@ -1,5 +1,7 @@
 // Post Quantum Secure Blockchain Article 1
 
+import VectorFieldInline from '../VectorField/VectorFieldInline'
+
 function KickerTag({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
@@ -217,6 +219,7 @@ export default function PostQuantum1Content() {
         "Post-quantum security is not a future upgrade for LW3 - it is a day-one design requirement. Every Battery Passport signed on the platform is already quantum-resistant."
       </Callout>
 
+      <VectorFieldInline />
       <SectionHeading>Regulatory and Compliance Implications</SectionHeading>
       <BodyText>
         The EU's NIS2 directive and the forthcoming Cyber Resilience Act both push critical infrastructure operators toward post-quantum cryptographic readiness. Battery supply chain data - covering provenance, carbon emissions, financial transactions, and compliance records - falls squarely within the scope of critical data that regulators expect to be secured against emerging threats.
