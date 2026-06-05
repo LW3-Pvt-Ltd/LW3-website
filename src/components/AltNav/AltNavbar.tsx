@@ -135,12 +135,18 @@ export default function AltNavbar({ visible }: Props) {
         }}
       >
         {/* Logo SVG */}
-        <img
-          src="/Latest updated logo.svg"
-          alt="LW3 Logistics W3"
-          draggable={false}
-          style={{ position: 'absolute', left: '8.14vw', top: '50%', transform: 'translateY(-50%)', width: '18.11vw', minWidth: '180px', height: 'auto' }}
-        />
+        <a
+          href="/"
+          onClick={e => { e.preventDefault(); navigate('/') }}
+          style={{ position: 'absolute', left: '8.14vw', top: '50%', transform: 'translateY(-50%)', display: 'inline-block', lineHeight: 0 }}
+        >
+          <img
+            src="/Latest updated logo.svg"
+            alt="LW3 Logistics W3"
+            draggable={false}
+            style={{ width: '18.11vw', minWidth: '180px', height: 'auto' }}
+          />
+        </a>
 
         {/* Nav links */}
         {LINKS.map(({ key, label, left, target }) => (

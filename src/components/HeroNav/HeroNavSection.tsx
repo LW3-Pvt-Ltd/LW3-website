@@ -316,12 +316,18 @@ export default function HeroNavSection() {
       </p>
 
       {/* ── Logo ── */}
-      <img
-        src="/Latest updated logo.svg"
-        alt="LW3 Logistics W3"
-        draggable={false}
-        style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', width: '18.11%', height: 'auto', zIndex: 3 }}
-      />
+      <a
+        href="/"
+        onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+        style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', zIndex: 3, display: 'inline-block', lineHeight: 0 }}
+      >
+        <img
+          src="/Latest updated logo.svg"
+          alt="LW3 Logistics W3"
+          draggable={false}
+          style={{ width: '18.11%', height: 'auto', minWidth: '180px' }}
+        />
+      </a>
 
       {/* ── Nav links (24px, small-caps) ── */}
       {NAV_LINKS.map(({ label, left, target }) => (
