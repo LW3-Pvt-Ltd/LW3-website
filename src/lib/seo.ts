@@ -67,8 +67,8 @@ const BASE_KEYWORDS = 'battery passport, digital product passport, circular econ
 // ── Page SEO configs ──────────────────────────────────────────────
 
 export const homepageSeo: SEOConfig = {
-  title: 'Battery Passport & Digital Product Passport | Logistics W3',
-  description: 'Accelerating Sustainable Traceability. LW3 builds EU-compliant Battery Passports with post-quantum blockchain security, carbon footprint tracking, and agentic AI - enabling circular economy and supply chain transparency.',
+  title: 'Battery Passport | Accelerating Sustainable Traceability | LW3',
+  description: 'Digital Product Passport. Accelerating Sustainable Traceability. LW3 builds EU-compliant Battery Passports with post-quantum blockchain security, carbon footprint tracking, and agentic AI - enabling circular economy and supply chain transparency.',
   canonicalUrl: SITE_URL,
   ogType: 'website',
   keywords: BASE_KEYWORDS,
