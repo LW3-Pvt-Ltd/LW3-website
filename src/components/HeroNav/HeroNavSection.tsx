@@ -319,13 +319,13 @@ export default function HeroNavSection() {
       <a
         href="/"
         onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-        style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', zIndex: 3, display: 'inline-block', lineHeight: 0 }}
+        style={{ position: 'absolute', left: '8.14%', top: '7.53%', transform: 'translateY(-50%)', zIndex: 3, display: 'inline-block', width: '18.11%', lineHeight: 0 }}
       >
         <img
           src="/Latest updated logo.svg"
           alt="LW3 Logistics W3"
           draggable={false}
-          style={{ width: '18.11%', height: 'auto', minWidth: '180px' }}
+          style={{ width: '100%', height: 'auto' }}
         />
       </a>
 
