@@ -180,7 +180,7 @@ export function injectOrganisationSchema() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'hello@lw3.world',
+      email: 'abhijit.pegu@logisticsw3.com',
     },
   }
   injectJsonLd('org-schema', schema)

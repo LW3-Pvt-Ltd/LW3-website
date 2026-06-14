@@ -8,7 +8,7 @@
 // List items: D-DIN Regular 0.68vw, gap 30.59px → top steps of 9.58%
 
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import { openContact } from '../Contact/ContactModal'
 
@@ -79,6 +79,7 @@ const cols = [
     heading: 'About',
     items: [
       { label: 'What is LW3?', target: 'what-is-lw3'   },
+      { label: 'Brand Kit',    target: 'brand'          },
       { label: 'Awards',       target: 'snap-bqegvir-2' },
       { label: 'Regulation',   target: 'snap-gap'       },
       { label: 'Contact us',   target: 'contact'        },
@@ -99,7 +100,16 @@ const TEXT_SM: React.CSSProperties = {
 
 export default function FooterSection() {
   const navigate = useNavigate()
+  const location = useLocation()
   const footerRef = useRef<HTMLElement>(null)
+
+  function goToSection(target: string) {
+    if (location.pathname === '/') {
+      scrollTo(target)
+    } else {
+      navigate('/', { state: { scrollTo: target } })
+    }
+  }
 
   useEffect(() => {
     const el = footerRef.current
@@ -201,7 +211,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else scrollTo(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { navigate('.', { replace: true, state: { restoreScrollY: window.scrollY } }); navigate('/brand'); } else goToSection(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,

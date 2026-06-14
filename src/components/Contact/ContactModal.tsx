@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const LABEL: React.CSSProperties = {
   display: 'block',
@@ -34,6 +34,28 @@ export default function ContactModal() {
   const [organisation, setOrganisation] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const formRef = useRef<HTMLFormElement>(null)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus('sending')
+    try {
+      const res = await fetch('https://formspree.io/f/xqeowwla', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, organisation, subject, message }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setName(''); setEmail(''); setOrganisation(''); setSubject(''); setMessage('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
 
   useEffect(() => {
     const handler = () => setOpen(true)
@@ -93,7 +115,7 @@ export default function ContactModal() {
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }} />
 
         {/* Form */}
-        <form onSubmit={e => e.preventDefault()} style={{ padding: '32px 40px 28px' }}>
+        <form ref={formRef} onSubmit={handleSubmit} style={{ padding: '32px 40px 28px' }}>
 
           {/* Name + Organisation */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
@@ -132,26 +154,41 @@ export default function ContactModal() {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '18px',
-              background: '#f0ede8',
-              border: 'none',
-              borderRadius: '0',
-              fontFamily: "'D-DIN', sans-serif",
-              fontSize: '1rem',
-              color: '#0d0e1a',
-              cursor: 'pointer',
-              marginBottom: '20px',
-            }}
-          >
-            Send message
-          </button>
+          {status === 'success' ? (
+            <div style={{ textAlign: 'center', padding: '20px 0', marginBottom: '20px' }}>
+              <p style={{ fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '1.1rem', color: '#1D9E75', marginBottom: '8px' }}>Message sent.</p>
+              <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>We'll get back to you within one business day.</p>
+            </div>
+          ) : (
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              style={{
+                width: '100%',
+                padding: '18px',
+                background: '#f0ede8',
+                border: 'none',
+                borderRadius: '0',
+                fontFamily: "'D-DIN', sans-serif",
+                fontSize: '1rem',
+                color: '#0d0e1a',
+                cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+                opacity: status === 'sending' ? 0.6 : 1,
+                marginBottom: '20px',
+              }}
+            >
+              {status === 'sending' ? 'Sending...' : 'Send message'}
+            </button>
+          )}
+
+          {status === 'error' && (
+            <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '0.8rem', color: '#FF6663', marginBottom: '12px' }}>
+              Something went wrong. Please try again or email us directly.
+            </p>
+          )}
 
           <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.6, margin: 0 }}>
-            We typically respond within one business day. For urgent matters, reach us directly at hello@logisticsw3.com
+            We typically respond within one business day. For urgent matters, reach us directly at abhijit.pegu@logisticsw3.com
           </p>
         </form>
       </div>

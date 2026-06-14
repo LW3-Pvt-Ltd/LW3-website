@@ -15,6 +15,7 @@ import BQEGVIRSection from './components/BQEGVIR/BQEGVIRSection'
 import BatteryStorySection from './components/BatteryStory/BatteryStorySection'
 import FooterSection from './components/Footer/FooterSection'
 import WhatIsLW3Page from './pages/WhatIsLW3Page'
+import BrandPage from './pages/BrandPage'
 import BlogPage from './pages/BlogPage'
 import PhygitalIOTPage from './pages/PhygitalIOTPage'
 import NearZeroCarbonPage from './pages/NearZeroCarbonPage'
@@ -123,6 +124,7 @@ function App() {
         <Route path="/post-quantum/:id" element={<PostQuantumPage />} />
         <Route path="/post-quantum" element={<PostQuantumPage />} />
         <Route path="/what-is-lw3" element={<WhatIsLW3Page />} />
+        <Route path="/brand" element={<BrandPage />} />
       </Routes>
     </>
   )
