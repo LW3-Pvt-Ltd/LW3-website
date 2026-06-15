@@ -151,9 +151,24 @@ export default function BookDemoPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0A0A08', color: '#ffffff', padding: '48px 24px 64px' }}>
 
-      {/* Logo */}
-      <div style={{ marginBottom: '40px' }}>
-        <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '28px', width: 'auto' }} />
+      {/* Logo + website link */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px' }}>
+        <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '22px', width: 'auto' }} />
+        <a
+          href="https://lw3.world"
+          style={{
+            fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
+            fontSize: '12px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.45)',
+            textDecoration: 'none',
+            border: '1px solid rgba(255,255,255,0.15)',
+            padding: '7px 14px',
+          }}
+        >
+          Visit Website
+        </a>
       </div>
 
       {/* Header */}
