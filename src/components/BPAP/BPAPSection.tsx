@@ -2,8 +2,8 @@
 // Canvas: 1905 × 1026   All positions as % of canvas dimensions
 
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
-import { openBookDemo } from '../BookDemo/BookDemoModal'
 
 const BPAP_LINES = [
   'Material to market visibility',
@@ -30,6 +30,7 @@ function SplitWord({ text, className }: { text: string; className?: string }) {
 }
 
 export default function BPAPSection() {
+  const navigate = useNavigate()
   const [demoHovered, setDemoHovered]   = useState(false)
   const sectionRef  = useRef<HTMLElement>(null)
   const agenticRef  = useRef<HTMLParagraphElement>(null)
@@ -150,7 +151,7 @@ export default function BPAPSection() {
 
       {/* ── "Book a Demo" button ── */}
       <button
-        onClick={openBookDemo}
+        onClick={() => navigate('/book-demo')}
         onMouseEnter={() => setDemoHovered(true)}
         onMouseLeave={() => setDemoHovered(false)}
         style={{

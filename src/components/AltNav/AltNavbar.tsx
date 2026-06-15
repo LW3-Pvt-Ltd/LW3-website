@@ -4,8 +4,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { openBookDemo } from '../BookDemo/BookDemoModal'
-import { openContact } from '../Contact/ContactModal'
 import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
 
 function useScrollTo() {
@@ -21,10 +19,11 @@ function useScrollTo() {
 }
 
 function BookDemoBtn() {
+  const navigate = useNavigate()
   const [hovered, setHovered] = useState(false)
   return (
     <button
-      onClick={openBookDemo}
+      onClick={() => navigate('/book-demo')}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -198,8 +197,8 @@ export default function AltNavbar({ visible }: Props) {
               onClick={(e) => {
                 e.preventDefault()
                 setActive(null)
-                if (target === null) openBookDemo()
-                else if (target === 'contact') openContact()
+                if (target === null) navigate('/book-demo')
+                else if (target === 'contact') navigate('/contact')
                 else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } })
                 else {
                   scrollTo(target)

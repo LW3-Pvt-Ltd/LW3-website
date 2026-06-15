@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { openContact } from '../Contact/ContactModal'
 
 const BODY: React.CSSProperties = {
   fontFamily: "'D-DIN', sans-serif",
@@ -40,7 +39,7 @@ export default function MobileFooter() {
   const navigate = useNavigate()
 
   function handleItem(id: string) {
-    if (id === 'contact') { openContact(); return }
+    if (id === 'contact') { navigate('/contact'); return }
     if (id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
     if (id === 'brand') { navigate('/brand'); return }
     sessionStorage.setItem('returnScrollY', '0')

@@ -7,8 +7,8 @@
 // Button (Front-CTA): x=156,y=944,w=438,h=67 → left=8.19%, top=89.14%, w=22.99%, h=6.33%
 
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
-import { openBookPilot } from '../BookPilot/BookPilotModal'
 
 const BOX_STYLE: React.CSSProperties = {
   position: 'absolute',
@@ -30,11 +30,12 @@ const boxes = [
 ]
 
 function BookPilotBtn() {
+  const navigate = useNavigate()
   const [hovered, setHovered] = useState(false)
   return (
     <a
       href="#"
-      onClick={e => { e.preventDefault(); openBookPilot() }}
+      onClick={e => { e.preventDefault(); navigate('/book-pilot') }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

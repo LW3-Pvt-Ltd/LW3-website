@@ -17,6 +17,8 @@ import FooterSection from './components/Footer/FooterSection'
 import WhatIsLW3Page from './pages/WhatIsLW3Page'
 import BrandPage from './pages/BrandPage'
 import BookDemoPage from './pages/BookDemoPage'
+import ContactPage from './pages/ContactPage'
+import BookPilotPage from './pages/BookPilotPage'
 import BlogPage from './pages/BlogPage'
 import PhygitalIOTPage from './pages/PhygitalIOTPage'
 import NearZeroCarbonPage from './pages/NearZeroCarbonPage'
@@ -133,6 +135,8 @@ function App() {
         <Route path="/what-is-lw3" element={<WhatIsLW3Page />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/book-demo" element={<BookDemoPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/book-pilot" element={<BookPilotPage />} />
       </Routes>
     </>
   )

@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { openBookDemo } from '../BookDemo/BookDemoModal'
-import { openContact } from '../Contact/ContactModal'
-import { openBookPilot } from '../BookPilot/BookPilotModal'
 import { openRegulationTab } from '../NeedAndRegulation/NeedAndRegulationSection'
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
@@ -201,7 +198,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
                     key={item.label}
                     onClick={() => {
                       onClose()
-                      if (item.id === 'contact') { openContact(); return }
+                      if (item.id === 'contact') { navigate('/contact'); return }
                       if (item.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
                       if (item.id === 'brand') { navigate('/brand'); return }
                       scrollTo(item.id)
@@ -224,8 +221,8 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
 
       {/* Bottom CTAs */}
       <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px', flexShrink: 0 }}>
-        <button onClick={() => { onClose(); openBookDemo() }} style={{ ...CTA_FILLED, fontSize: '14px' }}>Book a Demo</button>
-        <button onClick={() => { onClose(); openContact() }} style={{ ...CTA, fontSize: '14px' }}>Contact Us</button>
+        <button onClick={() => { onClose(); navigate('/book-demo') }} style={{ ...CTA_FILLED, fontSize: '14px' }}>Book a Demo</button>
+        <button onClick={() => { onClose(); navigate('/contact') }} style={{ ...CTA, fontSize: '14px' }}>Contact Us</button>
       </div>
     </div>
   )
@@ -261,6 +258,7 @@ function MobileNavBar({ onMenu }: { onMenu: () => void }) {
 // HERO
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileHero() {
+  const navigate = useNavigate()
   const [regIdx, setRegIdx] = useState(0)
   const [typed, setTyped] = useState('')
   const TYPING = ['Post Quantum Secured', 'Agentic AI']
@@ -310,8 +308,8 @@ function MobileHero() {
           Digital compliance infrastructure to issue, manage & verify battery passports to meet Global Battery Regulation requirements.
         </p>
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
-          <button onClick={openBookDemo} style={{ ...CTA_FILLED, width: 'auto', padding: '14px 28px', fontSize: '13px' }}>Book a Demo</button>
-          <button onClick={openContact} style={{ ...CTA, width: 'auto', padding: '14px 24px', fontSize: '13px' }}>Contact Us</button>
+          <button onClick={() => navigate('/book-demo')} style={{ ...CTA_FILLED, width: 'auto', padding: '14px 28px', fontSize: '13px' }}>Book a Demo</button>
+          <button onClick={() => navigate('/contact')} style={{ ...CTA, width: 'auto', padding: '14px 24px', fontSize: '13px' }}>Contact Us</button>
         </div>
       </div>
     </div>
@@ -502,6 +500,7 @@ function MobileBQEGVIR() {
 // MADPP — tabs (MADPP / RTWF / DDAt)
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileMADPP() {
+  const navigate = useNavigate()
   const [active, setActive] = useState(0)
   const tab = MADPP_TABS[active]
   return (
@@ -570,7 +569,7 @@ function MobileMADPP() {
           <p style={{ ...BODY, fontSize: '12px', color: 'rgba(255,255,255,0.5)', flexShrink: 0 }}>{tab.note}</p>
         )}
 
-        <button onClick={openBookDemo} style={CTA}>Book a Demo</button>
+        <button onClick={() => navigate('/book-demo')} style={CTA}>Book a Demo</button>
       </div>
     </div>
   )
@@ -580,6 +579,7 @@ function MobileMADPP() {
 // UYBPCER — Understand Your Battery Passport Compliance Effort Reduction
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileUYBPCER() {
+  const navigate = useNavigate()
   const features = [
     {
       label: 'For EUBR Compliance',
@@ -658,7 +658,7 @@ function MobileUYBPCER() {
           </div>
         ))}
       </div>
-      <button onClick={openBookDemo} style={{ ...CTA, position: 'relative', zIndex: 1 }}>Book a Demo</button>
+      <button onClick={() => navigate('/book-demo')} style={{ ...CTA, position: 'relative', zIndex: 1 }}>Book a Demo</button>
     </div>
   )
 }
@@ -667,6 +667,7 @@ function MobileUYBPCER() {
 // YDNLYC — Your Data Never Leaves Your Control
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileYDNLYC() {
+  const navigate = useNavigate()
   return (
     <div style={{ ...SECTION, position: 'relative', overflow: 'hidden' }}>
       <img src="/YDNLYC background.webp" alt="" draggable={false}
@@ -685,7 +686,7 @@ function MobileYDNLYC() {
           ))}
         </div>
       </div>
-      <button onClick={openBookDemo} style={{ ...CTA, position: 'relative', zIndex: 1 }}>Book a Demo</button>
+      <button onClick={() => navigate('/book-demo')} style={{ ...CTA, position: 'relative', zIndex: 1 }}>Book a Demo</button>
     </div>
   )
 }
@@ -745,6 +746,7 @@ function MobileInsight() {
 // BPAP — Agentic Battery Passport
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileBPAP() {
+  const navigate = useNavigate()
   const features = [
     'Material to market visibility',
     'Structured compliance records',
@@ -774,7 +776,7 @@ function MobileBPAP() {
         ))}
       </div>
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '12px' }}>
-        <button onClick={openBookDemo} style={{ ...CTA_FILLED, flex: 1 }}>Book a Demo</button>
+        <button onClick={() => navigate('/book-demo')} style={{ ...CTA_FILLED, flex: 1 }}>Book a Demo</button>
       </div>
     </div>
   )
@@ -819,6 +821,7 @@ function MobilePartners() {
 // BATTERY STORY
 // ══════════════════════════════════════════════════════════════════════════════
 function MobileBatteryStory() {
+  const navigate = useNavigate()
   const boxes = [
     { label: 'Upstream', sub: 'Supply Chain Due Diligence' },
     { label: 'Midstream', sub: 'Battery Passport EU Central Registry' },
@@ -843,7 +846,7 @@ function MobileBatteryStory() {
           </div>
         ))}
       </div>
-      <button onClick={openBookPilot} style={{ ...CTA_FILLED, position: 'relative', zIndex: 1 }}>Book a Pilot</button>
+      <button onClick={() => navigate('/book-pilot')} style={{ ...CTA_FILLED, position: 'relative', zIndex: 1 }}>Book a Pilot</button>
     </div>
   )
 }
@@ -912,7 +915,7 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
                 <button
                   key={it.label}
                   onClick={() => {
-                    if (it.id === 'contact') { openContact(); return }
+                    if (it.id === 'contact') { navigate('/contact'); return }
                     if (it.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
                     if (it.id === 'brand') { navigate('/brand'); return }
                     scrollTo(it.id)
