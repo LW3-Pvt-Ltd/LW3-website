@@ -1,7 +1,0 @@
-name: hammerhead-app
-static_sites:
-- source_dir: dist
-  envs:
-    NO_CACHE: "true"
-  http_paths:
-    /: index.html
