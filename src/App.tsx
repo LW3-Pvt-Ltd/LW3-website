@@ -56,6 +56,12 @@ function HomePage() {
     setSeoMeta(homepageSeo)
     injectOrganisationSchema()
     injectWebSiteSchema()
+    const returnY = sessionStorage.getItem('returnScrollY')
+    if (returnY !== null) {
+      sessionStorage.removeItem('returnScrollY')
+      requestAnimationFrame(() => window.scrollTo(0, parseInt(returnY)))
+      return
+    }
     const state = location.state as { scrollTo?: string; restoreScrollY?: number } | null
     if (state?.scrollTo) {
       const el = document.getElementById(state.scrollTo)

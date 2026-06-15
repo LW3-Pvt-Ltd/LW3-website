@@ -87,8 +87,8 @@ const cols = [
   },
 ]
 
-// List item y positions (abs y on canvas): 103.5, 134.09, 164.69, 195.28
-const ITEM_TOPS = ['32.43%', '42.01%', '51.60%', '61.18%']
+// List item y positions (abs y on canvas): 103.5, 134.09, 164.69, 195.28, 225.87
+const ITEM_TOPS = ['32.43%', '42.01%', '51.60%', '61.18%', '70.76%']
 
 const TEXT_SM: React.CSSProperties = {
   position: 'absolute',
@@ -211,7 +211,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { navigate('.', { replace: true, state: { restoreScrollY: window.scrollY } }); navigate('/brand'); } else goToSection(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') openContact(); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { sessionStorage.setItem('returnScrollY', String(window.scrollY)); navigate('/brand'); } else goToSection(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,
