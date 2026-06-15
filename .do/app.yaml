@@ -1,0 +1,6 @@
+name: lw3-business-site
+static_sites:
+  - name: lw3-business-site
+    build_command: pnpm run build
+    output_dir: dist
+    catchall_document: index.html
