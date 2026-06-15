@@ -25,21 +25,18 @@ const REGULATION_ITEMS = [
 
 // ── BOOK A DEMO button ────────────────────────────────────────────────────
 function BookDemoBtn() {
-  const [hovered, setHovered] = useState(false)
   return (
     <button
       onClick={openBookDemo}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         position: 'absolute',
         left: '8.14%',
         top: '78.76%',
         width: '11.02%',
         height: '5.42%',
-        border: '1px solid #ffffff',
-        background: hovered ? '#ffffff' : 'transparent',
-        color: hovered ? '#000000' : '#ffffff',
+        border: 'none',
+        background: '#FF6663',
+        color: '#ffffff',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -50,7 +47,6 @@ function BookDemoBtn() {
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
         cursor: 'pointer',
-        transition: 'background 0.2s ease, color 0.2s ease',
         zIndex: 2,
       }}
     >
