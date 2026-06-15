@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useState, useEffect } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
 import FooterSection from '../components/Footer/FooterSection'
+import MobileFooter from '../components/Mobile/MobileFooter'
 import { setSeoMeta } from '../lib/seo'
 
 const seo = {
@@ -13,7 +14,16 @@ const seo = {
 }
 
 // ── Color swatch component ───────────────────────────────────────────────────
-function ColorSwatch({ c }: { c: { name: string; hex: string; bg: string } }) {
+function ColorSwatch({ c, mobile }: { c: { name: string; hex: string; bg: string }; mobile?: boolean }) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy() {
+    navigator.clipboard.writeText(c.hex).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    })
+  }
+
   return (
     <div>
       <div style={{
@@ -21,8 +31,10 @@ function ColorSwatch({ c }: { c: { name: string; hex: string; bg: string } }) {
         height: '100px',
         background: c.bg,
         borderRadius: '0',
-        border: c.hex === '#FFFFFF' ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(255,255,255,0.04)',
-        marginBottom: '12px',
+        border: mobile
+          ? '2px solid rgba(255,255,255,0.5)'
+          : c.hex === '#FFFFFF' ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(255,255,255,0.04)',
+        marginBottom: mobile ? '3px' : '12px',
       }} />
       <p style={{
         fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif",
@@ -34,24 +46,32 @@ function ColorSwatch({ c }: { c: { name: string; hex: string; bg: string } }) {
         <p style={{
           fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
           fontSize: '12px',
-          color: 'rgba(255,255,255,0.35)',
+          color: copied ? '#1D9E75' : 'rgba(255,255,255,0.35)',
           letterSpacing: '0.06em',
           margin: 0,
-        }}>{c.hex}</p>
+          transition: 'color 0.2s',
+        }}>{copied ? 'Copied!' : c.hex}</p>
         <button
-          onClick={() => navigator.clipboard.writeText(c.hex)}
+          onClick={handleCopy}
           title="Copy hex"
           style={{
             background: 'none', border: 'none', cursor: 'pointer', padding: '4px',
-            color: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', transition: 'color 0.2s',
+            color: copied ? '#1D9E75' : 'rgba(255,255,255,0.3)',
+            display: 'flex', alignItems: 'center', transition: 'color 0.2s',
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#ffffff')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+          onMouseEnter={e => { if (!copied) e.currentTarget.style.color = '#ffffff' }}
+          onMouseLeave={e => { if (!copied) e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}
         >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-          </svg>
+          {copied ? (
+            <svg width={mobile ? '26' : '13'} height={mobile ? '26' : '13'} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          ) : (
+            <svg width={mobile ? '26' : '13'} height={mobile ? '26' : '13'} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+          )}
         </button>
       </div>
     </div>
@@ -178,10 +198,18 @@ const divider: React.CSSProperties = {
 
 export default function BrandPage() {
   const navigate = useNavigate()
+  const [isMobile, setIsMobile] = useState(false)
 
   useLayoutEffect(() => {
     setSeoMeta(seo)
     window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   return (
@@ -382,7 +410,7 @@ export default function BrandPage() {
             marginBottom: '48px',
           }}>
             {BRAND_COLORS.map(c => (
-              <ColorSwatch key={c.hex} c={c} />
+              <ColorSwatch key={c.hex} c={c} mobile={isMobile} />
             ))}
           </div>
 
@@ -409,7 +437,7 @@ export default function BrandPage() {
             gap: '16px',
           }}>
             {STATUS_COLORS.map(c => (
-              <ColorSwatch key={c.hex} c={c} />
+              <ColorSwatch key={c.hex} c={c} mobile={isMobile} />
             ))}
           </div>
         </div>
@@ -547,7 +575,8 @@ export default function BrandPage() {
         </div>
 
       </div>
-      <FooterSection />
+      <div className="hidden md:block"><FooterSection /></div>
+      <div className="md:hidden"><MobileFooter /></div>
     </div>
   )
 }
