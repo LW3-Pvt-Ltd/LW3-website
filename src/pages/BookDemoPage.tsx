@@ -209,7 +209,7 @@ export default function BookDemoPage() {
             opacity: status === 'sending' ? 0.6 : 1, marginTop: '8px',
           }}
         >
-          {status === 'sending' ? 'Sending...' : 'Send inquiry'}
+          {status === 'sending' ? 'Sending...' : 'Book Demo'}
         </button>
       )}
 
@@ -335,7 +335,7 @@ export default function BookDemoPage() {
                   opacity: status === 'sending' ? 0.6 : 1, marginTop: '8px',
                 }}
               >
-                {status === 'sending' ? 'Sending...' : 'Send inquiry'}
+                {status === 'sending' ? 'Sending...' : 'Book Demo'}
               </button>
             )}
             {status === 'error' && (
