@@ -203,7 +203,7 @@ export default function BookDemoPage() {
           type="submit"
           disabled={status === 'sending'}
           style={{
-            width: '100%', padding: '18px', background: '#f0ede8', border: 'none', borderRadius: '0',
+            width: '100%', padding: '18px', background: '#ffffff', border: 'none', borderRadius: '0',
             fontFamily: "'D-DIN', sans-serif", fontSize: '1rem', color: '#0d0e1a',
             cursor: status === 'sending' ? 'not-allowed' : 'pointer',
             opacity: status === 'sending' ? 0.6 : 1, marginTop: '8px',
