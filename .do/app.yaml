@@ -3,4 +3,6 @@ static_sites:
   - name: lw3-business-site
     build_command: pnpm run build
     output_dir: dist
-    catchall_document: index.html
+    routes:
+      - path: /
+    catchall_document: index.html   # ← this is the magic line
