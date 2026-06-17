@@ -555,6 +555,7 @@ export default function BrandPage() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '8px',
               padding: '12px 28px',
               minWidth: '320px',
