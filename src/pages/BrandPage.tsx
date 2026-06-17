@@ -557,6 +557,7 @@ export default function BrandPage() {
               alignItems: 'center',
               gap: '8px',
               padding: '12px 28px',
+              minWidth: '320px',
               border: '1px solid rgba(255,255,255,0.3)',
               borderRadius: '0',
               fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
