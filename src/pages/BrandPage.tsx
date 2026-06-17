@@ -551,7 +551,7 @@ export default function BrandPage() {
             Reach out for custom sizes, formats, or brand partnership enquiries.
           </p>
           <a
-            href="mailto:abhijit.pegu@logisticsw3.com"
+            href="#"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -570,7 +570,7 @@ export default function BrandPage() {
             onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.06)'}
             onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'}
           >
-            abhijit.pegu@logisticsw3.com
+            Reach out
           </a>
         </div>
 

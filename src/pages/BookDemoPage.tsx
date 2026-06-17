@@ -216,7 +216,7 @@ export default function BookDemoPage() {
 
       {status === 'error' && (
         <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: '#FF6663', textAlign: 'center' }}>
-          Something went wrong. Email us at abhijit.pegu@logisticsw3.com
+          Something went wrong. Please try again.
         </p>
       )}
       <WhatsAppButton />
@@ -342,7 +342,7 @@ export default function BookDemoPage() {
             )}
             {status === 'error' && (
               <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: '#FF6663', textAlign: 'center' }}>
-                Something went wrong. Email us at abhijit.pegu@logisticsw3.com
+                Something went wrong. Please try again.
               </p>
             )}
             <WhatsAppButton />

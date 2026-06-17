@@ -188,7 +188,7 @@ export default function ContactModal() {
           )}
 
           <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.6, margin: 0 }}>
-            We typically respond within one business day. For urgent matters, reach us directly at abhijit.pegu@logisticsw3.com
+            We typically respond within one business day.
           </p>
         </form>
       </div>

@@ -111,7 +111,7 @@ export default function ContactPage() {
             fontFamily: "'D-DIN', sans-serif", fontSize: '16px',
             color: 'rgba(255,255,255,0.4)', marginBottom: '48px', lineHeight: 1.6, maxWidth: '520px',
           }}>
-            We typically respond within one business day. For urgent matters, reach us at abhijit.pegu@logisticsw3.com
+            We typically respond within one business day.
           </p>
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginBottom: '40px' }} />
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -148,7 +148,7 @@ export default function ContactPage() {
             {submitBtn}
             {status === 'error' && (
               <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: '#FF6663', textAlign: 'center' }}>
-                Something went wrong. Email us at abhijit.pegu@logisticsw3.com
+                Something went wrong. Please try again.
               </p>
             )}
             <WhatsAppButton />
@@ -225,7 +225,7 @@ export default function ContactPage() {
             {submitBtn}
             {status === 'error' && (
               <p style={{ fontFamily: "'D-DIN', sans-serif", fontSize: '13px', color: '#FF6663', textAlign: 'center' }}>
-                Something went wrong. Email us at abhijit.pegu@logisticsw3.com
+                Something went wrong. Please try again.
               </p>
             )}
             <WhatsAppButton />
