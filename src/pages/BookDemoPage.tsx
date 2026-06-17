@@ -345,6 +345,7 @@ export default function BookDemoPage() {
                 Something went wrong. Email us at abhijit.pegu@logisticsw3.com
               </p>
             )}
+            <WhatsAppButton />
           </form>
         </div>
         <MobileFooter />
