@@ -4,6 +4,7 @@ import { setSeoMeta } from '../lib/seo'
 import AltNavbar from '../components/AltNav/AltNavbar'
 import FooterSection from '../components/Footer/FooterSection'
 import MobileFooter from '../components/Mobile/MobileFooter'
+import WhatsAppButton from '../components/WhatsAppButton'
 
 const seo = {
   title: 'Book a Pilot | LW3 - Logistics W3',
@@ -251,6 +252,7 @@ export default function BookPilotPage() {
                 Something went wrong. Email us at abhijit.pegu@logisticsw3.com
               </p>
             )}
+            <WhatsAppButton />
           </form>
         </div>
         <FooterSection />
@@ -312,6 +314,7 @@ export default function BookPilotPage() {
                 Something went wrong. Email us at abhijit.pegu@logisticsw3.com
               </p>
             )}
+            <WhatsAppButton />
           </form>
         </div>
         <MobileFooter />
