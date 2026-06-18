@@ -138,10 +138,10 @@ export default function BookDemoPage() {
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch('https://formspree.io/f/xqeowwla', {
+      const res = await fetch('/api/submit-form', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name, company, email, role, interest, message }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'Book a Demo', name, company, email, role, interest, message }),
       })
       if (res.ok) {
         setStatus('success')

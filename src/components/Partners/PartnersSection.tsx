@@ -49,7 +49,7 @@ export default function PartnersSection() {
         <div
           ref={headingRef}
           style={{
-            padding: '2.78vw 0 0 8.32%',
+            padding: '3vw 0 0 8.32%',
             fontFamily: "'D-DIN-Bold', sans-serif",
             fontSize: '3.67vw',
             lineHeight: 1.05,
@@ -64,7 +64,7 @@ export default function PartnersSection() {
 
         {/* Carousel band \u2014 15.5vw = 50% larger than original 10.34vw */}
         <div
-          style={{ width: '100%', height: '20vw', overflow: 'hidden' }}
+          style={{ width: '100%', height: '24vw', overflow: 'hidden' }}
           onMouseEnter={pause}
           onMouseLeave={resume}
         >
@@ -78,7 +78,7 @@ export default function PartnersSection() {
                 src="/Carousel frame.svg"
                 alt=""
                 draggable={false}
-                style={{ height: '20vw', width: 'auto', flexShrink: 0, display: 'block' }}
+                style={{ height: '24vw', width: 'auto', flexShrink: 0, display: 'block' }}
               />
             ))}
           </div>
@@ -86,7 +86,9 @@ export default function PartnersSection() {
       </div>
 
       {/* Vector field \u2014 inside Partners, above bottom border */}
-      <VectorFieldDivider />
+      <div style={{ margin: '0.5vw 0 6.33vw 0' }}>
+        <VectorFieldDivider />
+      </div>
     </section>
   )
 }

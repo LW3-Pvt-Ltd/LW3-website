@@ -1,19 +1,6 @@
 // Insight section — SVG background + CSS text overlay
-// Canvas: 1905 × 891
-//
-// Heading:  left=8.14%, top=3.14%, maxW=54.44% — D-DIN Bold 70px → 3.67vw
-//
-// Blog columns (each 635px wide):
-//   Blog 1: left=8.14% (x=155)
-//   Blog 2: left=41.47% (x=790)
-//   Blog 3: left=74.80% (x=1425)
-//
-// Per-blog (y as % of 891):
-//   Kicker tags: y=350–351 → top=39.28–39.39%   w=175px=9.19%  h=25px=2.81%  gap=11px=0.58%
-//   Date:        y=409     → top=45.93%  — D-DIN 16px → 0.84vw
-//   Title:       y=445–464 → top varies  — D-DINCondensed-Bold 32px → 1.68vw
-//   Desc:        y=578     → top=64.91%  — D-DIN 24px → 1.26vw
-//   Button:      y=688     → top=77.22%  — D-DIN 16px
+// Canvas: 1905 × 1059 (increased from 891 for equal top/bottom padding)
+// All % positions recalculated from original 891 canvas scaled to 1059 with equal padding offset
 
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
@@ -121,17 +108,17 @@ export default function InsightSection() {
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[]
     if (!el) return
 
-    gsap.set(el,    { opacity: 0, y: 50 })
-    gsap.set(cards, { opacity: 0, y: 60 })
+    gsap.set(el,    { opacity: 0 })
+    gsap.set(cards, { y: 220, filter: 'brightness(0)' })
 
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        gsap.to(el,    { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
-        gsap.to(cards, { opacity: 1, y: 0, duration: 0.75, stagger: 0.18, ease: 'power3.out', delay: 0.2 })
+        gsap.to(el,    { opacity: 1, duration: 0.7, ease: 'power3.out' })
+        gsap.to(cards, { y: 0, filter: 'brightness(1)', duration: 0.75, stagger: 0.18, ease: 'power3.out', delay: 0.2 })
         if (headingRef.current) gsap.fromTo(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.025, ease: 'power3.out' })
       } else {
-        gsap.set(el,    { opacity: 0, y: 50 })
-        gsap.set(cards, { opacity: 0, y: 60 })
+        gsap.set(el,    { opacity: 0 })
+        gsap.set(cards, { y: 220, filter: 'brightness(0)' })
         if (headingRef.current) gsap.set(Array.from(headingRef.current.querySelectorAll('span')), { y: 30, opacity: 0 })
       }
     }, { threshold: 0.15 })
@@ -141,12 +128,12 @@ export default function InsightSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 891', background: '#000000' }}>
+    <section ref={sectionRef} className="relative w-full" style={{ aspectRatio: '1905 / 1059', background: '#000000', overflow: 'hidden' }}>
       <img
         src="/insight-nobg.svg"
         alt=""
-        className="w-full h-auto block"
         draggable={false}
+        className="w-full h-auto block"
       />
       {/* Heading — D-DIN Bold 70px */}
       <h2
@@ -205,6 +192,7 @@ export default function InsightSection() {
           <ReadMoreBtn left={INNER_LEFT} blogId={blog.id} />
         </div>
       ))}
+
     </section>
   )
 }

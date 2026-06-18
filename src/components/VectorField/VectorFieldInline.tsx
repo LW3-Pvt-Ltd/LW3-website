@@ -1,13 +1,18 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-const COLS = 36
-const ROWS = 10
-const HALF_W = 0.38   // half-length (wide axis)
-const HALF_H = 0.07   // half-thickness (narrow axis)
-const MIN_SCALE = 0.15 // shortest the rectangle gets near cursor (15% of full length)
-const LERP = 0.08
+const COLS                   = 36
+const ROWS                   = 10
+const HALF_W                 = 0.40   // half-length of filled dash
+const HALF_H                 = 0.055  // half-thickness of filled dash
+const MIN_SCALE              = 0.15
+const LERP                   = 0.06
 const INFLUENCE_RADIUS_RATIO = 0.6
+
+// Traveling wave (rope effect)
+const RIPPLE_FREQ  = 1.0    // 1 crest visible across field
+const RIPPLE_SPEED = 0.022  // phase increment per frame
+const RIPPLE_AMP   = Math.PI / 5  // max tilt ≈ 36°
 
 export default function VectorFieldInline() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -15,9 +20,10 @@ export default function VectorFieldInline() {
   const mouseRef     = useRef<{ x: number; y: number } | null>(null)
   const anglesRef    = useRef<Float32Array | null>(null)
   const targetsRef   = useRef<Float32Array | null>(null)
-  const scalesRef    = useRef<Float32Array | null>(null)  // current length scale per cell
-  const tScalesRef   = useRef<Float32Array | null>(null)  // target length scale per cell
+  const scalesRef    = useRef<Float32Array | null>(null)
+  const tScalesRef   = useRef<Float32Array | null>(null)
   const dimsRef      = useRef({ w: 0, h: 0, cellW: 0 })
+  const phaseRef     = useRef(0)
 
   useEffect(() => {
     const container = containerRef.current
@@ -38,7 +44,7 @@ export default function VectorFieldInline() {
       dimsRef.current = { w, h, cellW }
 
       const count = COLS * ROWS
-      anglesRef.current  = new Float32Array(count)       // init at 0
+      anglesRef.current  = new Float32Array(count)
       targetsRef.current = new Float32Array(count)
       scalesRef.current  = new Float32Array(count).fill(1)
       tScalesRef.current = new Float32Array(count).fill(1)
@@ -48,6 +54,8 @@ export default function VectorFieldInline() {
       const { w, h, cellW } = dimsRef.current
       if (!w) return
 
+      phaseRef.current += RIPPLE_SPEED
+
       const angles  = anglesRef.current!
       const targets = targetsRef.current!
       const scales  = scalesRef.current!
@@ -55,7 +63,6 @@ export default function VectorFieldInline() {
       const mouse   = mouseRef.current
       const influenceR = w * INFLUENCE_RADIUS_RATIO
       const hwBase  = cellW * HALF_W
-      const hh      = cellW * HALF_H
 
       for (let col = 0; col < COLS; col++) {
         for (let row = 0; row < ROWS; row++) {
@@ -68,33 +75,31 @@ export default function VectorFieldInline() {
             const dy   = cy - mouse.y
             const dist = Math.sqrt(dx * dx + dy * dy)
             if (dist < influenceR) {
-              const blend = 1 - dist / influenceR
+              const blend  = 1 - dist / influenceR
               targets[idx] = Math.atan2(dy, dx) * blend
-              // scale shrinks to MIN_SCALE at cursor centre
               tScales[idx] = 1 - blend * (1 - MIN_SCALE)
             } else {
-              targets[idx] = 0
+              targets[idx] = Math.sin((col / COLS) * RIPPLE_FREQ * Math.PI * 2 + phaseRef.current) * RIPPLE_AMP
               tScales[idx] = 1
             }
           } else {
-            targets[idx] = 0
+            targets[idx] = Math.sin((col / COLS) * RIPPLE_FREQ * Math.PI * 2 + phaseRef.current) * RIPPLE_AMP
             tScales[idx] = 1
           }
 
-          // Lerp angle (shortest path)
           let diff = targets[idx] - angles[idx]
           if (diff >  Math.PI) diff -= 2 * Math.PI
           if (diff < -Math.PI) diff += 2 * Math.PI
           angles[idx] += diff * LERP
 
-          // Lerp scale
           scales[idx] += (tScales[idx] - scales[idx]) * LERP
         }
       }
 
       ctx.clearRect(0, 0, w, h)
-      ctx.strokeStyle = '#ffffff'
-      ctx.lineWidth   = 1.0
+      ctx.fillStyle = '#ffffff'
+
+      const hh = cellW * HALF_H
 
       for (let col = 0; col < COLS; col++) {
         for (let row = 0; row < ROWS; row++) {
@@ -107,7 +112,7 @@ export default function VectorFieldInline() {
           ctx.save()
           ctx.translate(cx, cy)
           ctx.rotate(a)
-          ctx.strokeRect(-hw, -hh, hw * 2, hh * 2)
+          ctx.fillRect(-hw, -hh, hw * 2, hh * 2)
           ctx.restore()
         }
       }

@@ -56,10 +56,10 @@ export default function ContactPage() {
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch('https://formspree.io/f/xqeowwla', {
+      const res = await fetch('/api/submit-form', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name, email, organisation, subject, message }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'Contact Us', name, email, organisation, subject, message }),
       })
       if (res.ok) {
         setStatus('success')

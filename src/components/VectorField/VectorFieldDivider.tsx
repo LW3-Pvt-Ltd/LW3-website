@@ -1,17 +1,19 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-// VectorFieldDivider — full-width minus site side padding (8.14% each side)
-// Height = 25% of inner width. Rectangle vector field matching VectorFieldInline.
-
-const SIDE_PAD_PCT = 0.0814
-const COLS = 36
-const ROWS = 10
-const HALF_W = 0.38              // half-length (wide axis, fraction of cellW)
-const HALF_H = 0.07              // half-thickness (narrow axis, fraction of cellW)
-const MIN_SCALE = 0.15
-const LERP = 0.08
+const SIDE_PAD_PCT           = 0.0814
+const COLS                   = 36
+const ROWS                   = 9
+const HALF_W                 = 0.40   // half-length of dash (fraction of cellW)
+const HALF_H                 = 0.055  // half-thickness of filled dash
+const MIN_SCALE              = 0.15
+const LERP                   = 0.06
 const INFLUENCE_RADIUS_RATIO = 0.6
+
+// Traveling wave (rope effect)
+const RIPPLE_FREQ  = 1.0          // cycles visible across field — 1 crest traveling
+const RIPPLE_SPEED = 0.022        // phase increment per frame — controls travel speed
+const RIPPLE_AMP   = Math.PI / 5  // max tilt ≈ 36°
 
 export default function VectorFieldDivider() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -22,6 +24,7 @@ export default function VectorFieldDivider() {
   const scalesRef    = useRef<Float32Array | null>(null)
   const tScalesRef   = useRef<Float32Array | null>(null)
   const dimsRef      = useRef({ w: 0, h: 0, cellW: 0 })
+  const phaseRef     = useRef(0)   // raw phase, increases every frame
 
   useEffect(() => {
     const container = containerRef.current
@@ -52,6 +55,9 @@ export default function VectorFieldDivider() {
       const { w, h, cellW } = dimsRef.current
       if (!w) return
 
+      // Advance phase continuously — wave travels right to left
+      phaseRef.current += RIPPLE_SPEED
+
       const angles  = anglesRef.current!
       const targets = targetsRef.current!
       const scales  = scalesRef.current!
@@ -59,7 +65,6 @@ export default function VectorFieldDivider() {
       const mouse   = mouseRef.current
       const influenceR = w * INFLUENCE_RADIUS_RATIO
       const hwBase  = cellW * HALF_W
-      const hh      = cellW * HALF_H
 
       for (let col = 0; col < COLS; col++) {
         for (let row = 0; row < ROWS; row++) {
@@ -72,15 +77,15 @@ export default function VectorFieldDivider() {
             const dy   = cy - mouse.y
             const dist = Math.sqrt(dx * dx + dy * dy)
             if (dist < influenceR) {
-              const blend = 1 - dist / influenceR
+              const blend  = 1 - dist / influenceR
               targets[idx] = Math.atan2(dy, dx) * blend
               tScales[idx] = 1 - blend * (1 - MIN_SCALE)
             } else {
-              targets[idx] = 0
+              targets[idx] = Math.sin((col / COLS) * RIPPLE_FREQ * Math.PI * 2 + phaseRef.current) * RIPPLE_AMP
               tScales[idx] = 1
             }
           } else {
-            targets[idx] = 0
+            targets[idx] = Math.sin((col / COLS) * RIPPLE_FREQ * Math.PI * 2 + phaseRef.current) * RIPPLE_AMP
             tScales[idx] = 1
           }
 
@@ -94,8 +99,9 @@ export default function VectorFieldDivider() {
       }
 
       ctx.clearRect(0, 0, w, h)
-      ctx.strokeStyle = '#ffffff'
-      ctx.lineWidth   = 1.0
+      ctx.fillStyle = '#ffffff'
+
+      const hh = cellW * HALF_H
 
       for (let col = 0; col < COLS; col++) {
         for (let row = 0; row < ROWS; row++) {
@@ -108,7 +114,7 @@ export default function VectorFieldDivider() {
           ctx.save()
           ctx.translate(cx, cy)
           ctx.rotate(a)
-          ctx.strokeRect(-hw, -hh, hw * 2, hh * 2)
+          ctx.fillRect(-hw, -hh, hw * 2, hh * 2)
           ctx.restore()
         }
       }
@@ -143,7 +149,7 @@ export default function VectorFieldDivider() {
     <div
       style={{
         width: '100%',
-        padding: `0 ${SIDE_PAD_PCT * 100}% 40px`,
+        padding: `0 ${SIDE_PAD_PCT * 100}%`,
         background: '#000000',
         boxSizing: 'border-box',
       }}
