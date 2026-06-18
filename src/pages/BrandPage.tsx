@@ -551,7 +551,9 @@ export default function BrandPage() {
             Reach out for custom sizes, formats, or brand partnership enquiries.
           </p>
           <a
-            href="mailto:debrupa@logisticsw3.com"
+            href="https://mail.google.com/mail/?view=cm&to=debrupa@logisticsw3.com"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
