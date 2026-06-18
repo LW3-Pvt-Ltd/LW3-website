@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const WHATSAPP_NUMBER = 'PLACEHOLDER'
+const WHATSAPP_NUMBER = '919629187298'
 
 const WHATSAPP_ICON = (color: string) => (
   <img
