@@ -201,7 +201,7 @@ export default function UYBPCERSection() {
       </span>
       <InsightsWidget
         position="bottom-right"
-        visibleCards={['/phygital-iot/1', '/near-zero-carbon/1', '/blog/4']}
+        visibleCards={['/blog/4/phygital-iot-identity', '/blog/5/near-zero-carbon-structure', '/blog/10/green-hydrogen-digital-product-passport']}
         sectionRef={sectionRef}
         scrollBackTo="snap-uybpcer"
       />

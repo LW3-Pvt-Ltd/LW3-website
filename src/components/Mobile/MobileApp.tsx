@@ -119,9 +119,9 @@ const AWARDS = [
 
 // ── Blog insights ─────────────────────────────────────────────────────────────
 const BLOGS = [
-  { id: '1', title: 'Compliant by design', desc: "How LW3's Battery Passport Meets Europe's Twin Regulatory Frontier", img: '/1 Insight you can act on Data you can trust.webp', tags: ['Regulatory Intelligence', 'Post-Quantum Security'] },
-  { id: '2', title: 'Programmable Money Meets the Battery Passport', desc: 'How eRupee and USDC Unlock Financial Traceability and an EoL Marketplace', img: '/2 Insight you can act on Data you can trust.webp', tags: ['Embedded Finance', 'Battery Passport'] },
-  { id: '3', title: 'The Intelligent Passport', desc: 'How Agentic AI Transforms EU Battery Compliance from Record-Keeping to Real-Time Intelligence', img: '/3 Insight you can act on Data you can trust.webp', tags: ['Agentic AI', 'Battery Regulation'] },
+  { id: '1', slug: 'compliant-by-design', title: 'Compliant by design', desc: "How LW3's Battery Passport Meets Europe's Twin Regulatory Frontier", img: '/1 Insight you can act on Data you can trust.webp', tags: ['Regulatory Intelligence', 'Post-Quantum Security'] },
+  { id: '2', slug: 'programmable-money-battery-passport', title: 'Programmable Money Meets the Battery Passport', desc: 'How eRupee and USDC Unlock Financial Traceability and an EoL Marketplace', img: '/2 Insight you can act on Data you can trust.webp', tags: ['Embedded Finance', 'Battery Passport'] },
+  { id: '3', slug: 'intelligent-passport', title: 'The Intelligent Passport', desc: 'How Agentic AI Transforms EU Battery Compliance from Record-Keeping to Real-Time Intelligence', img: '/3 Insight you can act on Data you can trust.webp', tags: ['Agentic AI', 'Battery Regulation'] },
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -442,12 +442,12 @@ function MobileNeedReg() {
 function MobileBQEGVIR() {
   const navigate = useNavigate()
   const TECHNOLOGIES = [
-    { name: 'Phygital Identity', sub: 'IoT Layer',             path: '/phygital-iot/1' },
-    { name: 'Near Zero Carbon Infrastructure', sub: '',         path: '/near-zero-carbon/1' },
-    { name: 'Post Quantum Secure Blockchain', sub: 'PQC Standards', path: '/post-quantum/1' },
-    { name: 'Carbon Footprint Engine', sub: '',                 path: '/carbon-footprint/1' },
-    { name: 'Agentic AI', sub: 'Real-time intelligence',       path: '/agentic-ai/1' },
-    { name: 'Supply Chain Finance', sub: '',                    path: '/supply-chain-finance/1' },
+    { name: 'Phygital Identity', sub: 'IoT Layer',             path: '/blog/4/phygital-iot-identity' },
+    { name: 'Near Zero Carbon Infrastructure', sub: '',         path: '/blog/5/near-zero-carbon-structure' },
+    { name: 'Post Quantum Secure Blockchain', sub: 'PQC Standards', path: '/blog/8/post-quantum-secure-blockchain' },
+    { name: 'Carbon Footprint Engine', sub: '',                 path: '/blog/9/carbon-footprint-engine' },
+    { name: 'Agentic AI', sub: 'Real-time intelligence',       path: '/blog/6/agentic-ai-intelligence' },
+    { name: 'Supply Chain Finance', sub: '',                    path: '/blog/7/supply-chain-finance' },
   ]
   return (
     <div style={{ ...SECTION, minHeight: 'auto', padding: '0', gap: '0', position: 'relative', overflow: 'hidden' }}>
@@ -710,7 +710,7 @@ function MobileInsight() {
       <div style={{ flex: 1, overflowY: 'auto', padding: '0 24px 40px', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {BLOGS.map((b) => (
-            <Link key={b.id} to={`/blog/${b.id}`} style={{ textDecoration: 'none' }}>
+            <Link key={b.id} to={`/blog/${b.id}/${b.slug}`} style={{ textDecoration: 'none' }}>
               <div style={{
                 border: '1px solid rgba(255,255,255,0.2)',
                 display: 'flex', flexDirection: 'column', overflow: 'hidden',
@@ -1014,20 +1014,20 @@ export default function MobileApp() {
         {/* Invisible SEO links — all 14 pages always in DOM for Google mobile indexing */}
         <div aria-hidden="true" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}>
           {[
-            ['/phygital-iot/1', 'Phygital Identity IoT'],
-            ['/near-zero-carbon/1', 'Near Zero Carbon Infrastructure'],
-            ['/agentic-ai/1', 'Agentic AI Intelligence'],
-            ['/supply-chain-finance/1', 'Supply Chain Finance'],
-            ['/carbon-footprint/1', 'Carbon Footprint Engine'],
-            ['/post-quantum/1', 'Post Quantum Secure Blockchain'],
-            ['/blog/1', 'Compliant by Design'],
-            ['/blog/2', 'Programmable Money Meets the Battery Passport'],
-            ['/blog/3', 'The Intelligent Passport'],
-            ['/blog/4', "Green Hydrogen's Digital Product Passport"],
-            ['/blog/5', 'Global Product Traceability Regulations'],
-            ['/blog/6', 'Product Traceability for Food'],
-            ['/blog/7', 'How Traceability Enhances Product Safety'],
-            ['/blog/8', 'Indian Battery Traceability Battery Adhaar'],
+            ['/blog/1/compliant-by-design', 'Compliant by Design'],
+            ['/blog/2/programmable-money-battery-passport', 'Programmable Money Meets the Battery Passport'],
+            ['/blog/3/intelligent-passport', 'The Intelligent Passport'],
+            ['/blog/4/phygital-iot-identity', 'Phygital Identity IoT'],
+            ['/blog/5/near-zero-carbon-structure', 'Near Zero Carbon Infrastructure'],
+            ['/blog/6/agentic-ai-intelligence', 'Agentic AI Intelligence'],
+            ['/blog/7/supply-chain-finance', 'Supply Chain Finance'],
+            ['/blog/8/post-quantum-secure-blockchain', 'Post Quantum Secure Blockchain'],
+            ['/blog/9/carbon-footprint-engine', 'Carbon Footprint Engine'],
+            ['/blog/10/green-hydrogen-digital-product-passport', "Green Hydrogen's Digital Product Passport"],
+            ['/blog/11/global-product-traceability-regulations', 'Global Product Traceability Regulations'],
+            ['/blog/12/product-traceability-food', 'Product Traceability for Food'],
+            ['/blog/13/traceability-product-safety', 'How Traceability Enhances Product Safety'],
+            ['/blog/14/battery-aadhaar-indian-traceability', 'Battery Aadhaar Indian Battery Traceability'],
             ['/what-is-lw3', 'What is LW3'],
           ].map(([path, label]) => (
             <Link key={path} to={path} tabIndex={-1}>{label}</Link>

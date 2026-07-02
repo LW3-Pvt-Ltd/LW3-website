@@ -12,12 +12,12 @@ const METRICS = [
 ]
 
 const TECH_ARTICLES = [
-  { label: 'Post Quantum Secure Blockchain', path: '/post-quantum/1' },
-  { label: 'Phygital Identity (IoT)',        path: '/phygital-iot/1' },
-  { label: 'Carbon Footprint Engine',        path: '/carbon-footprint/1' },
-  { label: 'Agentic AI Intelligence',        path: '/agentic-ai/1' },
-  { label: 'Near Zero Carbon Infrastructure',path: '/near-zero-carbon/1' },
-  { label: 'Supply Chain Finance',           path: '/supply-chain-finance/1' },
+  { label: 'Post Quantum Secure Blockchain', path: '/blog/8/post-quantum-secure-blockchain' },
+  { label: 'Phygital Identity (IoT)',        path: '/blog/4/phygital-iot-identity' },
+  { label: 'Carbon Footprint Engine',        path: '/blog/9/carbon-footprint-engine' },
+  { label: 'Agentic AI Intelligence',        path: '/blog/6/agentic-ai-intelligence' },
+  { label: 'Near Zero Carbon Infrastructure',path: '/blog/5/near-zero-carbon-structure' },
+  { label: 'Supply Chain Finance',           path: '/blog/7/supply-chain-finance' },
 ]
 
 const REGULATIONS = [

@@ -180,7 +180,7 @@ export default function YDNLYCSection() {
 
 <InsightsWidget
         position="bottom-right"
-        visibleCards={['/post-quantum/1', '/phygital-iot/1', '/near-zero-carbon/1']}
+        visibleCards={['/blog/8/post-quantum-secure-blockchain', '/blog/4/phygital-iot-identity', '/blog/5/near-zero-carbon-structure']}
         sectionRef={sectionRef}
         scrollBackTo="snap-ydnlyc"
       />

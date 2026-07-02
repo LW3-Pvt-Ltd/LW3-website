@@ -668,7 +668,7 @@ export default function MADPPSection() {
       </div>
       <InsightsWidget
         position="bottom-left"
-        visibleCards={['/agentic-ai/1', '/supply-chain-finance/1', '/carbon-footprint/1']}
+        visibleCards={['/blog/6/agentic-ai-intelligence', '/blog/7/supply-chain-finance', '/blog/9/carbon-footprint-engine']}
         sectionRef={wrapperRef as React.RefObject<HTMLElement>}
         fixed
         scrollBackTo="snap-madpp-0"

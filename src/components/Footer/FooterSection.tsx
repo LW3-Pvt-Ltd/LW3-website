@@ -211,7 +211,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { sessionStorage.setItem('returnScrollY', String(window.scrollY)); navigate('/brand'); } else if (target === 'blogs') navigate('/blog/1'); else goToSection(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { sessionStorage.setItem('returnScrollY', String(window.scrollY)); navigate('/brand'); } else if (target === 'blogs') navigate('/blog/1/compliant-by-design'); else goToSection(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,

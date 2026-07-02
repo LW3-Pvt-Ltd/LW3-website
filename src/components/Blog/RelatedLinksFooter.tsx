@@ -4,20 +4,20 @@
 import { useNavigate } from 'react-router-dom'
 
 const ALL_PAGES = [
-  { label: 'Phygital Identity (IoT)',                       path: '/phygital-iot/1' },
-  { label: 'Near Zero Carbon Infrastructure',               path: '/near-zero-carbon/1' },
-  { label: 'Agentic AI Intelligence',                       path: '/agentic-ai/1' },
-  { label: 'Supply Chain Finance',                          path: '/supply-chain-finance/1' },
-  { label: 'Carbon Footprint Engine',                       path: '/carbon-footprint/1' },
-  { label: 'Post Quantum Secure Blockchain',                path: '/post-quantum/1' },
-  { label: 'Compliant by Design',                           path: '/blog/1' },
-  { label: 'Programmable Money Meets the Battery Passport', path: '/blog/2' },
-  { label: 'The Intelligent Passport',                      path: '/blog/3' },
-  { label: "Green Hydrogen's Digital Product Passport",     path: '/blog/4' },
-  { label: 'Global Product Traceability Regulations',       path: '/blog/5' },
-  { label: 'Product Traceability for Food',                 path: '/blog/6' },
-  { label: 'How Traceability Enhances Product Safety',      path: '/blog/7' },
-  { label: 'Indian Battery Traceability: Battery Adhaar',   path: '/blog/8' },
+  { label: 'Compliant by Design',                           path: '/blog/1/compliant-by-design' },
+  { label: 'Programmable Money Meets the Battery Passport', path: '/blog/2/programmable-money-battery-passport' },
+  { label: 'The Intelligent Passport',                      path: '/blog/3/intelligent-passport' },
+  { label: 'Phygital Identity (IoT)',                       path: '/blog/4/phygital-iot-identity' },
+  { label: 'Near Zero Carbon Structure',                    path: '/blog/5/near-zero-carbon-structure' },
+  { label: 'Agentic AI Intelligence',                       path: '/blog/6/agentic-ai-intelligence' },
+  { label: 'Supply Chain Finance',                          path: '/blog/7/supply-chain-finance' },
+  { label: 'Post Quantum Secure Blockchain',                path: '/blog/8/post-quantum-secure-blockchain' },
+  { label: 'Carbon Footprint Engine',                       path: '/blog/9/carbon-footprint-engine' },
+  { label: "Green Hydrogen's Digital Product Passport",     path: '/blog/10/green-hydrogen-digital-product-passport' },
+  { label: 'Global Product Traceability Regulations',       path: '/blog/11/global-product-traceability-regulations' },
+  { label: 'Product Traceability for Food',                 path: '/blog/12/product-traceability-food' },
+  { label: 'How Traceability Enhances Product Safety',      path: '/blog/13/traceability-product-safety' },
+  { label: 'Battery Aadhaar: Indian Battery Traceability',  path: '/blog/14/battery-aadhaar-indian-traceability' },
 ]
 
 export default function RelatedLinksFooter({ currentPath }: { currentPath: string }) {

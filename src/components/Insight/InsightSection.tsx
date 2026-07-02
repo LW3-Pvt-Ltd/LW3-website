@@ -56,7 +56,7 @@ function ReadMoreBtn({ left, blogId }: { left: string; blogId: string }) {
   const [hovered, setHovered] = useState(false)
   return (
     <Link
-      to={`/blog/${blogId}`}
+      to={`/blog/${blogId}/${{'1':'compliant-by-design','2':'programmable-money-battery-passport','3':'intelligent-passport'}[blogId] ?? ''}`}
       state={{ from: 'snap-insight' }}
       style={{
         position: 'absolute',

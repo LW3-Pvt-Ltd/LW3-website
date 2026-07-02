@@ -101,7 +101,7 @@ export const blog3Seo: SEOConfig = {
 export const phygitalIOTSeo: SEOConfig = {
   title: 'Phygital Identity & IoT: Battery Lifecycle Management | LW3',
   description: 'LW3\'s Phygital IOT layer anchors physical battery identity on-chain - tamper-proof, machine-readable, and globally verifiable. Post-quantum secure IoT for digital product passport compliance.',
-  canonicalUrl: `${SITE_URL}/phygital-iot/1`,
+  canonicalUrl: `${SITE_URL}/blog/4/phygital-iot-identity`,
   ogType: 'article',
   keywords: 'phygital identity, IoT, battery passport, product traceability, digital product passport, post-quantum security, product lifecycle management, circular economy',
 }
@@ -109,7 +109,7 @@ export const phygitalIOTSeo: SEOConfig = {
 export const nearZeroCarbonSeo: SEOConfig = {
   title: 'Near Zero Carbon Infrastructure for Battery Supply Chains | LW3',
   description: 'LW3\'s Carbon Infrastructure makes every gram of CO2 in the battery supply chain measurable, attributable, and verifiable - directly inside the EU-compliant Battery Passport.',
-  canonicalUrl: `${SITE_URL}/near-zero-carbon/1`,
+  canonicalUrl: `${SITE_URL}/blog/5/near-zero-carbon-structure`,
   ogType: 'article',
   keywords: 'near zero carbon, carbon footprint, battery supply chain, sustainability reporting, eu green deal, environmentally friendly, circular economy, digital product passport, CIRPASS',
 }
@@ -117,7 +117,7 @@ export const nearZeroCarbonSeo: SEOConfig = {
 export const agenticAISeo: SEOConfig = {
   title: 'Agentic AI Intelligence for Battery Lifecycle Automation | LW3',
   description: 'LW3\'s Agentic AI autonomously monitors compliance, detects anomalies, and routes batteries to second life - continuously, at scale, across the full product lifecycle management system.',
-  canonicalUrl: `${SITE_URL}/agentic-ai/1`,
+  canonicalUrl: `${SITE_URL}/blog/6/agentic-ai-intelligence`,
   ogType: 'article',
   keywords: 'agentic AI, battery AI, product lifecycle management, circular economy, battery compliance, supply chain transparency, digital product passport, automation',
 }
@@ -125,7 +125,7 @@ export const agenticAISeo: SEOConfig = {
 export const supplyChainFinanceSeo: SEOConfig = {
   title: 'Supply Chain Finance Against Verified Battery Passport Data | LW3',
   description: 'LW3 uses verified Battery Passport data to unlock dynamic invoice discounting, asset-backed lending, and supply chain finance - bridging the capital gap in battery supply chains.',
-  canonicalUrl: `${SITE_URL}/supply-chain-finance/1`,
+  canonicalUrl: `${SITE_URL}/blog/7/supply-chain-finance`,
   ogType: 'article',
   keywords: 'supply chain finance, battery passport, supply chain transparency, circular economy, digital product passport, working capital, blockchain, product traceability',
 }
@@ -133,7 +133,7 @@ export const supplyChainFinanceSeo: SEOConfig = {
 export const carbonFootprintSeo: SEOConfig = {
   title: 'Carbon Footprint Engine: Verified Battery Lifecycle Emissions | LW3',
   description: 'LW3\'s Carbon Footprint Engine calculates, verifies, and anchors battery lifecycle CO2 emissions to ISO 14040 standards - fulfilling EU Battery Regulation carbon declaration requirements.',
-  canonicalUrl: `${SITE_URL}/carbon-footprint/1`,
+  canonicalUrl: `${SITE_URL}/blog/9/carbon-footprint-engine`,
   ogType: 'article',
   keywords: 'carbon footprint, battery lifecycle, LCA, ISO 14040, sustainability reporting, eu green deal, environmentally friendly, digital product passport, EU battery regulation',
 }
@@ -141,7 +141,7 @@ export const carbonFootprintSeo: SEOConfig = {
 export const postQuantumSeo: SEOConfig = {
   title: 'Post Quantum Secure Blockchain for Battery Passports | LW3',
   description: 'LW3 builds Battery Passports on NIST post-quantum cryptography (CRYSTALS-Dilithium) - protecting 15-year battery lifecycle records against quantum computing threats.',
-  canonicalUrl: `${SITE_URL}/post-quantum/1`,
+  canonicalUrl: `${SITE_URL}/blog/8/post-quantum-secure-blockchain`,
   ogType: 'article',
   keywords: 'post-quantum security, blockchain, battery passport, CRYSTALS-Dilithium, digital product passport, product traceability, supply chain transparency, Cardano',
 }

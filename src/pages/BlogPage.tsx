@@ -1,47 +1,121 @@
-// Blog page — renders CSS-based blog content components (converted from Figma design)
-// Blog 1: node 1:720 | Blog 2: node 1:796 | Blog 3: node 1:888
-
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useLayoutEffect, lazy, Suspense } from 'react'
 import AltNavbar from '../components/AltNav/AltNavbar'
 import RelatedLinksFooter from '../components/Blog/RelatedLinksFooter'
 import { setSeoMeta, injectArticleSchema, injectBreadcrumbSchema, blog1Seo, blog2Seo, blog3Seo } from '../lib/seo'
 
-const Blog1Content = lazy(() => import('../components/Blog/Blog1Content'))
-const Blog2Content = lazy(() => import('../components/Blog/Blog2Content'))
-const Blog3Content = lazy(() => import('../components/Blog/Blog3Content'))
-const Blog4Content = lazy(() => import('../components/Blog/Blog4Content'))
-const Blog5Content = lazy(() => import('../components/Blog/Blog5Content'))
-const Blog6Content = lazy(() => import('../components/Blog/Blog6Content'))
-const Blog7Content = lazy(() => import('../components/Blog/Blog7Content'))
-const Blog8Content = lazy(() => import('../components/Blog/Blog8Content'))
+const Blog1Content  = lazy(() => import('../components/Blog/Blog1Content'))
+const Blog2Content  = lazy(() => import('../components/Blog/Blog2Content'))
+const Blog3Content  = lazy(() => import('../components/Blog/Blog3Content'))
+const Blog4Content  = lazy(() => import('../components/Blog/Blog4Content'))
+const Blog5Content  = lazy(() => import('../components/Blog/Blog5Content'))
+const Blog6Content  = lazy(() => import('../components/Blog/Blog6Content'))
+const Blog7Content  = lazy(() => import('../components/Blog/Blog7Content'))
+const Blog8Content  = lazy(() => import('../components/Blog/Blog8Content'))
+const PhygitalIOT1Content       = lazy(() => import('../components/PhygitalIOT/PhygitalIOT1Content'))
+const NearZeroCarbon1Content    = lazy(() => import('../components/NearZeroCarbon/NearZeroCarbon1Content'))
+const AgenticAI1Content         = lazy(() => import('../components/AgenticAI/AgenticAI1Content'))
+const SupplyChainFinance1Content = lazy(() => import('../components/SupplyChainFinance/SupplyChainFinance1Content'))
+const PostQuantum1Content       = lazy(() => import('../components/PostQuantum/PostQuantum1Content'))
+const CarbonFootprint1Content   = lazy(() => import('../components/CarbonFootprint/CarbonFootprint1Content'))
 
-const blog4Seo = { title: "Green Hydrogen's Digital Product Passport | LW3", description: 'How digital product passports are revolutionising the green hydrogen supply chain - enhancing transparency, traceability, and certification for a sustainable future.', canonicalUrl: 'https://www.lw3.world/blog/4', ogType: 'article', keywords: 'green hydrogen, digital product passport, supply chain transparency, blockchain, circular economy' }
-const blog5Seo = { title: 'Global Product Traceability Regulations: Key Insights | LW3', description: 'Product traceability regulations vary across regions. Understanding EU, US and Asia-Pacific differences is essential for global supply chain compliance.', canonicalUrl: 'https://www.lw3.world/blog/5', ogType: 'article', keywords: 'product traceability regulations, global supply chain, ESPR, EU battery regulation, compliance' }
-const blog6Seo = { title: 'Product Traceability for Food: Safety & Transparency | LW3', description: 'Ensuring food safety and supply chain transparency through product traceability - technologies, regulations, and benefits for businesses and consumers.', canonicalUrl: 'https://www.lw3.world/blog/6', ogType: 'article', keywords: 'food traceability, food safety, supply chain transparency, blockchain, RFID, IoT' }
-const blog7Seo = { title: 'How Traceability Enhances Product Safety Standards | LW3', description: 'Traceability is a fundamental pillar of modern business survival. Discover how blockchain, IoT, and digital passports protect products, consumers and brands.', canonicalUrl: 'https://www.lw3.world/blog/7', ogType: 'article', keywords: 'product safety, traceability, blockchain, IoT, digital product passport, product recall' }
-const blog8Seo = { title: 'Indian Battery Traceability: Battery Adhaar & Regulations | LW3', description: 'How Battery Adhaar and Indian regulations are building a digital traceability framework for battery manufacturers preparing for EU Battery Regulation compliance.', canonicalUrl: 'https://www.lw3.world/blog/8', ogType: 'article', keywords: 'Battery Adhaar, BPAN, India battery traceability, EU battery regulation, digital product passport, EV battery' }
-
-const BLOG_COMPONENTS: Record<string, React.ComponentType> = {
-  '1': Blog1Content,
-  '2': Blog2Content,
-  '3': Blog3Content,
-  '4': Blog4Content,
-  '5': Blog5Content,
-  '6': Blog6Content,
-  '7': Blog7Content,
-  '8': Blog8Content,
+// Canonical slug for each blog id
+export const BLOG_SLUGS: Record<string, string> = {
+  '1':  'compliant-by-design',
+  '2':  'programmable-money-battery-passport',
+  '3':  'intelligent-passport',
+  '4':  'phygital-iot-identity',
+  '5':  'near-zero-carbon-structure',
+  '6':  'agentic-ai-intelligence',
+  '7':  'supply-chain-finance',
+  '8':  'post-quantum-secure-blockchain',
+  '9':  'carbon-footprint-engine',
+  '10': 'green-hydrogen-digital-product-passport',
+  '11': 'global-product-traceability-regulations',
+  '12': 'product-traceability-food',
+  '13': 'traceability-product-safety',
+  '14': 'battery-aadhaar-indian-traceability',
 }
 
-const BLOG_SEO_MAP: Record<string, typeof blog1Seo> = {
-  '4': blog4Seo, '5': blog5Seo, '6': blog6Seo, '7': blog7Seo, '8': blog8Seo,
+// Map old legacy paths to canonical blog ids
+const LEGACY_PATH_TO_ID: Record<string, string> = {
+  '/phygital-iot':       '4',
+  '/phygital-iot/1':     '4',
+  '/near-zero-carbon':   '5',
+  '/near-zero-carbon/1': '5',
+  '/agentic-ai':         '6',
+  '/agentic-ai/1':       '6',
+  '/supply-chain-finance':   '7',
+  '/supply-chain-finance/1': '7',
+  '/post-quantum':       '8',
+  '/post-quantum/1':     '8',
+  '/carbon-footprint':   '9',
+  '/carbon-footprint/1': '9',
+}
+
+const BLOG_COMPONENTS: Record<string, React.ComponentType> = {
+  '1':  Blog1Content,
+  '2':  Blog2Content,
+  '3':  Blog3Content,
+  '4':  PhygitalIOT1Content,
+  '5':  NearZeroCarbon1Content,
+  '6':  AgenticAI1Content,
+  '7':  SupplyChainFinance1Content,
+  '8':  PostQuantum1Content,
+  '9':  CarbonFootprint1Content,
+  '10': Blog4Content,
+  '11': Blog5Content,
+  '12': Blog6Content,
+  '13': Blog7Content,
+  '14': Blog8Content,
+}
+
+const seoMap: Record<string, { title: string; description: string; canonicalUrl: string; ogType: string; keywords: string }> = {
+  '1':  { ...blog1Seo, canonicalUrl: 'https://www.lw3.world/blog/1/compliant-by-design', ogType: blog1Seo.ogType ?? 'article', keywords: blog1Seo.keywords ?? '' },
+  '2':  { ...blog2Seo, canonicalUrl: 'https://www.lw3.world/blog/2/programmable-money-battery-passport', ogType: blog2Seo.ogType ?? 'article', keywords: blog2Seo.keywords ?? '' },
+  '3':  { ...blog3Seo, canonicalUrl: 'https://www.lw3.world/blog/3/intelligent-passport', ogType: blog3Seo.ogType ?? 'article', keywords: blog3Seo.keywords ?? '' },
+  '4':  { title: 'Phygital IoT Identity | LW3', description: 'How LW3 combines physical IoT sensors with digital identity to create tamper-proof battery passports.', canonicalUrl: 'https://www.lw3.world/blog/4/phygital-iot-identity', ogType: 'article', keywords: 'phygital IoT, battery passport, digital identity, IoT sensors, LW3' },
+  '5':  { title: 'Near Zero Carbon Structure | LW3', description: 'How near-zero carbon infrastructure is reshaping battery lifecycle management and EU compliance.', canonicalUrl: 'https://www.lw3.world/blog/5/near-zero-carbon-structure', ogType: 'article', keywords: 'near zero carbon, carbon structure, battery regulation, sustainability, LW3' },
+  '6':  { title: 'Agentic AI Intelligence | LW3', description: 'How agentic AI transforms EU battery compliance from record-keeping to real-time intelligence.', canonicalUrl: 'https://www.lw3.world/blog/6/agentic-ai-intelligence', ogType: 'article', keywords: 'agentic AI, battery passport, AI compliance, real-time intelligence, LW3' },
+  '7':  { title: 'Supply Chain Finance | LW3', description: 'How eRupee and USDC unlock financial traceability and an end-of-life battery marketplace.', canonicalUrl: 'https://www.lw3.world/blog/7/supply-chain-finance', ogType: 'article', keywords: 'supply chain finance, battery passport, eRupee, USDC, embedded finance, LW3' },
+  '8':  { title: 'Post Quantum Secure Blockchain | LW3', description: 'How post-quantum cryptography secures battery passport data against future quantum threats.', canonicalUrl: 'https://www.lw3.world/blog/8/post-quantum-secure-blockchain', ogType: 'article', keywords: 'post quantum, blockchain, battery passport, PQC, CRYSTALS, LW3' },
+  '9':  { title: 'Carbon Footprint Engine | LW3', description: 'How LW3\'s carbon footprint engine automates lifecycle emissions tracking for battery compliance.', canonicalUrl: 'https://www.lw3.world/blog/9/carbon-footprint-engine', ogType: 'article', keywords: 'carbon footprint, battery regulation, lifecycle emissions, LW3, EU compliance' },
+  '10': { title: "Green Hydrogen's Digital Product Passport | LW3", description: 'How digital product passports are revolutionising the green hydrogen supply chain.', canonicalUrl: 'https://www.lw3.world/blog/10/green-hydrogen-digital-product-passport', ogType: 'article', keywords: 'green hydrogen, digital product passport, supply chain transparency, blockchain' },
+  '11': { title: 'Global Product Traceability Regulations | LW3', description: 'Key insights on global traceability regulations for supply chain compliance.', canonicalUrl: 'https://www.lw3.world/blog/11/global-product-traceability-regulations', ogType: 'article', keywords: 'product traceability regulations, global supply chain, ESPR, EU battery regulation' },
+  '12': { title: 'Product Traceability for Food | LW3', description: 'Ensuring food safety and supply chain transparency through product traceability.', canonicalUrl: 'https://www.lw3.world/blog/12/product-traceability-food', ogType: 'article', keywords: 'food traceability, food safety, supply chain transparency, blockchain, RFID' },
+  '13': { title: 'How Traceability Enhances Product Safety | LW3', description: 'How blockchain, IoT, and digital passports protect products, consumers and brands.', canonicalUrl: 'https://www.lw3.world/blog/13/traceability-product-safety', ogType: 'article', keywords: 'product safety, traceability, blockchain, IoT, digital product passport' },
+  '14': { title: 'Battery Aadhaar: Indian Battery Traceability | LW3', description: 'How Battery Aadhaar and Indian regulations are building a digital traceability framework.', canonicalUrl: 'https://www.lw3.world/blog/14/battery-aadhaar-indian-traceability', ogType: 'article', keywords: 'Battery Aadhaar, BPAN, India battery traceability, EU battery regulation, EV battery' },
 }
 
 export default function BlogPage() {
-  const { id } = useParams<{ id: string }>()
+  const { id, slug } = useParams<{ id: string; slug: string }>()
   const navigate = useNavigate()
   const location = useLocation()
-  const BlogContent = BLOG_COMPONENTS[id ?? '1'] ?? BLOG_COMPONENTS['1']
+
+  // Resolve blog id — handle legacy paths like /phygital-iot/1
+  const resolvedId = LEGACY_PATH_TO_ID[location.pathname] ?? id ?? '1'
+  const canonicalSlug = BLOG_SLUGS[resolvedId]
+  const BlogContent = BLOG_COMPONENTS[resolvedId] ?? BLOG_COMPONENTS['1']
+  const currentPath = `/blog/${resolvedId}/${canonicalSlug}`
+
+  // Redirect legacy paths and slugless URLs to canonical
+  useLayoutEffect(() => {
+    const isLegacy = !!LEGACY_PATH_TO_ID[location.pathname]
+    const missingSlug = !slug && !isLegacy
+    if (isLegacy || missingSlug) {
+      navigate(`/blog/${resolvedId}/${canonicalSlug}`, { replace: true })
+      return
+    }
+    window.scrollTo(0, 0)
+    const seo = seoMap[resolvedId] ?? seoMap['1']
+    setSeoMeta(seo)
+    injectArticleSchema(seo.title, seo.description, seo.canonicalUrl, '2026-04-01')
+    injectBreadcrumbSchema([
+      { name: 'Home', url: 'https://www.lw3.world/' },
+      { name: 'Insights', url: 'https://www.lw3.world/' },
+      { name: seo.title.split(' | ')[0], url: seo.canonicalUrl },
+    ])
+  }, [resolvedId, slug])
 
   const handleBack = () => {
     const from = (location.state as { from?: string; scrollSection?: string } | null)?.from
@@ -61,34 +135,12 @@ export default function BlogPage() {
     }
   }
 
-  const seoMap: Record<string, typeof blog1Seo> = { '1': blog1Seo, '2': blog2Seo, '3': blog3Seo, ...BLOG_SEO_MAP }
-  const articleUrls: Record<string, string> = {
-    '1': 'https://www.lw3.world/blog/1',
-    '2': 'https://www.lw3.world/blog/2',
-    '3': 'https://www.lw3.world/blog/3',
-    '4': 'https://www.lw3.world/blog/4',
-    '5': 'https://www.lw3.world/blog/5',
-    '6': 'https://www.lw3.world/blog/6',
-    '7': 'https://www.lw3.world/blog/7',
-    '8': 'https://www.lw3.world/blog/8',
-  }
-
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-    const seo = seoMap[id ?? '1'] ?? blog1Seo
-    setSeoMeta(seo)
-    injectArticleSchema(seo.title, seo.description, articleUrls[id ?? '1'] ?? articleUrls['1'], '2026-04-01')
-    injectBreadcrumbSchema([{ name: 'Home', url: 'https://www.lw3.world/' }, { name: 'Insights', url: 'https://www.lw3.world/' }, { name: seo.title.split(' | ')[0], url: articleUrls[id ?? '1'] ?? articleUrls['1'] }])
-  }, [id])
-
   return (
     <div style={{ minHeight: '100vh', background: '#000' }}>
-      {/* Desktop navbar — hidden on mobile */}
       <div className="hidden md:block">
         <AltNavbar visible={true} />
       </div>
 
-      {/* Mobile top bar — fixed, back arrow + logo */}
       <div className="flex items-center md:hidden" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         height: '60px', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(8px)',
@@ -112,44 +164,35 @@ export default function BlogPage() {
         <img src="/Latest updated logo.svg" alt="LW3" style={{ height: '24px', width: 'auto', marginLeft: 'auto' }} draggable={false} />
       </div>
 
-      {/* Desktop back link — sits below navbar */}
       <div className="hidden md:block" style={{ paddingTop: '4.83vw' }}>
         <button
           onClick={handleBack}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4em',
+            display: 'inline-flex', alignItems: 'center', gap: '0.4em',
             padding: '1vw 8.14%',
             fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif",
             fontSize: 'clamp(10px, 0.84vw, 14px)',
-            color: 'rgba(255,255,255,0.6)',
-            textDecoration: 'none',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
+            color: 'rgba(255,255,255,0.6)', textDecoration: 'none',
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+            background: 'none', border: 'none', cursor: 'pointer',
           }}
         >
           ← Back
         </button>
       </div>
 
-      {/* Blog content */}
       <div className="hidden md:block" style={{ padding: '0 8.14% clamp(48px, 6vw, 80px) 8.14%' }}>
         <Suspense fallback={<div style={{ color: '#fff', padding: '2vw' }}>Loading…</div>}>
           <BlogContent />
         </Suspense>
-        <RelatedLinksFooter currentPath={`/blog/${id}`} />
+        <RelatedLinksFooter currentPath={currentPath} />
       </div>
 
-      {/* Mobile blog content — padded below fixed top bar */}
       <div className="md:hidden" style={{ paddingTop: '60px', padding: '60px 20px clamp(40px, 8vw, 60px)', overflowX: 'hidden' }}>
         <Suspense fallback={<div style={{ color: '#fff', padding: '24px' }}>Loading…</div>}>
           <BlogContent />
         </Suspense>
-        <RelatedLinksFooter currentPath={`/blog/${id}`} />
+        <RelatedLinksFooter currentPath={currentPath} />
       </div>
     </div>
   )

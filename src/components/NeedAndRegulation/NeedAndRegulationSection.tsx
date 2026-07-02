@@ -434,7 +434,7 @@ export default function NeedAndRegulationSection() {
 
       <InsightsWidget
         position="bottom-right"
-        visibleCards={['/post-quantum/1', '/blog/5', '/blog/8']}
+        visibleCards={['/blog/8/post-quantum-secure-blockchain', '/blog/11/global-product-traceability-regulations', '/blog/14/battery-aadhaar-indian-traceability']}
         sectionRef={sectionRef}
         bottomOffset="7%"
         widgetRef={widgetRef}

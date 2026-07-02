@@ -20,12 +20,6 @@ import BookDemoPage from './pages/BookDemoPage'
 import ContactPage from './pages/ContactPage'
 import BookPilotPage from './pages/BookPilotPage'
 import BlogPage from './pages/BlogPage'
-import PhygitalIOTPage from './pages/PhygitalIOTPage'
-import NearZeroCarbonPage from './pages/NearZeroCarbonPage'
-import AgenticAIPage from './pages/AgenticAIPage'
-import SupplyChainFinancePage from './pages/SupplyChainFinancePage'
-import CarbonFootprintPage from './pages/CarbonFootprintPage'
-import PostQuantumPage from './pages/PostQuantumPage'
 import BookDemoModal from './components/BookDemo/BookDemoModal'
 import ContactModal from './components/Contact/ContactModal'
 import BookPilotModal from './components/BookPilot/BookPilotModal'
@@ -119,19 +113,20 @@ function App() {
       <BookPilotModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/blog/:id/:slug" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogPage />} />
-        <Route path="/phygital-iot/:id" element={<PhygitalIOTPage />} />
-        <Route path="/phygital-iot" element={<PhygitalIOTPage />} />
-        <Route path="/near-zero-carbon/:id" element={<NearZeroCarbonPage />} />
-        <Route path="/near-zero-carbon" element={<NearZeroCarbonPage />} />
-        <Route path="/agentic-ai/:id" element={<AgenticAIPage />} />
-        <Route path="/agentic-ai" element={<AgenticAIPage />} />
-        <Route path="/supply-chain-finance/:id" element={<SupplyChainFinancePage />} />
-        <Route path="/supply-chain-finance" element={<SupplyChainFinancePage />} />
-        <Route path="/carbon-footprint/:id" element={<CarbonFootprintPage />} />
-        <Route path="/carbon-footprint" element={<CarbonFootprintPage />} />
-        <Route path="/post-quantum/:id" element={<PostQuantumPage />} />
-        <Route path="/post-quantum" element={<PostQuantumPage />} />
+        <Route path="/phygital-iot/:id" element={<BlogPage />} />
+        <Route path="/phygital-iot" element={<BlogPage />} />
+        <Route path="/near-zero-carbon/:id" element={<BlogPage />} />
+        <Route path="/near-zero-carbon" element={<BlogPage />} />
+        <Route path="/agentic-ai/:id" element={<BlogPage />} />
+        <Route path="/agentic-ai" element={<BlogPage />} />
+        <Route path="/supply-chain-finance/:id" element={<BlogPage />} />
+        <Route path="/supply-chain-finance" element={<BlogPage />} />
+        <Route path="/carbon-footprint/:id" element={<BlogPage />} />
+        <Route path="/carbon-footprint" element={<BlogPage />} />
+        <Route path="/post-quantum/:id" element={<BlogPage />} />
+        <Route path="/post-quantum" element={<BlogPage />} />
         <Route path="/what-is-lw3" element={<WhatIsLW3Page />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/book-demo" element={<BookDemoPage />} />
