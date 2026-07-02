@@ -83,6 +83,7 @@ const DROPDOWNS: Record<Key, DropdownItem[]> = {
   ],
   about: [
     { label: 'what is lw3', target: 'what-is-lw3' },
+    { label: 'blogs',       target: 'blogs'        },
     { label: 'book a demo', target: null },
     { label: 'awards',      target: 'snap-bqegvir-2' },
     { label: 'contact us',  target: 'contact'      },
@@ -200,6 +201,7 @@ export default function AltNavbar({ visible }: Props) {
                 if (target === null) navigate('/book-demo')
                 else if (target === 'contact') navigate('/contact')
                 else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } })
+                else if (target === 'blogs') navigate('/blog/1')
                 else {
                   scrollTo(target)
                   if (regTab) openRegulationTab(regTab as Parameters<typeof openRegulationTab>[0])

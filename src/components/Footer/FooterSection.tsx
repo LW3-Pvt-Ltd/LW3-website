@@ -78,6 +78,7 @@ const cols = [
     heading: 'About',
     items: [
       { label: 'What is LW3?', target: 'what-is-lw3'   },
+      { label: 'Blogs',        target: 'blogs'          },
       { label: 'Brand Kit',    target: 'brand'          },
       { label: 'Awards',       target: 'snap-bqegvir-2' },
       { label: 'Regulation',   target: 'snap-gap'       },
@@ -87,7 +88,7 @@ const cols = [
 ]
 
 // List item y positions (abs y on canvas): 103.5, 134.09, 164.69, 195.28, 225.87
-const ITEM_TOPS = ['32.43%', '42.01%', '51.60%', '61.18%', '70.76%']
+const ITEM_TOPS = ['32.43%', '40.10%', '47.77%', '55.44%', '63.11%', '70.76%']
 
 const TEXT_SM: React.CSSProperties = {
   position: 'absolute',
@@ -210,7 +211,7 @@ export default function FooterSection() {
             <a
               key={label}
               href="#"
-              onClick={(e) => { e.preventDefault(); if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { sessionStorage.setItem('returnScrollY', String(window.scrollY)); navigate('/brand'); } else goToSection(target) }}
+              onClick={(e) => { e.preventDefault(); if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'brand') { sessionStorage.setItem('returnScrollY', String(window.scrollY)); navigate('/brand'); } else if (target === 'blogs') navigate('/blog/1'); else goToSection(target) }}
               style={{
                 ...TEXT_SM,
                 left: col.left,

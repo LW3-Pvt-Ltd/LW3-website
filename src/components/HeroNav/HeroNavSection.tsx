@@ -125,7 +125,8 @@ const REG_SUBS = [
 
 const ABOUT_LEFT = '87.45%'
 const ABOUT_SUBS = [
-  { text: 'what is lw3', top: '7.78%',  target: 'what-is-lw3' as string | null },
+  { text: 'what is lw3', top: '6.37%',  target: 'what-is-lw3' as string | null },
+  { text: 'blogs',       top: '7.78%',  target: 'blogs' as string | null },
   { text: 'book a demo', top: '9.19%',  target: null as string | null },
   { text: 'awards',      top: '10.61%', target: 'snap-bqegvir-2' as string | null },
   { text: 'contact us',  top: '12.02%', target: 'contact' as string | null },
@@ -350,7 +351,7 @@ export default function HeroNavSection() {
 
       {/* ── About sub-items ── */}
       {ABOUT_SUBS.map(({ text, top, target }) => (
-        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) navigate('/book-demo'); else if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) navigate('/book-demo'); else if (target === 'contact') navigate('/contact'); else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } }); else if (target === 'blogs') navigate('/blog/1'); else scrollTo(target) }} style={{ ...DATE_LINK, left: ABOUT_LEFT, top }}>{text}</a>
       ))}
 
     </section>
