@@ -155,6 +155,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
       label: 'About',
       items: [
         { label: 'What is LW3?', id: 'what-is-lw3' },
+        { label: 'Blogs', id: 'blogs' },
         { label: 'Brand Kit', id: 'brand' },
         { label: 'Awards', id: 'snap-bqegvir' },
         { label: 'Contact us', id: 'contact' },
@@ -201,6 +202,7 @@ function MobileNavOverlay({ onClose, scrollTo }: { onClose: () => void; scrollTo
                       if (item.id === 'contact') { navigate('/contact'); return }
                       if (item.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
                       if (item.id === 'brand') { navigate('/brand'); return }
+                      if (item.id === 'blogs') { navigate('/blog/1/compliant-by-design'); return }
                       scrollTo(item.id)
                       if ('tab' in item && item.tab) openRegulationTab(item.tab)
                     }}
@@ -876,6 +878,7 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
       heading: 'About',
       items: [
         { label: 'What is LW3?', id: 'what-is-lw3' },
+        { label: 'Blogs', id: 'blogs' },
         { label: 'Brand Kit', id: 'brand' },
         { label: 'Awards', id: 'snap-bqegvir' },
         { label: 'Regulation', id: 'snap-gap' },
@@ -918,6 +921,7 @@ function MobileFooter({ scrollTo }: { scrollTo: (id: string) => void }) {
                     if (it.id === 'contact') { navigate('/contact'); return }
                     if (it.id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
                     if (it.id === 'brand') { navigate('/brand'); return }
+                    if (it.id === 'blogs') { navigate('/blog/1/compliant-by-design'); return }
                     scrollTo(it.id)
                   }}
                   style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.65)', textAlign: 'left', cursor: 'pointer', fontFamily: "'D-DIN', sans-serif", fontSize: '14px', padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
