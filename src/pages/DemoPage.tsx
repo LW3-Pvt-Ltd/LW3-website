@@ -15,6 +15,41 @@ const seo = {
   keywords: 'LW3 demo, battery passport demo video, logistics W3 product demo',
 }
 
+function TypewriterHeading({ text, style }: { text: string; style: React.CSSProperties }) {
+  const [display, setDisplay] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    const obj = { i: 0 }
+    setDisplay('')
+    setDone(false)
+    const tween = gsap.to(obj, {
+      i: text.length,
+      duration: text.length * 0.045,
+      ease: 'none',
+      onUpdate: () => setDisplay(text.slice(0, Math.round(obj.i))),
+      onComplete: () => setDone(true),
+    })
+    return () => { tween.kill() }
+  }, [text])
+
+  return (
+    <h1 style={style}>
+      {display}
+      <span
+        style={{
+          display: 'inline-block',
+          width: '0.06em',
+          marginLeft: '0.08em',
+          background: '#ffffff',
+          opacity: done ? 0 : 1,
+          animation: done ? 'none' : 'demoCursorBlink 0.9s step-end infinite',
+        }}
+      >&nbsp;</span>
+    </h1>
+  )
+}
+
 const PlayIcon = ({ size = 28 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <path d="M8 5v14l11-7L8 5z" fill="#0d0e1a" />
@@ -323,6 +358,7 @@ export default function DemoPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#0A0A08', color: '#ffffff' }}>
+      <style>{`@keyframes demoCursorBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }`}</style>
 
       {/* ── Desktop ── */}
       <div className="hidden md:block">
@@ -348,10 +384,10 @@ export default function DemoPage() {
             fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '11px',
             letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '10px',
           }}>Demo</p>
-          <h1 style={{
+          <TypewriterHeading text="Watch the passport come to life" style={{
             fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: 'clamp(32px, 3vw, 52px)',
             fontWeight: 700, color: '#ffffff', margin: '0 0 12px', lineHeight: 1.05,
-          }}>Watch the passport come to life</h1>
+          }} />
           <p style={{
             fontFamily: "'D-DIN', sans-serif", fontSize: '16px',
             color: 'rgba(255,255,255,0.4)', marginBottom: '48px', lineHeight: 1.6, maxWidth: '560px',
@@ -403,10 +439,10 @@ export default function DemoPage() {
             fontFamily: "'D-DINCondensed', 'D-DIN', sans-serif", fontSize: '11px',
             letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '10px',
           }}>Demo</p>
-          <h1 style={{
+          <TypewriterHeading text="Watch the passport come to life" style={{
             fontFamily: "'D-DIN-Bold', 'D-DIN', sans-serif", fontSize: '2.2rem',
             fontWeight: 700, color: '#ffffff', margin: '0 0 12px', lineHeight: 1.05,
-          }}>Watch the passport come to life</h1>
+          }} />
           <p style={{
             fontFamily: "'D-DIN', sans-serif", fontSize: '14px',
             color: 'rgba(255,255,255,0.4)', marginBottom: '32px', lineHeight: 1.6,
