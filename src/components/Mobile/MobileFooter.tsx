@@ -20,6 +20,7 @@ const cols = [
     items: [
       { label: 'Post Quantum Secure Blockchain', id: 'snap-madpp-0' },
       { label: 'Agentic AI', id: 'snap-madpp-0' },
+      { label: 'Product Demo', id: 'demo' },
     ],
   },
   {
@@ -42,6 +43,7 @@ export default function MobileFooter() {
     if (id === 'contact') { navigate('/contact'); return }
     if (id === 'what-is-lw3') { navigate('/what-is-lw3'); return }
     if (id === 'brand') { navigate('/brand'); return }
+    if (id === 'demo') { navigate('/ev/battery/passport/demo'); return }
     sessionStorage.setItem('returnScrollY', '0')
     navigate('/', { state: { scrollTo: id } })
   }

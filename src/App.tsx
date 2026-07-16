@@ -18,6 +18,7 @@ import WhatIsLW3Page from './pages/WhatIsLW3Page'
 import BrandPage from './pages/BrandPage'
 import BookDemoPage from './pages/BookDemoPage'
 import ContactPage from './pages/ContactPage'
+import DemoPage from './pages/DemoPage'
 import BookPilotPage from './pages/BookPilotPage'
 import BlogPage from './pages/BlogPage'
 import BookDemoModal from './components/BookDemo/BookDemoModal'
@@ -130,6 +131,7 @@ function App() {
         <Route path="/what-is-lw3" element={<WhatIsLW3Page />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/book-demo" element={<BookDemoPage />} />
+        <Route path="/ev/battery/passport/demo" element={<DemoPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/book-pilot" element={<BookPilotPage />} />
       </Routes>

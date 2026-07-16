@@ -61,7 +61,7 @@ const LINKS: { key: Key; label: string; left: string; target: string }[] = [
   { key: 'about',      label: 'about',      left: '64.78%', target: 'snap-bqegvir' },
 ]
 
-type DropdownItem = { label: string; target: string | null; regTab?: string }
+type DropdownItem = { label: string; target: string | null; regTab?: string; demo?: boolean }
 
 const DROPDOWNS: Record<Key, DropdownItem[]> = {
   product: [
@@ -72,6 +72,7 @@ const DROPDOWNS: Record<Key, DropdownItem[]> = {
   technology: [
     { label: 'agentic ai intelligence', target: 'snap-madpp-0' },
     { label: 'pq secure blockchain',    target: 'snap-madpp-0' },
+    { label: 'product demo',            target: null, demo: true },
   ],
   regulation: [
     { label: 'eubr enters force',      target: 'snap-gap', regTab: 'eubr'       },
@@ -191,14 +192,15 @@ export default function AltNavbar({ visible }: Props) {
             minWidth: '160px',
           }}
         >
-          {DROPDOWNS[active].map(({ label, target, regTab }) => (
+          {DROPDOWNS[active].map(({ label, target, regTab, demo }) => (
             <a
               key={label}
               href="#"
               onClick={(e) => {
                 e.preventDefault()
                 setActive(null)
-                if (target === null) navigate('/book-demo')
+                if (demo) navigate('/ev/battery/passport/demo')
+                else if (target === null) navigate('/book-demo')
                 else if (target === 'contact') navigate('/contact')
                 else if (target === 'what-is-lw3') navigate('/what-is-lw3', { state: { scrollY: window.scrollY } })
                 else if (target === 'blogs') navigate('/blog/1/compliant-by-design')

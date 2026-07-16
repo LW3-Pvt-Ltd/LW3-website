@@ -109,8 +109,9 @@ const PROD_SUBS = [
 
 const TECH_LEFT = '69.92%'
 const TECH_SUBS = [
-  { text: 'agentic ai intelligence', top: '10.61%', target: 'snap-madpp-0' },
-  { text: 'pq secure blockchain',    top: '12.02%', target: 'snap-madpp-0' },
+  { text: 'agentic ai intelligence', top: '9.20%',  target: 'snap-madpp-0' },
+  { text: 'pq secure blockchain',    top: '10.61%', target: 'snap-madpp-0' },
+  { text: 'product demo',           top: '12.02%', target: null as string | null },
 ]
 
 const REG_LEFT = '52.49%'
@@ -341,7 +342,7 @@ export default function HeroNavSection() {
 
       {/* ── Technology sub-items ── */}
       {TECH_SUBS.map(({ text, top, target }) => (
-        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); scrollTo(target) }} style={{ ...DATE_LINK, left: TECH_LEFT, top }}>{text}</a>
+        <a key={text} href="#" className="nav-sub" onClick={e => { e.preventDefault(); if (target === null) navigate('/ev/battery/passport/demo'); else scrollTo(target) }} style={{ ...DATE_LINK, left: TECH_LEFT, top }}>{text}</a>
       ))}
 
       {/* ── Regulation sub-items ── */}
