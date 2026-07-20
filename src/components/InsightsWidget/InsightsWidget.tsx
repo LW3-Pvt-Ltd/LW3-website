@@ -2,7 +2,7 @@
 // - Shows a pulsing tab when section is visible
 // - On hover: GSAP stagger animates visible cards in
 // - On mouse leave: cards animate out
-// - All 14 links always in DOM for SEO (invisible)
+// - All 15 links always in DOM for SEO (invisible)
 
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -23,6 +23,7 @@ const ALL_LINKS = [
   { label: 'Product Traceability for Food',      path: '/blog/12/product-traceability-food' },
   { label: 'Traceability & Product Safety',      path: '/blog/13/traceability-product-safety' },
   { label: 'Indian Battery Traceability',        path: '/blog/14/battery-aadhaar-indian-traceability' },
+  { label: 'BatteryPass-Ready Validation',       path: '/blog/15/batterypass-ready-test-environment' },
 ]
 
 interface Props {

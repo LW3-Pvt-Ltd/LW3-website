@@ -12,6 +12,7 @@ const Blog5Content  = lazy(() => import('../components/Blog/Blog5Content'))
 const Blog6Content  = lazy(() => import('../components/Blog/Blog6Content'))
 const Blog7Content  = lazy(() => import('../components/Blog/Blog7Content'))
 const Blog8Content  = lazy(() => import('../components/Blog/Blog8Content'))
+const Blog9Content  = lazy(() => import('../components/Blog/Blog9Content'))
 const PhygitalIOT1Content       = lazy(() => import('../components/PhygitalIOT/PhygitalIOT1Content'))
 const NearZeroCarbon1Content    = lazy(() => import('../components/NearZeroCarbon/NearZeroCarbon1Content'))
 const AgenticAI1Content         = lazy(() => import('../components/AgenticAI/AgenticAI1Content'))
@@ -35,6 +36,7 @@ export const BLOG_SLUGS: Record<string, string> = {
   '12': 'product-traceability-food',
   '13': 'traceability-product-safety',
   '14': 'battery-aadhaar-indian-traceability',
+  '15': 'batterypass-ready-test-environment',
 }
 
 // Map old legacy paths to canonical blog ids
@@ -68,6 +70,7 @@ const BLOG_COMPONENTS: Record<string, React.ComponentType> = {
   '12': Blog6Content,
   '13': Blog7Content,
   '14': Blog8Content,
+  '15': Blog9Content,
 }
 
 const seoMap: Record<string, { title: string; description: string; canonicalUrl: string; ogType: string; keywords: string }> = {
@@ -85,6 +88,7 @@ const seoMap: Record<string, { title: string; description: string; canonicalUrl:
   '12': { title: 'Product Traceability for Food | LW3', description: 'Ensuring food safety and supply chain transparency through product traceability.', canonicalUrl: 'https://www.lw3.world/blog/12/product-traceability-food', ogType: 'article', keywords: 'food traceability, food safety, supply chain transparency, blockchain, RFID' },
   '13': { title: 'How Traceability Enhances Product Safety | LW3', description: 'How blockchain, IoT, and digital passports protect products, consumers and brands.', canonicalUrl: 'https://www.lw3.world/blog/13/traceability-product-safety', ogType: 'article', keywords: 'product safety, traceability, blockchain, IoT, digital product passport' },
   '14': { title: 'Battery Aadhaar: Indian Battery Traceability | LW3', description: 'How Battery Aadhaar and Indian regulations are building a digital traceability framework.', canonicalUrl: 'https://www.lw3.world/blog/14/battery-aadhaar-indian-traceability', ogType: 'article', keywords: 'Battery Aadhaar, BPAN, India battery traceability, EU battery regulation, EV battery' },
+  '15': { title: 'LW3 Successfully Validates its Solution in the BatteryPass-Ready Test Environment | LW3', description: 'LW3 has tested its Battery Passport solution in the BatteryPass-Ready Test Environment, demonstrating alignment with EU DPP Registry requirements ahead of the February 2027 deadline.', canonicalUrl: 'https://www.lw3.world/blog/15/batterypass-ready-test-environment', ogType: 'article', keywords: 'BatteryPass-Ready, DPP Registry, Battery Passport, EU Battery Regulation, ESPR, DIN SPEC 99100, Battery360 Alliance, LW3' },
 }
 
 export default function BlogPage() {

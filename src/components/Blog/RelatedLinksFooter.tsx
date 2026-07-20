@@ -18,6 +18,7 @@ const ALL_PAGES = [
   { label: 'Product Traceability for Food',                 path: '/blog/12/product-traceability-food' },
   { label: 'How Traceability Enhances Product Safety',      path: '/blog/13/traceability-product-safety' },
   { label: 'Battery Aadhaar: Indian Battery Traceability',  path: '/blog/14/battery-aadhaar-indian-traceability' },
+  { label: 'LW3 Validates its Solution in BatteryPass-Ready', path: '/blog/15/batterypass-ready-test-environment' },
 ]
 
 export default function RelatedLinksFooter({ currentPath }: { currentPath: string }) {
